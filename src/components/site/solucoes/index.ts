@@ -1,0 +1,1 @@
+export { Solucoes } from './Solucoes';

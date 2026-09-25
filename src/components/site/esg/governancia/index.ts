@@ -1,0 +1,1 @@
+export { GovernancaSection } from './GovernanciaSection';
