@@ -458,7 +458,11 @@ export default function SeminovosSection({
             <Grid size={{ xs: 12, md: 5 }}>
               <Box
                 component="img"
-                src={getContentString(conteudo, 'introducao.imagemUrl', '/images/seminovos/seminovos.png')}
+                src={getContentString(
+                  conteudo,
+                  'introducao.imagemUrl',
+                  '/images/seminovos/seminovos.png'
+                )}
                 alt="Caminhão seminovo Pizzattolog"
                 sx={{
                   display: 'block',
@@ -471,12 +475,17 @@ export default function SeminovosSection({
                   },
 
                   objectFit: 'cover',
-
                   objectPosition: 'right center',
 
                   borderRadius: '8px 54px 8px 54px',
 
                   boxShadow: '0 24px 52px rgba(19, 39, 57, 0.14)',
+
+                  // joga a imagem para o centro da página
+                  transform: {
+                    xs: 'none',
+                    md: 'translateX(-45px)',
+                  },
                 }}
               />
             </Grid>

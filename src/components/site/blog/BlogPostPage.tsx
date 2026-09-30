@@ -121,7 +121,12 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
               'linear-gradient(180deg, rgba(7, 25, 36, 0.22) 0%, rgba(7, 25, 36, 0.72) 64%, rgba(7, 25, 36, 0.9) 100%)',
           }}
         />
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+        <Container maxWidth="lg" sx={{
+          position: 'relative', zIndex: 1, pt: {
+            xs: 4,
+            md: 6,
+          },
+        }}>
           <Stack spacing={2.25} sx={{ maxWidth: 920, alignItems: 'flex-start' }}>
             <Button
               component="a"

@@ -858,15 +858,7 @@ export function CarreirasSection({
 
           color: '#ffffff',
 
-          backgroundImage: `
-  linear-gradient(
-    90deg,
-    rgba(28, 28, 27, 0.72) 0%,
-    rgba(28, 28, 27, 0.48) 45%,
-    rgba(28, 28, 27, 0.10) 100%
-  ),
-  url("/images/carreira/carreiras1.png")
-`,
+          backgroundImage: 'url("/images/carreira/carreiras1.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center 35%',
           backgroundRepeat: 'no-repeat',

@@ -342,7 +342,9 @@ export default function ContatosSection({
       'titulo',
       'texto',
     ]);
-  const [areaSelecionada, setAreaSelecionada] = useState<string>('Seja um fornecedor');
+  const [areaSelecionada, setAreaSelecionada] =
+  useState<string>('Solicite uma cotação');
+
   const [statusEnvio, setStatusEnvio] = useState<ContactSubmitStatus>('idle');
   const [erroEnvio, setErroEnvio] = useState('');
   const formularioAgregado = areaSelecionada === 'Seja um agregado';
@@ -541,6 +543,15 @@ export default function ContatosSection({
                 },
               }}
             >
+              <Box
+                sx={{
+                  mt: {
+                    xs: 3,
+                    md: 5,
+                  },
+                }}
+              >
+              </Box>
               <Typography
                 component="h1"
                 variant="h1"
@@ -588,7 +599,7 @@ export default function ContatosSection({
                     return (
                       <AreaButton
                         key={area.titulo}
-                        active={!href && areaSelecionada === area.titulo}
+                        active={areaSelecionada === area.titulo}
                         href={href}
                         icon={area.icone}
                         onClick={href ? undefined : () => selecionarAreaContato(area.titulo)}
