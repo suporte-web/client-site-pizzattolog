@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
-import { MarketingTracking } from '@/components/analytics/MarketingTracking';
+import { RastreamentoMarketing } from '@/components/analytics/RastreamentoMarketing';
 import { Providers } from './providers';
 import 'leaflet/dist/leaflet.css';
+
 
 export const metadata: Metadata = {
   title: 'Pizzattolog',
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-BR">
       <body>
-        <MarketingTracking />
+        <RastreamentoMarketing />
         <AppRouterCacheProvider>
           <Providers>{children}</Providers>
         </AppRouterCacheProvider>
@@ -25,3 +26,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
+
+
+

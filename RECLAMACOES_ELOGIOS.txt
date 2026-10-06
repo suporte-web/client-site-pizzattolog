@@ -1,0 +1,61 @@
+RECLAMAÇÕES E ELOGIOS — CANAL DO CLIENTE
+
+Site: /canal-do-cliente -> Registrar ocorrência -> /reclamacoes-elogios.
+Campos: nome completo, telefone com DDD, e-mail, estado (27 UFs), tipo Reclamação/Elogio, relato e anexos opcionais.
+Até 5 anexos PDF, JPG ou PNG, 10 MB por arquivo. É possível remover arquivos selecionados antes de enviar.
+Informativo oculto na nova página. Formulário responsivo com espaçamento abaixo do cabeçalho.
+
+Fluxo: browser POST /api/reclamacoes-elogios -> servidor Next -> CRM POST /api/atendimentos/site/relatos -> EntradasService.createFromSite.
+Atendimento existente Ticket, tipo SUPORTE, status NOVO, origem SITE, protocolo ENT, histórico e notificação interna reaproveitados.
+Nome, e-mail, telefone preservados nos campos do atendimento; estado, tipo e relato no formPayload e na mensagem. Não gera lead nem solicitação comercial.
+CRM: Atendimentos (/chamados), seção Registro do Canal do Cliente. Também disponível no detalhe de Entradas para os perfis já autorizados.
+Anexos guardados em private-uploads/relatos-site, fora de /uploads públicos. Download exige JWT e a mesma autorização do ticket.
+Uma identificação do envio permite repetir a solicitação após falha de rede sem duplicar o atendimento; o formulário muda essa identificação quando os dados são alterados.
+Não há criação de conta para o visitante. A equipe recebe dados de contato; este trabalho não adiciona envio automático de atualizações por e-mail ao visitante.
+
+Variáveis existentes necessárias, apenas nos servidores:
+- SITE .env.local: CRM_API_URL=http://localhost:3001/api e SITE_LEAD_INTEGRATION_TOKEN.
+- CRM .env: SITE_LEAD_INTEGRATION_TOKEN deve ter o mesmo valor configurado no site.
+- CRM opcional: RELATOS_SITE_UPLOAD_DIR, diretório privado persistente fora de uploads públicos. Padrão private-uploads/relatos-site. Incluir esse diretório nos backups junto com o banco.
+Nenhuma mudança no Prisma ou migração necessária.
+
+Arquivos novos
+CRM backend:
+src/modules/entradas/dto/registrar-relato.dto.ts
+src/modules/entradas/relatos-site.controller.ts
+src/modules/entradas/relatos-site.service.ts
+src/modules/entradas/relatos-site.spec.ts
+CRM frontend:
+src/components/atendimentos/DadosRelatoSite.tsx
+Site:
+src/lib/relato-cliente.ts
+src/app/api/reclamacoes-elogios/route.ts
+src/app/(site)/reclamacoes-elogios/page.tsx
+src/components/site/canal-do-cliente/PaginaReclamacoesElogios.tsx
+scripts/reclamacoes-elogios.test.mjs
+RECLAMACOES_ELOGIOS.txt
+
+Arquivos alterados
+CRM backend: src/modules/entradas/entradas.module.ts; src/modules/entradas/entradas.service.ts (destino opcional das notificações, padrão anterior preservado); src/modules/tickets/tickets.module.ts (export do service); .gitignore; .env.example.
+CRM frontend: src/app/chamados/components/TicketsPage.tsx; src/app/entradas/[id]/components/EntradaDetailPage.tsx.
+Site: src/components/site/canal-do-cliente/PaginaCanalDoCliente.tsx; src/components/site/layout/SiteNewsletter.tsx.
+
+Validação
+8 testes backend: validação e token de servidor, multipart, criação como SUPORTE, anexos privados, arquivos disfarçados, limpeza em erro, reenvios, falha posterior de notificação, download autenticado.
+5 testes site: validação de campos/anexos, proxy servidor, proteção contra exposição de token e dados internos, erros de rede.
+Tipos nos três projetos verificados.
+Teste de banco real em transação revertida: atendimento apareceu na listagem, campos preservados, anexo recuperado e reenvio sem duplicação. Nenhum registro de teste permaneceu e nenhum e-mail foi enviado no teste.
+
+Executar
+CRM backend: npm run dev
+CRM frontend: npm run dev
+SITE: npm run dev
+Teste backend: node node_modules/jest/bin/jest.js --runInBand --runTestsByPath src/modules/entradas/relatos-site.spec.ts
+Teste site: node scripts/reclamacoes-elogios.test.mjs
+
+Como testar
+Abrir http://localhost:3002/canal-do-cliente, clicar Registrar ocorrência e enviar um registro com dados de teste identificáveis. Conferir o protocolo na confirmação e localizar esse protocolo em Atendimentos do CRM como ADMIN/GESTAO/COMERCIAL, conforme permissões existentes. Conferir dados, relato, download dos anexos e histórico. Testar também a remoção de um arquivo antes de enviar, campos obrigatórios e um elogio sem anexos.
+
+Atualização de anexos: seleção múltipla ou em etapas, até 5 arquivos de 10 MB cada. Cada arquivo tem comentário opcional de até 1000 caracteres e botão Excluir. Comentários seguem associados por arquivo no envio e aparecem abaixo do download no atendimento do CRM. Não houve migração. Validação atual: 11 testes backend + 8 testes site, incluindo exclusão de um arquivo sem perder o comentário de outro; TypeScript nos três projetos sem erros.
+
+ATUALIZAÇÃO SAC: o mesmo fluxo server-side agora cria Atendimento SAC no CRM e retorna protocolo SAC-ANO-SEQUENCIA. O formulário inclui empresa, cidade, tipo da reclamação e documento opcionais. A documentação completa está em frontend-crm/backend-crm/ATENDIMENTO_SAC.txt. Os relatos são tratados na nova seção Atendimento, não pela tela antiga de Chamados.

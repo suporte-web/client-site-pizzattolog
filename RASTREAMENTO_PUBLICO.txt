@@ -1,0 +1,56 @@
+RASTREAMENTO PÚBLICO DO SITE
+
+Análise da integração existente
+- CRM: src/modules/trackings/trackings.controller.ts expõe POST /api/trackings/query (JWT) e POST /api/trackings/public-query (usado atualmente pela tela do CRM).
+- TrackingsService.queryTracking envia formulário para https://ssw.inf.br/api/trackingdest e interpreta JSON/XML. Estes arquivos e endpoints não foram alterados.
+- A consulta existente requer CNPJ do destinatário, tipo (nro_nf, pedido, chave_nfe, nro_coleta) e valor. Não existe consulta apenas por um código universal. A landing page conserva estes dados obrigatórios.
+- Novo adaptador público usa o mesmo service; não há outra implementação de SSW.
+
+Endpoint CRM
+GET /api/public/trackings/:codigo?cnpj=00000000000000&tipo=nro_nf
+tipo padrão: nro_nf. CNPJ: 14 dígitos (pontuação aceita); código: 1 a 80 caracteres alfanuméricos/espaço/ponto/hífen/underscore; chave NFe: 44 dígitos.
+Resposta: codigo, status, origem, destino, previsaoEntrega, documento, eventos[{dataHora,ocorrencia,descricao,local}]. Campos ausentes ficam null; não são inventadas cidades, datas ou movimentações. Eventos são ordenados por data quando todas as datas são reconhecidas; caso contrário a ordem da fonte é preservada.
+400: entrada inválida; 404: sem carga; 502: integração indisponível; 504: timeout. Corpo bruto, cabeçalhos completos, documentos/nome do recebedor e erros técnicos não são devolvidos.
+
+Configuração
+SITE: CRM_API_URL=http://localhost:3001/api (já existente). Sem NEXT_PUBLIC_. Aceita também origem sem /api. Reiniciar Next após alterar .env.local.
+CRM: SSW_TRACKING_PASSWORD e SSW_TRACKING_COMPANY opcionais, somente no .env do backend, se necessários à consulta SSW. Não preencher no navegador. Nenhum JWT necessário no endpoint novo.
+Nenhuma alteração Prisma ou migração.
+
+Fluxo
+/canal-do-cliente -> Rastrear carga -> /rastreamento
+POST /api/rastreamento no Next -> GET público no CRM -> TrackingsService -> SSW.
+Cache no-store em ambas as camadas. O navegador não recebe URL interna nem credenciais.
+
+Executar nos respectivos projetos
+CRM: npm run dev
+SITE: npm run dev (porta 3002 configurada neste projeto)
+Testes CRM: node node_modules/jest/bin/jest.js --runInBand --runTestsByPath src/modules/trackings/rastreamento-publico.spec.ts src/modules/trackings/trackings.service.spec.ts src/modules/trackings/trackings.controller.spec.ts
+Tipos CRM: node node_modules/typescript/bin/tsc --noEmit -p tsconfig.build.json
+Testes SITE: node scripts/rastreamento.test.mjs
+Tipos SITE: node node_modules/typescript/bin/tsc --noEmit --incremental false
+
+Teste local
+1. Configurar CRM_API_URL no site e iniciar ambos os servidores.
+2. Abrir http://localhost:3002/canal-do-cliente e clicar Rastrear carga.
+3. Usar o mesmo CNPJ, tipo e número de uma consulta válida no CRM.
+4. Conferir status, cidades, documento, previsão quando retornada e timeline; comparar com CRM.
+5. No Network, navegador chama somente /api/rastreamento. Testar CNPJ/código inválidos e consulta válida sem resultado.
+Não foi fornecido documento real para validar uma carga na SSW; testes automatizados usam fixtures, sem consultar dados de clientes.
+
+Arquivos desta implementação
+CRM criados:
+- src/modules/trackings/dto/consulta-rastreamento-publico.dto.ts
+- src/modules/trackings/rastreamento-publico.controller.ts
+- src/modules/trackings/rastreamento-publico.service.ts
+- src/modules/trackings/rastreamento-publico.spec.ts
+CRM alterados: src/modules/trackings/trackings.module.ts; .env.example
+SITE criados:
+- src/app/(site)/rastreamento/page.tsx
+- src/app/api/rastreamento/route.ts
+- src/components/site/rastreamento/PaginaRastreamento.tsx
+- src/types/rastreamento.ts
+- scripts/rastreamento.test.mjs
+- RASTREAMENTO_PUBLICO.txt
+SITE alterado: src/components/site/canal-do-cliente/PaginaCanalDoCliente.tsx
+Validação: 14 testes CRM + 6 testes rastreamento SITE + 5 testes de regressão Informativo passaram; tipos de produção do CRM e tipos do site passaram. Ambas as páginas responderam 200; endpoints reais rejeitaram entrada inválida com 400.

@@ -120,8 +120,10 @@ export default async function InstitutionalPageSection({
 
   const imagemHero = getContentString(
     conteudoPublicado,
-    'hero.imagemUrl',
-    '/images/carreira/carreiras-banner.png',
+    isSolucoes ? 'cabecalho.imagemUrl' : 'hero.imagemUrl',
+    isSolucoes
+      ? '/images/solucoes/solucoes-banner.png'
+      : '/images/carreira/carreiras-banner.png',
   );
 
 
@@ -164,7 +166,7 @@ export default async function InstitutionalPageSection({
             bgcolor: 'primary.dark',
 
             background: isSolucoes
-              ? 'linear-gradient(90deg, rgba(9,43,67,0.82) 0%, rgba(9,43,67,0.58) 46%, rgba(255,88,5,0.22) 100%), url("/images/solucoes/solucoes-banner.png")'
+              ? `linear-gradient(90deg, rgba(9,43,67,0.82) 0%, rgba(9,43,67,0.58) 46%, rgba(255,88,5,0.22) 100%), url("${imagemHero}")`
               : isCarreiras
                 ? `linear-gradient(
                                         90deg,

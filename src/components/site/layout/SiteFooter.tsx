@@ -7,6 +7,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, Container, Divider, Grid, IconButton, Stack, SvgIcon, Typography } from '@mui/material';
 import type { Rodape } from '@/types/site';
 import { normalizeSitePath } from '@/utils/routes';
+import { CanalDoCliente } from './CanalDoCliente';
 
 interface SiteFooterProps {
   nomeEmpresa: string;
@@ -179,6 +180,7 @@ export function SiteFooter({ nomeEmpresa, rodape }: SiteFooterProps) {
                     </Button>
                   );
                 })}
+                {(secao.id === 'contato' || /^contatos?$/i.test(secao.titulo.trim())) && <CanalDoCliente />}
               </Stack>
             </Grid>
           ))}

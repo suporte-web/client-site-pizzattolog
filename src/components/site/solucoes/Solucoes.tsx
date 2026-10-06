@@ -356,6 +356,17 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
           imagemUrl?: string;
         })
         | undefined;
+      // O editor atual usa a ordem Armazenagem, Operador, Transporte.
+      // O conteúdo legado em itens continua sendo aceito.
+      const editorIndices: Record<string, number> = {
+        armazenagem: 0,
+        'operador-logistico': 1,
+        'transporte-de-cargas': 2,
+      };
+      const editorIndex = editorIndices[solucao.slug];
+      const crmImagemEditavel = editorIndex === undefined
+        ? ''
+        : getContentString(conteudo, `solucoes.${editorIndex}.imagemUrl`, '');
       const crmImagemUrlPorSlug =
         getContentString(
           conteudo,
@@ -382,6 +393,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
         ...solucao,
         ...fallback,
         imagemUrl:
+          crmImagemEditavel ||
           crmImagemUrlPorSlug ||
           crmItem?.imagemUrl ||
           solucao.imagemUrl ||
@@ -553,7 +565,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                             width: '100%',
                             height: 'auto',
                             objectFit: 'contain',
-                            filter: `drop-shadow(0 24px 34px ${corSolucao}22)`,
+                            
                           }}
                         />
                       </Box>
@@ -1066,7 +1078,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                         borderRadius: 4,
                         color: 'white',
                         backgroundImage: `linear-gradient(180deg, rgba(9,43,67,0.12) 0%, rgba(9,43,67,0.56) 42%, rgba(9,43,67,0.88) 100%), url("${post.imagem}")`,
-                        backgroundSize: 'cover',
+                        backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         boxShadow: '0 18px 38px rgba(19, 39, 57, 0.12)',
                         transition: 'transform 0.2s ease, box-shadow 0.2s ease',

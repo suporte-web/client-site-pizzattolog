@@ -2,24 +2,56 @@
 
 import MarkEmailReadRoundedIcon from '@mui/icons-material/MarkEmailReadRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import { Box, Button, Container, Stack, TextField, Typography } from '@mui/material';
-import { FormEvent, useState } from 'react';
+import { Alert, Box, Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { FormEvent, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function SiteNewsletter() {
+  const caminhoAtual = usePathname();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [enviado, setEnviado] = useState(false);
+  const [estado, setEstado] = useState<'idle' | 'enviando' | 'sucesso' | 'erro'>('idle');
+  const [mensagem, setMensagem] = useState('');
+  const envioEmAndamento = useRef(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  if (['/canal-do-cliente', '/rastreamento', '/reclamacoes-elogios'].includes(caminhoAtual?.replace(/\/+$/, '') ?? '')) return null;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (!nome.trim() || !email.trim()) {
+    if (envioEmAndamento.current) return;
+    const nomeNormalizado = nome.trim().replace(/\s+/g, ' ');
+    const emailNormalizado = email.trim().toLowerCase();
+    if (!nomeNormalizado || nomeNormalizado.length > 200 || emailNormalizado.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNormalizado)) {
+      setEstado('erro');
+      setMensagem('Informe seu nome e um e-mail válido.');
       return;
     }
-
-    setEnviado(true);
-    setNome('');
-    setEmail('');
+    envioEmAndamento.current = true;
+    setEstado('enviando');
+    setMensagem('');
+    try {
+      const response = await fetch('/api/informativo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // O aviso já existente informa o aceite ao assinar, sem checkbox adicional.
+        body: JSON.stringify({ nome: nomeNormalizado, email: emailNormalizado, aceitePrivacidade: true }),
+        signal: AbortSignal.timeout(15000),
+      });
+      if (!response.ok) {
+        setEstado('erro');
+        setMensagem(response.status === 400 ? 'Informe seu nome e um e-mail válido.' : 'Não foi possível concluir seu cadastro. Tente novamente em instantes.');
+        return;
+      }
+      setEstado('sucesso');
+      setMensagem('Cadastro realizado com sucesso! Agora você receberá as novidades da Pizzattolog.');
+      setNome('');
+      setEmail('');
+    } catch {
+      setEstado('erro');
+      setMensagem('Não foi possível concluir seu cadastro. Tente novamente em instantes.');
+    } finally {
+      envioEmAndamento.current = false;
+    }
   }
 
   return (
@@ -62,6 +94,7 @@ export function SiteNewsletter() {
                 required
                 fullWidth
                 label="Nome"
+                disabled={estado === 'enviando'}
                 value={nome}
                 onChange={(event) => setNome(event.target.value)}
                 sx={{
@@ -76,6 +109,7 @@ export function SiteNewsletter() {
                 fullWidth
                 type="email"
                 label="E-mail"
+                disabled={estado === 'enviando'}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 sx={{
@@ -87,6 +121,7 @@ export function SiteNewsletter() {
               />
               <Button
                 type="submit"
+                disabled={estado === 'enviando'}
                 variant="contained"
                 color="secondary"
                 size="large"
@@ -99,14 +134,17 @@ export function SiteNewsletter() {
                   fontWeight: 900,
                 }}
               >
-                Assine
+                {estado === 'enviando' ? 'Enviando...' : 'Assine'}
               </Button>
             </Stack>
 
+            {mensagem ? (
+              <Box aria-live="polite" sx={{ width: '100%' }}>
+                <Alert severity={estado === 'sucesso' ? 'success' : 'error'}>{mensagem}</Alert>
+              </Box>
+            ) : null}
             <Typography sx={{ width: '100%', color: '#626262', fontSize: 15.5, textAlign: { xs: 'center', md: 'left' } }}>
-              {enviado
-                ? 'Cadastro recebido. Obrigado por assinar o informativo Pizzattolog.'
-                : 'Seus dados estão seguros conosco. Ao assinar, você concorda com nossa Política de Privacidade e com o recebimento de conteúdos informativos.'}
+              Seus dados estão seguros conosco. Ao assinar, você concorda com nossa Política de Privacidade e com o recebimento de conteúdos informativos.
             </Typography>
           </Stack>
         </Box>
