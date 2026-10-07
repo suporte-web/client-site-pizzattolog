@@ -35,7 +35,16 @@ export function PaginaCanalDoCliente() {
     <Box component="main" sx={{ bgcolor: '#F7F8F8', pt: { xs: 13, md: 16 }, pb: { xs: 6, md: 10 } }}>
       <Container maxWidth="xl">
         <Stack spacing={2} sx={{ mb: { xs: 4, md: 6 }, maxWidth: 760 }}>
-          <Typography component="h1" sx={{ fontSize: { xs: '2.45rem', md: '4rem' }, fontWeight: 850, lineHeight: 1.1, color: 'text.primary' }}>
+          <Typography
+            component="h1"
+            sx={{
+              mt: { xs: 3, md: 4 },
+              fontSize: { xs: '2.45rem', md: '4rem' },
+              fontWeight: 850,
+              lineHeight: 1.1,
+              color: 'text.primary',
+            }}
+          >
             Canal do Cliente
           </Typography>
           <Typography sx={{ fontSize: { xs: 17, md: 20 }, color: 'text.secondary', lineHeight: 1.7 }}>
