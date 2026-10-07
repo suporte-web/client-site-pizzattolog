@@ -40,20 +40,69 @@ export function PaginaReclamacoesElogios() {
   }
   async function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
+
     if (envioEmAndamento.current) return;
+
     const formulario = new FormData(evento.currentTarget);
+
+    const camposOpcionais = [
+      'empresa',
+      'cidade',
+      'tipoReclamacao',
+      'documento',
+    ];
+
+    camposOpcionais.forEach((campo) => {
+      const valor = formulario.get(campo);
+
+      if (typeof valor === 'string' && !valor.trim()) {
+        formulario.delete(campo);
+      }
+    });
+
     identificador.current ??= gerarIdUnico();
     formulario.set('identificador', identificador.current);
-    arquivos.forEach(({ arquivo }) => formulario.append('arquivos', arquivo));
-    formulario.set('comentariosAnexos', JSON.stringify(arquivos.map(anexo => anexo.comentario.trim())));
-    envioEmAndamento.current = true; definirEnviando(true); definirErro('');
+
+    arquivos.forEach(({ arquivo }) => {
+      formulario.append('arquivos', arquivo);
+    });
+
+    formulario.set(
+      'comentariosAnexos',
+      JSON.stringify(
+        arquivos.map((anexo) => anexo.comentario.trim()),
+      ),
+    );
+
+    envioEmAndamento.current = true;
+    definirEnviando(true);
+    definirErro('');
+
     try {
-      const resposta = await fetch('/api/reclamacoes-elogios', { method: 'POST', body: formulario, signal: AbortSignal.timeout(35000) });
+      const resposta = await fetch('/api/reclamacoes-elogios', {
+        method: 'POST',
+        body: formulario,
+        signal: AbortSignal.timeout(35000),
+      });
+
       const resultado = await resposta.json();
-      if (!resposta.ok) definirErro(resultado.message ?? 'Não foi possível confirmar o envio. Tente novamente.');
-      else definirProtocolo(resultado.protocolo);
-    } catch { definirErro('Não foi possível confirmar o envio. Tente novamente usando os mesmos dados.'); }
-    finally { envioEmAndamento.current = false; definirEnviando(false); }
+
+      if (!resposta.ok) {
+        definirErro(
+          resultado.message ??
+          'Não foi possível confirmar o envio. Tente novamente.',
+        );
+      } else {
+        definirProtocolo(resultado.protocolo);
+      }
+    } catch {
+      definirErro(
+        'Não foi possível confirmar o envio. Tente novamente usando os mesmos dados.',
+      );
+    } finally {
+      envioEmAndamento.current = false;
+      definirEnviando(false);
+    }
   }
   return <Box component="main" sx={{ bgcolor: '#F7F8F8', pt: { xs: 13, md: 16 }, pb: { xs: 6, md: 10 } }}>
     <Container maxWidth="lg">
