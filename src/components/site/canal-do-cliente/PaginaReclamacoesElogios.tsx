@@ -5,6 +5,17 @@ import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import { estadosBrasileiros } from '@/lib/relato-cliente';
 
+function gerarIdUnico() {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.crypto?.randomUUID === 'function'
+  ) {
+    return window.crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 export function PaginaReclamacoesElogios() {
   const [arquivos, definirArquivos] = useState<Array<{ id: string; arquivo: File; comentario: string }>>([]);
   const [enviando, definirEnviando] = useState(false);
@@ -14,8 +25,15 @@ export function PaginaReclamacoesElogios() {
   const envioEmAndamento = useRef(false);
   function alterarDados() { identificador.current = null; }
   function selecionarArquivos(novos: File[]) {
-    const selecionados = [...arquivos, ...novos.map(arquivo => ({ id: crypto.randomUUID(), arquivo, comentario: '' }))];
-    if (selecionados.length > 5 || selecionados.some(({ arquivo }) => !['application/pdf','image/jpeg','image/png'].includes(arquivo.type) || arquivo.size > 10 * 1024 * 1024 || !arquivo.size)) {
+    const selecionados = [
+      ...arquivos,
+      ...novos.map(arquivo => ({
+        id: gerarIdUnico(),
+        arquivo,
+        comentario: '',
+      })),
+    ];
+    if (selecionados.length > 5 || selecionados.some(({ arquivo }) => !['application/pdf', 'image/jpeg', 'image/png'].includes(arquivo.type) || arquivo.size > 10 * 1024 * 1024 || !arquivo.size)) {
       definirErro('Selecione até 5 arquivos PDF, JPG ou PNG, de até 10 MB cada.'); return;
     }
     alterarDados(); definirArquivos(selecionados); definirErro('');
@@ -24,7 +42,7 @@ export function PaginaReclamacoesElogios() {
     evento.preventDefault();
     if (envioEmAndamento.current) return;
     const formulario = new FormData(evento.currentTarget);
-    identificador.current ??= crypto.randomUUID();
+    identificador.current ??= gerarIdUnico();
     formulario.set('identificador', identificador.current);
     arquivos.forEach(({ arquivo }) => formulario.append('arquivos', arquivo));
     formulario.set('comentariosAnexos', JSON.stringify(arquivos.map(anexo => anexo.comentario.trim())));
