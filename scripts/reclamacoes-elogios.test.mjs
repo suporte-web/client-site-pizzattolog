@@ -5,6 +5,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
+const { webcrypto } = require('node:crypto');
 const { NextResponse } = require('next/server');
 const compilar = arquivo => ts.transpileModule(readFileSync(new URL(arquivo, import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
 const helper = { exports: {} }; vm.runInNewContext(compilar('../src/lib/relato-cliente.ts'), helper);
@@ -19,6 +20,44 @@ function formulario() {
   for (const [chave, valor] of Object.entries({ identificador: '915bb8a8-fad6-4a39-9a51-583d2927e67d', nome: ' Pessoa Teste ', telefone: '(41) 99999-9999', email: ' TESTE@EXAMPLE.INVALID ', estado: 'PR', tipo: 'ELOGIO', relato: 'Relato com detalhes para atendimento.' })) form.set(chave, valor);
   return form;
 }
+
+test('formulário em HTTP gera UUID aceito pela rota e preserva identificador ao reenviar', async () => {
+  const fonte = readFileSync(new URL('../src/components/site/canal-do-cliente/PaginaReclamacoesElogios.tsx', import.meta.url), 'utf8');
+  const compilado = ts.transpileModule(fonte, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText;
+  for (const navegadorCrypto of [
+    { getRandomValues: bytes => webcrypto.getRandomValues(bytes) },
+    { randomUUID: () => '915bb8a8-fad6-4a39-9a51-583d2927e67d' },
+  ]) {
+    const ids = [];
+    const statuses = [];
+    const post = rota(async (_url, init) => {
+      ids.push(init.body.get('identificador'));
+      return ids.length === 1 ? Response.json({}, { status: 500 }) : Response.json({ sucesso: true, protocolo: 'SAC-2026-000001' });
+    });
+    const contexto = {
+      exports: {}, window: { crypto: navegadorCrypto }, AbortSignal,
+      FormData: class { constructor() { const form = formulario(); form.set('tipo', 'RECLAMACAO'); form.delete('identificador'); return form; } },
+      fetch: async (_url, init) => { const response = await post(init.body); statuses.push(response.status); return response; },
+      require: nome => {
+        if (nome === 'react') return { useState: inicial => [inicial, () => {}], useRef: inicial => ({ current: inicial }) };
+        if (nome === '@mui/material') return Object.fromEntries(['Alert','Box','Button','CircularProgress','Container','Grid','MenuItem','Paper','Stack','TextField','Typography'].map(nome => [nome, nome]));
+        if (nome.startsWith('@mui/icons-material/')) return { default: () => null };
+        if (nome === '@/lib/relato-cliente') return helper.exports;
+        return require(nome);
+      },
+    };
+    vm.runInNewContext(compilado, contexto);
+    function elementos(no) { if (Array.isArray(no)) return no.flatMap(elementos); if (!no || typeof no !== 'object') return []; return [no, ...elementos(no.props?.children)]; }
+    const form = elementos(contexto.exports.PaginaReclamacoesElogios()).find(no => no.props?.component === 'form');
+    const evento = { preventDefault() {}, currentTarget: {} };
+    await form.props.onSubmit(evento);
+    await form.props.onSubmit(evento);
+    assert.deepEqual(statuses, [502, 201]);
+    assert.equal(ids.length, 2, 'os dois envios devem passar pela validação e chegar ao CRM');
+    assert.match(ids[0], /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+    assert.equal(ids[1], ids[0], 'reenvio mantém a chave de idempotência');
+  }
+});
 test('envia formulário e anexo com token apenas no servidor e devolve só protocolo', async () => {
   const form = formulario(); form.append('arquivos', new Blob(['%PDF-1.4\n%%EOF'], { type: 'application/pdf' }), 'documento.pdf');
   const post = rota(async (url, init) => {
@@ -87,7 +126,7 @@ test('excluir um arquivo mantém o comentário do outro e permite adicionar mais
   const fonte = readFileSync(new URL('../src/components/site/canal-do-cliente/PaginaReclamacoesElogios.tsx', import.meta.url), 'utf8');
   const compilado = ts.transpileModule(fonte, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText;
   const mui = Object.fromEntries(['Alert','Box','Button','CircularProgress','Container','Grid','MenuItem','Paper','Stack','TextField','Typography'].map(nome => [nome,nome]));
-  const contexto = { exports: {}, crypto: require('node:crypto'), require: nome => {
+  const contexto = { exports: {}, window: { crypto: webcrypto }, require: nome => {
     if (nome === 'react') return hooks;
     if (nome === '@mui/material') return mui;
     if (nome.startsWith('@mui/icons-material/')) return { default: () => null };
