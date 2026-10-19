@@ -1,7 +1,3 @@
-import HealthAndSafetyRoundedIcon from '@mui/icons-material/HealthAndSafetyRounded';
-import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
-import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
-import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded';
 import { Box, Container, Grid, Paper, Stack, Typography } from '@mui/material';
 import type { Subpagina } from '@/types/site';
 import type { QuemSomosConteudo } from '@/types/site-institucional';
@@ -19,7 +15,6 @@ const certificacoes = [
     descricao:
       'Membro certificado do Programa de Logística Verde Brasil, reforçando nosso compromisso com práticas logísticas mais sustentáveis.',
     imagem: '/images/certificacoes/plvb.png',
-    icone: <LocalShippingRoundedIcon />,
     cor: '#2f8061',
   },
   {
@@ -28,7 +23,6 @@ const certificacoes = [
     descricao:
       'Empresa aprovada no Sistema de Avaliação de Segurança, Saúde, Meio Ambiente e Qualidade para operações responsáveis.',
     imagem: '/images/certificacoes/sassmaq.png',
-    icone: <HealthAndSafetyRoundedIcon />,
     cor: '#ffb71b',
   },
   {
@@ -37,7 +31,6 @@ const certificacoes = [
     descricao:
       'Empresa apoiadora do Hospital Pequeno Príncipe, contribuindo com uma das principais instituições pediátricas do país.',
     imagem: '/images/certificacoes/hospital-pequeno-principe.png',
-    icone: <VolunteerActivismRoundedIcon />,
     cor: '#f23f35',
   },
   {
@@ -46,7 +39,6 @@ const certificacoes = [
     descricao:
       'Certificação que reconhece empresas comprometidas com impacto social e ambiental positivo, ética e responsabilidade nos negócios.',
     imagem: '/images/certificacoes/empresa-b.png',
-    icone: <WorkspacePremiumRoundedIcon />,
     cor: '#010102',
   },
 ];
@@ -160,21 +152,6 @@ export function CertificacoesSection({
                           objectFit: 'contain',
                         }}
                       />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: 58,
-                        height: 58,
-                        borderRadius: 2,
-                        display: 'grid',
-                        placeItems: 'center',
-                        bgcolor: certificacao.cor,
-                        color: 'white',
-                        boxShadow: `0 14px 28px ${certificacao.cor}38`,
-                        '& svg': { fontSize: 31 },
-                      }}
-                    >
-                      {certificacao.icone}
                     </Box>
                     <Typography variant="h5" sx={{ fontWeight: 900, lineHeight: 1.18 }}>
                       {certificacao.titulo}
