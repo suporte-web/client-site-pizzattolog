@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
-import NearMeRoundedIcon from '@mui/icons-material/NearMeRounded';
 
 import {
   Box,
@@ -443,7 +442,6 @@ export function NossasUnidadesSection({
               rel="noopener noreferrer"
               variant="contained"
               color="secondary"
-              startIcon={<NearMeRoundedIcon />}
               sx={{
                 width: { xs: '100%', sm: 'fit-content' },
                 alignSelf: { sm: 'flex-end' },

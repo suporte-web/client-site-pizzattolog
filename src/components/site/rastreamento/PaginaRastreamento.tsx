@@ -3,7 +3,8 @@
 import { FormEvent, useRef, useState } from 'react';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { Alert, Box, Button, Chip, CircularProgress, Container, Grid, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Chip, CircularProgress, Container, Grid, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material';
+import { avisarRegistro } from '@/utils/site/avisos';
 import type { ResultadoRastreamento, TipoConsultaRastreamento } from '@/types/rastreamento';
 
 const tipos: Array<{ valor: TipoConsultaRastreamento; titulo: string }> = [
@@ -28,15 +29,13 @@ export function PaginaRastreamento() {
   const [codigo, definirCodigo] = useState('');
   const [tipo, definirTipo] = useState<TipoConsultaRastreamento>('nro_nf');
   const [carregando, definirCarregando] = useState(false);
-  const [mensagem, definirMensagem] = useState('');
-  const [naoEncontrado, definirNaoEncontrado] = useState(false);
   const [resultado, definirResultado] = useState<ResultadoRastreamento | null>(null);
   const consultaEmAndamento = useRef(false);
 
   async function rastrear(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
     if (consultaEmAndamento.current) return;
-    definirResultado(null); definirMensagem(''); definirNaoEncontrado(false);
+    definirResultado(null);
     consultaEmAndamento.current = true; definirCarregando(true);
     try {
       const resposta = await fetch('/api/rastreamento', {
@@ -45,11 +44,15 @@ export function PaginaRastreamento() {
       });
       const dados = await resposta.json();
       if (!resposta.ok) {
-        definirNaoEncontrado(resposta.status === 404);
-        definirMensagem(typeof dados.message === 'string' ? dados.message : 'Não foi possível consultar o rastreamento.');
-      } else definirResultado(dados);
+        avisarRegistro(typeof dados.message === 'string' ? dados.message : 'Não foi possível consultar o rastreamento.');
+      } else {
+        definirResultado(dados);
+        if (!dados.eventos.length) {
+          avisarRegistro('Ainda não há movimentações disponíveis para esta carga.');
+        }
+      }
     } catch {
-      definirMensagem('Não foi possível consultar o rastreamento. Tente novamente.');
+      avisarRegistro('Não foi possível consultar o rastreamento. Tente novamente.');
     } finally { consultaEmAndamento.current = false; definirCarregando(false); }
   }
 
@@ -70,7 +73,6 @@ export function PaginaRastreamento() {
           <Button type="submit" variant="contained" disabled={carregando} startIcon={carregando ? <CircularProgress size={20} color="inherit" /> : <SearchRoundedIcon />} sx={{ mt: 3, py: 1.4, px: 4, bgcolor: '#ff5805', boxShadow: 'none', '&:hover': { bgcolor: '#f23f35', boxShadow: 'none' } }}>{carregando ? 'Consultando…' : 'Rastrear'}</Button>
         </Paper>
         <Box aria-live="polite" aria-busy={carregando} sx={{ mt: 4 }}>
-          {mensagem && <Alert severity={naoEncontrado ? 'info' : 'error'}>{mensagem}</Alert>}
           {resultado && <Stack spacing={3}>
             <Paper elevation={0} sx={{ p: { xs: 3, md: 4 }, borderRadius: 3, border: '1px solid #e5e7eb' }}>
               <Typography sx={{ fontSize: 14, color: 'text.secondary', mb: 1 }}>Status atual</Typography>
@@ -82,7 +84,7 @@ export function PaginaRastreamento() {
             </Paper>
             <Paper elevation={0} sx={{ p: { xs: 3, md: 4 }, borderRadius: 3, border: '1px solid #e5e7eb' }}>
               <Typography component="h2" sx={{ fontSize: 24, fontWeight: 800, mb: 3 }}>Movimentações da carga</Typography>
-              {!resultado.eventos.length ? <Alert severity="info">Ainda não há movimentações disponíveis para esta carga.</Alert> : <Stack component="ol" spacing={0} sx={{ m: 0, pl: 0, listStyle: 'none' }}>
+              {!resultado.eventos.length ? <Typography sx={{ color: 'text.secondary' }}>Ainda não há movimentações disponíveis para esta carga.</Typography> : <Stack component="ol" spacing={0} sx={{ m: 0, pl: 0, listStyle: 'none' }}>
                 {[...resultado.eventos].reverse().map((evento, indice) => <Box component="li" key={`${evento.dataHora}-${indice}`} sx={{ position: 'relative', pl: 3.5, pb: indice === resultado.eventos.length - 1 ? 0 : 4, borderLeft: '2px solid #ffb71b', ml: 1 }}>
                   <Box sx={{ position: 'absolute', left: -7, top: 4, width: 12, height: 12, borderRadius: '50%', bgcolor: indice === 0 ? '#ff5805' : '#ffb71b', outline: '4px solid white' }} />
                   <Typography sx={{ color: 'text.secondary', fontSize: 14 }}>{formatarData(evento.dataHora)}</Typography>

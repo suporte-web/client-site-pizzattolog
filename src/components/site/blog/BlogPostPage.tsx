@@ -1,4 +1,3 @@
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import { Box, Button, Chip, Container, Grid, Paper, Stack, Typography } from '@mui/material';
@@ -118,7 +117,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(180deg, rgba(7, 25, 36, 0.22) 0%, rgba(7, 25, 36, 0.72) 64%, rgba(7, 25, 36, 0.9) 100%)',
+              'none',
           }}
         />
         <Container maxWidth="lg" sx={{
@@ -131,7 +130,6 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
             <Button
               component="a"
               href="/blog"
-              startIcon={<ArrowBackRoundedIcon />}
               sx={{
                 alignSelf: 'flex-start',
                 px: 0,

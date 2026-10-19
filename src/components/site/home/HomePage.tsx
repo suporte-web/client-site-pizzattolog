@@ -57,44 +57,15 @@ function aplicarConteudoHome(
 }
 
 export default async function HomePage() {
-  console.log('[HOME] 1 - iniciou');
-
-  const siteFallbackPromise =
-    getSiteHomeData().then((resultado) => {
-      console.log(
-        '[HOME] 2 - getSiteHomeData terminou',
-      );
-
-      return resultado;
-    });
-
-  const paginaPublicadaPromise =
-    getPaginaPublicadaSite<HomeConteudoCrm>(
-      'home',
-    ).then((resultado) => {
-      console.log('[HOME] 3 - CRM terminou');
-
-      return resultado;
-    });
-
   const [siteFallback, paginaPublicada] =
     await Promise.all([
-      siteFallbackPromise,
-      paginaPublicadaPromise,
+      getSiteHomeData(),
+      getPaginaPublicadaSite<HomeConteudoCrm>('home'),
     ]);
-
-  console.log(
-    '[HOME] 4 - Promise.all terminou',
-  );
 
   const site = aplicarConteudoHome(
     siteFallback,
     paginaPublicada?.conteudo ?? null,
-  );
-
-  console.log(
-    '[HOME] 5 - merge terminou. Soluções:',
-    site.solucoes.length,
   );
 
   return (

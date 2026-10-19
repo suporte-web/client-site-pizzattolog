@@ -165,17 +165,9 @@ export default async function InstitutionalPageSection({
 
             bgcolor: 'primary.dark',
 
-            background: isSolucoes
-              ? `linear-gradient(90deg, rgba(9,43,67,0.82) 0%, rgba(9,43,67,0.58) 46%, rgba(255,88,5,0.22) 100%), url("${imagemHero}")`
-              : isCarreiras
-                ? `linear-gradient(
-                                        90deg,
-                                        rgba(9,43,67,0.52) 0%,
-                                        rgba(9,43,67,0.22) 52%,
-                                        rgba(255,88,5,0.08) 100%
-                                      ),
-                                      url("${imagemHero}")`
-                : 'linear-gradient(120deg, rgba(9,43,67,1)F 0%, rgba(23,69,107,0.96) 58%, rgba(46,125,97,0.92) 100%)',
+            backgroundImage: isSolucoes || isCarreiras
+              ? `url("${imagemHero}")`
+              : 'none',
 
             backgroundSize: 'cover',
 

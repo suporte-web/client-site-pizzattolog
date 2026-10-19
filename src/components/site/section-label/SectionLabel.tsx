@@ -1,4 +1,4 @@
-import { Typography, type SxProps, type Theme } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 import type { ReactNode } from 'react';
 
 interface SectionLabelProps {
@@ -6,23 +6,7 @@ interface SectionLabelProps {
   sx?: SxProps<Theme>;
 }
 
-export function SectionLabel({ children, sx }: SectionLabelProps) {
-  return (
-    <Typography
-      component="span"
-      sx={{
-        display: 'inline-flex',
-        width: 'fit-content',
-        color: '#ff5805',
-        fontSize: { xs: 14, md: 16 },
-        fontWeight: 900,
-        letterSpacing: 0,
-        lineHeight: 1.2,
-        textTransform: 'uppercase',
-        ...sx,
-      }}
-    >
-      {children}
-    </Typography>
-  );
+// Page and section headings already identify their content.
+export function SectionLabel(_props: SectionLabelProps) {
+  return null;
 }

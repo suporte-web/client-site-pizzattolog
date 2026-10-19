@@ -2,16 +2,16 @@
 
 import MarkEmailReadRoundedIcon from '@mui/icons-material/MarkEmailReadRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import { Alert, Box, Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, TextField, Typography } from '@mui/material';
 import { FormEvent, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { avisarRegistro } from '@/utils/site/avisos';
 
 export function SiteNewsletter() {
   const caminhoAtual = usePathname();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [estado, setEstado] = useState<'idle' | 'enviando' | 'sucesso' | 'erro'>('idle');
-  const [mensagem, setMensagem] = useState('');
   const envioEmAndamento = useRef(false);
 
   if (['/canal-do-cliente', '/rastreamento', '/reclamacoes-elogios'].includes(caminhoAtual?.replace(/\/+$/, '') ?? '')) return null;
@@ -23,12 +23,11 @@ export function SiteNewsletter() {
     const emailNormalizado = email.trim().toLowerCase();
     if (!nomeNormalizado || nomeNormalizado.length > 200 || emailNormalizado.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNormalizado)) {
       setEstado('erro');
-      setMensagem('Informe seu nome e um e-mail válido.');
+      avisarRegistro('Informe seu nome e um e-mail válido.');
       return;
     }
     envioEmAndamento.current = true;
     setEstado('enviando');
-    setMensagem('');
     try {
       const response = await fetch('/api/informativo', {
         method: 'POST',
@@ -39,16 +38,16 @@ export function SiteNewsletter() {
       });
       if (!response.ok) {
         setEstado('erro');
-        setMensagem(response.status === 400 ? 'Informe seu nome e um e-mail válido.' : 'Não foi possível concluir seu cadastro. Tente novamente em instantes.');
+        avisarRegistro(response.status === 400 ? 'Informe seu nome e um e-mail válido.' : 'Não foi possível concluir seu cadastro. Tente novamente em instantes.');
         return;
       }
       setEstado('sucesso');
-      setMensagem('Cadastro realizado com sucesso! Agora você receberá as novidades da Pizzattolog.');
+      avisarRegistro('Cadastro realizado com sucesso! Agora você receberá as novidades da Pizzattolog.');
       setNome('');
       setEmail('');
     } catch {
       setEstado('erro');
-      setMensagem('Não foi possível concluir seu cadastro. Tente novamente em instantes.');
+      avisarRegistro('Não foi possível concluir seu cadastro. Tente novamente em instantes.');
     } finally {
       envioEmAndamento.current = false;
     }
@@ -138,11 +137,6 @@ export function SiteNewsletter() {
               </Button>
             </Stack>
 
-            {mensagem ? (
-              <Box aria-live="polite" sx={{ width: '100%' }}>
-                <Alert severity={estado === 'sucesso' ? 'success' : 'error'}>{mensagem}</Alert>
-              </Box>
-            ) : null}
             <Typography sx={{ width: '100%', color: '#626262', fontSize: 15.5, textAlign: { xs: 'center', md: 'left' } }}>
               Seus dados estão seguros conosco. Ao assinar, você concorda com nossa Política de Privacidade e com o recebimento de conteúdos informativos.
             </Typography>

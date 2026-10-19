@@ -107,10 +107,7 @@ export default function EspecialidadesSection({
           bgcolor: 'primary.dark',
 
           backgroundImage: imagemHero
-            ? `linear-gradient(
-          rgba(15, 39, 49, 0.74),
-          rgba(15, 39, 49, 0.74)
-        ), url("${imagemHero}")`
+            ? `url("${imagemHero}")`
             : 'none',
 
           backgroundSize: 'cover',

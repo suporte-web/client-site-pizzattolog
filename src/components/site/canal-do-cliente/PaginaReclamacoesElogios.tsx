@@ -1,9 +1,10 @@
 'use client';
 import { FormEvent, useRef, useState } from 'react';
-import { Alert, Box, Button, CircularProgress, Container, Grid, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Grid, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import { estadosBrasileiros } from '@/lib/relato-cliente';
+import { avisarRegistro } from '@/utils/site/avisos';
 
 function gerarIdUnico() {
   if (
@@ -24,7 +25,6 @@ function gerarIdUnico() {
 export function PaginaReclamacoesElogios() {
   const [arquivos, definirArquivos] = useState<Array<{ id: string; arquivo: File; comentario: string }>>([]);
   const [enviando, definirEnviando] = useState(false);
-  const [erro, definirErro] = useState('');
   const [protocolo, definirProtocolo] = useState('');
   const identificador = useRef<string | null>(null);
   const envioEmAndamento = useRef(false);
@@ -39,9 +39,9 @@ export function PaginaReclamacoesElogios() {
       })),
     ];
     if (selecionados.length > 5 || selecionados.some(({ arquivo }) => !['application/pdf', 'image/jpeg', 'image/png'].includes(arquivo.type) || arquivo.size > 10 * 1024 * 1024 || !arquivo.size)) {
-      definirErro('Selecione até 5 arquivos PDF, JPG ou PNG, de até 10 MB cada.'); return;
+      avisarRegistro('Selecione até 5 arquivos PDF, JPG ou PNG, de até 10 MB cada.'); return;
     }
-    alterarDados(); definirArquivos(selecionados); definirErro('');
+    alterarDados(); definirArquivos(selecionados);
   }
   async function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
@@ -81,7 +81,6 @@ export function PaginaReclamacoesElogios() {
 
     envioEmAndamento.current = true;
     definirEnviando(true);
-    definirErro('');
 
     try {
       const resposta = await fetch('/api/reclamacoes-elogios', {
@@ -93,15 +92,16 @@ export function PaginaReclamacoesElogios() {
       const resultado = await resposta.json();
 
       if (!resposta.ok) {
-        definirErro(
+        avisarRegistro(
           resultado.message ??
           'Não foi possível confirmar o envio. Tente novamente.',
         );
       } else {
         definirProtocolo(resultado.protocolo);
+        avisarRegistro(`Solicitação enviada com sucesso. Protocolo: ${resultado.protocolo}.`);
       }
     } catch {
-      definirErro(
+      avisarRegistro(
         'Não foi possível confirmar o envio. Tente novamente usando os mesmos dados.',
       );
     } finally {
@@ -117,8 +117,8 @@ export function PaginaReclamacoesElogios() {
         <Typography sx={{ color: 'text.secondary', lineHeight: 1.8 }}>Registre um elogio ou reclamação para a equipe de atendimento da Pizzattolog. Informe seus dados de contato para que a equipe possa responder ao seu relato.</Typography>
       </Paper>
       {protocolo ? <Stack spacing={3}>
-        <Alert severity="success">Solicitação enviada com sucesso. Protocolo: <strong>{protocolo}</strong>.</Alert>
-        <Button variant="outlined" sx={{ alignSelf: 'flex-start' }} onClick={() => { definirProtocolo(''); definirArquivos([]); definirErro(''); identificador.current = null; }}>Registrar outro relato</Button>
+        <Typography>Protocolo do registro: <strong>{protocolo}</strong>.</Typography>
+        <Button variant="outlined" sx={{ alignSelf: 'flex-start' }} onClick={() => { definirProtocolo(''); definirArquivos([]); identificador.current = null; }}>Registrar outro relato</Button>
       </Stack> : <Box component="form" onSubmit={enviar} onChange={alterarDados}>
         <Paper elevation={0} sx={{ p: { xs: 3, md: 4 }, borderRadius: 3, mb: 3 }}>
           <Typography component="h2" sx={{ fontSize: 21, fontWeight: 800, mb: 3 }}>Registro da ocorrência</Typography>
@@ -146,7 +146,6 @@ export function PaginaReclamacoesElogios() {
           </Box>)}</Stack>
         </Paper>
         <Typography sx={{ color: 'text.secondary', fontSize: 14, mb: 2 }}>Usaremos os dados informados para tratar seu registro, conforme nossa <Box component="a" href="/politica-de-privacidade" sx={{ color: '#ff5805' }}>Política de Privacidade</Box>.</Typography>
-        <Box aria-live="polite" sx={{ mb: 2 }}>{erro && <Alert severity="error">{erro}</Alert>}</Box>
         <Button type="submit" variant="contained" disabled={enviando} startIcon={enviando ? <CircularProgress size={20} color="inherit" /> : <SendRoundedIcon />} sx={{ bgcolor: '#ff5805', px: 4, py: 1.5, '&:hover': { bgcolor: '#f23f35' } }}>{enviando ? 'Enviando…' : 'Enviar solicitação'}</Button>
       </Box>}
     </Container>

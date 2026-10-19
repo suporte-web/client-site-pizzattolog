@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from 'react';
 import {
-  Alert,
   Box,
   Button,
   Checkbox,
@@ -33,7 +32,7 @@ import { onlyDigits } from '@/utils/site/masks';
 import { isValidCnpj, isValidEmail, isValidPhone } from '@/utils/site/validation';
 import CotacaoDadosCliente from './CotacaoDadosCliente';
 import CotacaoDadosSolucao from './CotacaoDadosSolucao';
-import CotacaoSuccess from './CotacaoSuccess';
+import { avisarRegistro } from '@/utils/site/avisos';
 import { FORMULARIO_COTACAO_INICIAL, SOLUCOES_COTACAO } from './cotacao.constants';
 
 function getServicoLabel(tipoServico: FormularioCotacao['tipoServico']) {
@@ -135,7 +134,6 @@ export default function SolicitarCotacaoForm() {
   const [formulario, setFormulario] = useState<FormularioCotacao>(FORMULARIO_COTACAO_INICIAL);
   const [erros, setErros] = useState<CotacaoFormErrors>({});
   const [status, setStatus] = useState<CotacaoSubmitStatus>('idle');
-  const [erroEnvio, setErroEnvio] = useState('');
   const enviando = status === 'enviando';
 
   function atualizarCampo<K extends keyof FormularioCotacao>(campo: K, valor: FormularioCotacao[K]) {
@@ -147,7 +145,6 @@ export default function SolicitarCotacaoForm() {
       ...anterior,
       [campo]: undefined,
     }));
-    setErroEnvio('');
     setStatus((current) => (current === 'sucesso' ? 'idle' : current));
   }
 
@@ -158,13 +155,13 @@ export default function SolicitarCotacaoForm() {
       return;
     }
 
-    setErroEnvio('');
     setStatus('idle');
 
     const novosErros = validateForm(formulario);
     setErros(novosErros);
 
     if (Object.keys(novosErros).length > 0) {
+      avisarRegistro(Object.values(novosErros).filter(Boolean).join('\n'));
       return;
     }
 
@@ -178,21 +175,15 @@ export default function SolicitarCotacaoForm() {
       setErros({});
       setStatus('sucesso');
       trackSolicitarCotacaoEnviado();
+      avisarRegistro('Solicitação enviada com sucesso!\n\nRecebemos as informações da sua operação. Nossa equipe fará a análise e entrará em contato.');
     } catch (error) {
-      setErroEnvio(error instanceof Error ? error.message : 'Não foi possível enviar sua solicitação. Tente novamente.');
+      avisarRegistro(error instanceof Error ? error.message : 'Não foi possível enviar sua solicitação. Tente novamente.');
       setStatus('erro');
     }
   }
 
   return (
     <>
-      {status === 'sucesso' ? <CotacaoSuccess /> : null}
-      {status === 'erro' && erroEnvio ? (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {erroEnvio}
-        </Alert>
-      ) : null}
-
       <Paper elevation={0} sx={{ border: '1px solid', borderColor: 'divider', overflow: 'hidden' }}>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ p: { xs: 2.5, sm: 4, md: 5 } }}>
           <Stack spacing={4}>

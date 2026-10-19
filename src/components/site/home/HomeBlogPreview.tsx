@@ -1,4 +1,3 @@
-import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import { Box, Button, Chip, Container, Grid, Stack, Typography } from '@mui/material';
 
 import { blogPosts, getBlogPostPath, type BlogPost } from '@/components/site/blog/blog-posts';
@@ -76,7 +75,6 @@ function BlogPreviewCard({
         <Button
           component="a"
           href={getBlogPostPath(post)}
-          endIcon={<ArrowOutwardRoundedIcon />}
           sx={{
             width: 'fit-content',
             minHeight: 32,

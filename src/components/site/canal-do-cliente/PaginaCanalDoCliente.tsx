@@ -35,21 +35,39 @@ export function PaginaCanalDoCliente() {
     <Box component="main" sx={{ bgcolor: '#F7F8F8', pt: { xs: 13, md: 16 }, pb: { xs: 6, md: 10 } }}>
       <Container maxWidth="xl">
         <Stack spacing={2} sx={{ mb: { xs: 4, md: 6 }, maxWidth: 760 }}>
-          <Typography
-            component="h1"
+          <Box
             sx={{
-              mt: { xs: 3, md: 4 },
-              fontSize: { xs: '2.45rem', md: '4rem' },
-              fontWeight: 850,
-              lineHeight: 1.1,
-              color: 'text.primary',
+              width: 'fit-content',
+              maxWidth: '100%',
+              mx: 'auto',
             }}
           >
-            Canal do Cliente
-          </Typography>
-          <Typography sx={{ fontSize: { xs: 17, md: 20 }, color: 'text.secondary', lineHeight: 1.7 }}>
-            Um espaço para acompanhar sua carga e se comunicar com a Pizzattolog.
-          </Typography>
+            <Typography
+              component="h1"
+              sx={{
+                mt: { xs: 6, md: 8 },
+                fontSize: { xs: '2.45rem', md: '4rem' },
+                fontWeight: 850,
+                lineHeight: 1.1,
+                color: 'text.primary',
+                textAlign: 'left',
+              }}
+            >
+              Canal do Cliente
+            </Typography>
+
+            <Typography
+              sx={{
+                mt: 2,
+                fontSize: { xs: 17, md: 20 },
+                color: 'text.secondary',
+                lineHeight: 1.7,
+                textAlign: 'left',
+              }}
+            >
+              Um espaço para acompanhar sua carga e se comunicar com a Pizzattolog.
+            </Typography>
+          </Box>
         </Stack>
         <Grid container spacing={3}>
           {opcoes.map(({ titulo, descricao, icone: Icone, href, botao, telefone }) => (

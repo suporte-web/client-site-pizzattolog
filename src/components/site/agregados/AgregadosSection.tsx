@@ -1,6 +1,5 @@
 'use client';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
@@ -304,7 +303,6 @@ export function AgregadosSection({
                   variant="contained"
                   color="secondary"
                   size="large"
-                  endIcon={<ArrowForwardRoundedIcon />}
                   sx={{ width: { xs: '100%', sm: 'fit-content' } }}
                 >
                   Falar pelo WhatsApp
@@ -673,7 +671,7 @@ export function AgregadosSection({
             inset: 0,
 
             background:
-              'linear-gradient(90deg, rgba(8, 43, 65, 0.92) 0%, rgba(8, 43, 65, 0.72) 45%, rgba(8, 43, 65, 0.28) 100%)',
+              'none',
 
             zIndex: 0,
           },
@@ -768,7 +766,6 @@ export function AgregadosSection({
               variant="contained"
               color="secondary"
               size="large"
-              endIcon={<ArrowForwardRoundedIcon />}
               sx={{
                 flexShrink: 0,
 

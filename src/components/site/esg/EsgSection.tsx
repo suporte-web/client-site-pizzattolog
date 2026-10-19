@@ -1,5 +1,4 @@
 import {
-  ArrowForwardRounded,
   AutoStoriesRounded,
   Diversity3Rounded,
   ElectricCarRounded,
@@ -7,7 +6,6 @@ import {
   ForestRounded,
   GavelRounded,
   GroupsRounded,
-  OpenInNewRounded,
   PublicRounded,
   ShieldRounded,
   WorkspacePremiumRounded,
@@ -675,7 +673,6 @@ export function NossoCompromissoEsgSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="outlined"
-                    endIcon={<OpenInNewRounded />}
                     sx={{
                       width: 'fit-content',
                       borderRadius: 99,

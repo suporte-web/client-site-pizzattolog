@@ -393,20 +393,11 @@ async function fetchJson<T>(path: string, fallback: T): Promise<T> {
   try {
     const url = `${apiBaseUrl}${path}`;
 
-    console.log('[SITE API] Buscando:', url);
-
     const response = await fetch(url, {
       cache: 'no-store',
     });
 
-    console.log(
-      '[SITE API] Resposta:',
-      response.status,
-      response.statusText,
-    );
-
     if (!response.ok) {
-      console.log('[SITE API] Usando fallback para:', path);
       return fallback;
     }
 
@@ -425,20 +416,11 @@ async function fetchCrmJson<T>(
   try {
     const url = `${crmApiBaseUrl}${path}`;
 
-    console.log('[CRM API] Buscando:', url);
-
     const response = await fetch(url, {
       cache: 'no-store',
     });
 
-    console.log(
-      '[CRM API] Resposta:',
-      response.status,
-      response.statusText,
-    );
-
     if (!response.ok) {
-      console.log('[CRM API] Usando fallback para:', path);
       return fallback;
     }
 

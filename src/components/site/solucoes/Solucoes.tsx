@@ -1,6 +1,6 @@
 'use client';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
@@ -689,7 +689,6 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
               variant="contained"
               color="secondary"
               size="large"
-              endIcon={<ArrowForwardRoundedIcon />}
               sx={{
                 position: 'relative',
                 zIndex: 1,
@@ -920,17 +919,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
               bgcolor: 'white',
             }}
           >
-            <Box
-              sx={{
-                position: 'absolute',
-                inset: 0,
-                pointerEvents: 'none',
-                opacity: 0.28,
-                backgroundImage:
-                  'linear-gradient(135deg, transparent 0 22%, rgba(242,63,53,0.18) 22.2%, transparent 22.6%), linear-gradient(35deg, transparent 0 55%, rgba(255,183,27,0.18) 55.2%, transparent 55.8%)',
-                backgroundSize: '420px 260px, 520px 340px',
-              }}
-            />
+            <NumbersBackground />
             <Container maxWidth="xl" sx={{ position: 'relative' }}>
               <Box sx={{ mb: 6 }}>
                 <SectionHeader label="Nossos números" title="Nossos números" />
@@ -1041,7 +1030,6 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                   variant="contained"
                   color="secondary"
                   size="large"
-                  endIcon={<ArrowForwardRoundedIcon />}
                   sx={{ alignSelf: 'flex-start' }}
                 >
                   {getContentString(conteudo, 'agregados.botaoTexto', 'Saiba mais')}
@@ -1077,7 +1065,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                         p: { xs: 3, md: 3.5 },
                         borderRadius: 4,
                         color: 'white',
-                        backgroundImage: `linear-gradient(180deg, rgba(9,43,67,0.12) 0%, rgba(9,43,67,0.56) 42%, rgba(9,43,67,0.88) 100%), url("${post.imagem}")`,
+                        backgroundImage: `url("${post.imagem}")`,
                         backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         boxShadow: '0 18px 38px rgba(19, 39, 57, 0.12)',
@@ -1108,7 +1096,6 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                         </Typography>
                         <Button
                           component="span"
-                          endIcon={<ArrowForwardRoundedIcon />}
                           sx={{
                             alignSelf: 'flex-start',
                             minHeight: 32,

@@ -1,6 +1,5 @@
 'use client';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import CoffeeRoundedIcon from '@mui/icons-material/CoffeeRounded';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
@@ -397,7 +396,6 @@ export function CarreirasSection({
                     rel="noopener noreferrer"
                     variant="contained"
                     color="secondary"
-                    endIcon={<ArrowForwardRoundedIcon />}
                     sx={{
                       width: {
                         xs: '100%',
@@ -919,7 +917,6 @@ export function CarreirasSection({
               variant="contained"
               color="secondary"
               size="large"
-              endIcon={<ArrowForwardRoundedIcon />}
               sx={{
                 width: {
                   xs: '100%',

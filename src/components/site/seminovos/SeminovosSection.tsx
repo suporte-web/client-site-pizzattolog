@@ -1,6 +1,5 @@
 'use client';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
@@ -245,13 +244,6 @@ export default function SeminovosSection({
 
           alignItems: 'center',
           backgroundImage: `
-  linear-gradient(
-    90deg,
-    rgba(17, 24, 39, 0.78) 0%,
-    rgba(17, 24, 39, 0.60) 35%,
-    rgba(17, 24, 39, 0.28) 65%,
-    rgba(17, 24, 39, 0.05) 100%
-  ),
   url('${getContentString(
             conteudo,
             'hero.imagemUrl',
@@ -331,7 +323,6 @@ export default function SeminovosSection({
                 rel="noopener noreferrer"
                 variant="contained"
                 size="large"
-                endIcon={<ArrowForwardRoundedIcon />}
                 sx={{
                   width: {
                     xs: '100%',
@@ -1391,7 +1382,6 @@ export default function SeminovosSection({
               href="https://wa.me/554192393384?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20equipe%20da%20Pizzattolog."
               variant="contained"
               size="large"
-              endIcon={<ArrowForwardRoundedIcon />}
               sx={{
                 width: {
                   xs: '100%',

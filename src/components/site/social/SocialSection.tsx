@@ -116,12 +116,6 @@ export default function SocialSection({
           },
 
           backgroundImage: `
-      linear-gradient(
-        90deg,
-        rgba(9,43,67,0.30) 0%,
-        rgba(9,43,67,0.12) 50%,
-        rgba(9,43,67,0.04) 100%
-      ),
       url("${heroImagem}")
     `,
 

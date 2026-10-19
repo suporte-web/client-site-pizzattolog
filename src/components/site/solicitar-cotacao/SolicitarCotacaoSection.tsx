@@ -97,7 +97,7 @@ export default function SolicitarCotacaoSection({
               {getContentString(
                 conteudo,
                 'hero.descricao',
-                'Conte um pouco sobre a sua operação. Nossa equipe comercial analisará as informações e entrará em contato com você.',
+                'Conte um pouco sobre a sua operação. Nossa equipe analisará as informações e entrará em contato com você.',
               )}
             </Typography>
           </Box>

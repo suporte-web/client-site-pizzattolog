@@ -1,6 +1,5 @@
 'use client';
 
-import ArrowOutwardRoundedIcon from '@mui/icons-material/ArrowOutwardRounded';
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -180,7 +179,6 @@ function FeaturedPost({
               href={getBlogPostPath(post)}
               variant="contained"
               color="secondary"
-              endIcon={<ArrowOutwardRoundedIcon />}
               sx={{ width: 'fit-content', mt: 1 }}
             >
               {readMoreLabel}
@@ -234,7 +232,6 @@ function BlogCard({
           <Button
             component="a"
             href={getBlogPostPath(post)}
-            endIcon={<ArrowOutwardRoundedIcon />}
             sx={{
               width: 'fit-content',
               px: 0,

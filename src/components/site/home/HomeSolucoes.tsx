@@ -1,6 +1,6 @@
 'use client';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
@@ -772,9 +772,6 @@ export function HomeSolucoes({
                               rel="noopener noreferrer"
                               variant="contained"
                               size="large"
-                              endIcon={
-                                <ArrowForwardRoundedIcon />
-                              }
                               sx={{
                                 width:
                                 {
@@ -1647,34 +1644,7 @@ export function HomeSolucoes({
       FUNDO GEOMÉTRICO
   =================================================== */}
 
-        <Box
-          sx={{
-            position: 'absolute',
-            inset: 0,
-
-            pointerEvents: 'none',
-
-            opacity: 0.35,
-
-            backgroundImage: `
-        linear-gradient(
-          135deg,
-          transparent 0 22%,
-          rgba(242,63,53,0.18) 22.2%,
-          transparent 22.6%
-        ),
-        linear-gradient(
-          35deg,
-          transparent 0 55%,
-          rgba(255,183,27,0.16) 55.2%,
-          transparent 55.8%
-        )
-      `,
-
-            backgroundSize:
-              '420px 260px, 520px 340px',
-          }}
-        />
+        <NumbersBackground />
 
         <Container
           maxWidth="xl"
@@ -2018,9 +1988,6 @@ export function HomeSolucoes({
               href="/agregados"
               variant="contained"
               size="large"
-              endIcon={
-                <ArrowForwardRoundedIcon />
-              }
               sx={{
                 alignSelf: 'flex-start',
 

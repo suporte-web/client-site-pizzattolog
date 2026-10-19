@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
@@ -113,15 +112,7 @@ export function Hero({ hero }: HeroProps) {
                 position: 'absolute',
                 inset: 0,
 
-                background: `
-          linear-gradient(
-            90deg,
-            rgba(15, 23, 42, 0.48) 0%,
-            rgba(15, 23, 42, 0.24) 38%,
-            rgba(15, 23, 42, 0.05) 70%,
-            rgba(15, 23, 42, 0) 100%
-          )
-        `,
+                background: 'none',
 
                 pointerEvents: 'none',
               }}
@@ -191,7 +182,6 @@ export function Hero({ hero }: HeroProps) {
               component={Link}
               href="/solicitar-cotacao"
               variant="contained"
-              endIcon={<ArrowForwardRoundedIcon />}
               sx={{
                 minHeight: 48,
 

@@ -105,12 +105,6 @@ export function HistoriaSection({
           alignItems: 'flex-end',
 
           backgroundImage: `
-            linear-gradient(
-              90deg,
-              rgba(9, 43, 67, 0.70) 0%,
-              rgba(9, 43, 67, 0.30) 48%,
-              rgba(255, 88, 5, 0.08) 100%
-            ),
             url("${bannerImagem}")
           `,
 

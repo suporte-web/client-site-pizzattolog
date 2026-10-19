@@ -1,9 +1,9 @@
 'use client';
 
 import { FormEvent, ReactNode, useState } from 'react';
+import NextLink from 'next/link';
 
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import CampaignRoundedIcon from '@mui/icons-material/CampaignRounded';
 import CloudUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
@@ -17,10 +17,8 @@ import RequestQuoteRoundedIcon from '@mui/icons-material/RequestQuoteRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ShieldRoundedIcon from '@mui/icons-material/ShieldRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 import {
-  Alert,
   Box,
   Button,
   Checkbox,
@@ -43,6 +41,7 @@ import {
   enviarEntradaSite,
 } from '@/services/site/entrada-site.service';
 import { trackFaleConoscoEnviado } from '@/lib/analytics/tracking';
+import { avisarRegistro } from '@/utils/site/avisos';
 
 import {
   mergeTextItems,
@@ -230,6 +229,7 @@ function AreaButton({
   return (
     <Button
       type={href ? undefined : 'button'}
+      LinkComponent={NextLink}
       href={href}
       onClick={onClick}
       fullWidth
@@ -268,7 +268,6 @@ interface ContatosSectionProps {
 }
 
 type ContactSubmitStatus = 'idle' | 'enviando' | 'sucesso' | 'erro';
-
 
 function getMensagemSucesso(area: string) {
   switch (area) {
@@ -333,20 +332,20 @@ function getMensagemSucesso(area: string) {
 export default function ContatosSection({
   conteudo,
 }: ContatosSectionProps) {
-  const areasContatoEditaveis =
+  const [areaCotacao, areaAgregados, ...demaisAreas] =
     mergeTextItems(areasContato, conteudo, 'areasContato', [
       'titulo',
     ]);
+  const areasContatoEditaveis = [areaAgregados, areaCotacao, ...demaisAreas];
   const canaisAtendimentoEditaveis =
     mergeTextItems(canaisAtendimento, conteudo, 'canaisAtendimento', [
       'titulo',
       'texto',
     ]);
   const [areaSelecionada, setAreaSelecionada] =
-  useState<string>('Solicite uma cotação');
+    useState<string>(areasContatoEditaveis[0].titulo);
 
   const [statusEnvio, setStatusEnvio] = useState<ContactSubmitStatus>('idle');
-  const [erroEnvio, setErroEnvio] = useState('');
   const formularioAgregado = areaSelecionada === 'Seja um agregado';
   const enviando = statusEnvio === 'enviando';
   const mensagemSucesso = getMensagemSucesso(areaSelecionada);
@@ -358,7 +357,6 @@ export default function ContatosSection({
 
   function selecionarAreaContato(area: string) {
     setAreaSelecionada(area);
-    setErroEnvio('');
     setStatusEnvio('idle');
   }
 
@@ -384,8 +382,6 @@ export default function ContatosSection({
         )
       : [];
 
-
-    setErroEnvio('');
     setStatusEnvio('enviando');
 
     try {
@@ -503,8 +499,9 @@ export default function ContatosSection({
 
       setStatusEnvio('sucesso');
       trackFaleConoscoEnviado(areaSelecionada);
+      avisarRegistro(`${mensagemSucesso.titulo}\n\n${mensagemSucesso.descricao}`);
     } catch (error) {
-      setErroEnvio(
+      avisarRegistro(
         error instanceof Error
           ? error.message
           : 'Não foi possível enviar sua solicitação. Tente novamente.',
@@ -635,16 +632,6 @@ export default function ContatosSection({
                 >
                   <Box component="form" key={areaSelecionada} onSubmit={handleSubmit}>
                     <Stack spacing={3}>
-
-
-                      {statusEnvio === 'erro' && erroEnvio ? (
-                        <Alert severity="error">
-                          {erroEnvio}
-                        </Alert>
-                      ) : null}
-
-
-
 
                       {formularioAgregado ? (
                         <>
@@ -985,64 +972,6 @@ export default function ContatosSection({
                         </>
                       )}
 
-                      {statusEnvio === 'sucesso' ? (
-                        <Paper
-                          elevation={0}
-                          sx={{
-                            p: { xs: 2.5, md: 3 },
-                            borderRadius: 3,
-                            border: '1px solid',
-                            borderColor: 'rgba(46, 125, 50, 0.22)',
-                            bgcolor: 'rgba(46, 125, 50, 0.06)',
-                          }}
-                        >
-                          <Stack
-                            direction="row"
-                            spacing={2}
-                            sx={{
-                              alignItems: 'flex-start',
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                display: 'grid',
-                                placeItems: 'center',
-                                width: 48,
-                                height: 48,
-                                flexShrink: 0,
-                                borderRadius: '50%',
-                                bgcolor: 'success.main',
-                                color: 'white',
-                              }}
-                            >
-                              <CheckCircleRoundedIcon />
-                            </Box>
-
-                            <Box>
-                              <Typography
-                                sx={{
-                                  color: 'success.dark',
-                                  fontSize: { xs: 16, md: 18 },
-                                  fontWeight: 900,
-                                }}
-                              >
-                                {mensagemSucesso.titulo}
-                              </Typography>
-
-                              <Typography
-                                sx={{
-                                  mt: 0.75,
-                                  color: 'text.secondary',
-                                  fontSize: 15,
-                                  lineHeight: 1.65,
-                                }}
-                              >
-                                {mensagemSucesso.descricao}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                        </Paper>
-                      ) : null}
                     </Stack>
                   </Box>
                 </Paper>
@@ -1123,7 +1052,6 @@ export default function ContatosSection({
                         href={canal.href}
                         target={canal.href.startsWith('http') ? '_blank' : undefined}
                         rel={canal.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        endIcon={<ArrowForwardRoundedIcon />}
                         sx={{
                           alignSelf: 'flex-start',
                           minHeight: 48,

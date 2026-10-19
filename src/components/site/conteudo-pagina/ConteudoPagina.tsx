@@ -1,6 +1,5 @@
  'use client';
 
-import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 type BlocoConteudo =
@@ -117,7 +116,6 @@ export function ConteudoPagina({ conteudo }: ConteudoPaginaProps) {
               key={`${bloco.url}-${index}`}
               href={bloco.url}
               variant="contained"
-              endIcon={<OpenInNewRoundedIcon />}
               sx={{ alignSelf: 'flex-start' }}
             >
               {bloco.texto}

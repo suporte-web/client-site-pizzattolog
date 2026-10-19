@@ -14,15 +14,17 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  Menu,
+  Popper,
+  Paper,
   MenuItem,
+  MenuList,
   Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import type { MouseEvent, ReactNode } from "react";
 import type { ItemMenu, MenuNavegacao } from "@/types/site";
 import { normalizeSitePath } from "@/utils/routes";
@@ -32,19 +34,9 @@ interface HeaderProps {
   menus: MenuNavegacao[];
 }
 
-const logoUrl = './';
-
 function getHref(url: string | null | undefined, slug: string) {
   return normalizeSitePath(url, `/${slug}`);
 }
-
-const topicosSolucoes = new Set([
-  "transporte-de-cargas",
-  "armazenagem",
-  "operador-logistico",
-]);
-
-const menusComCliqueDireto = new Set(["solucoes"]);
 
 function normalizePathname(path: string) {
   return path.replace(/\/$/, "") || "/";
@@ -99,18 +91,17 @@ function renderDesktopItems(
   return itens.flatMap((item) => {
     const filhos = item.filhos ?? [];
     const aberto = itemExpandido === item.id;
-    const linkDireto = topicosSolucoes.has(item.slug);
 
-    if (filhos.length && !linkDireto) {
+    if (filhos.length) {
       return [
         <Fragment key={item.id}>
           <MenuItem
-            component="button"
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              alternarItem(item.id);
-            }}
+            tabIndex={0}
+            component={Link}
+            href={getHref(item.url, item.slug)}
+            onClick={fecharMenu}
+            onMouseEnter={() => alternarItem(item.id)}
+            onFocus={() => alternarItem(item.id)}
             sx={{
               width: '100%',
               minHeight: 42,
@@ -159,6 +150,7 @@ function renderDesktopItems(
 
     return [
       <MenuItem
+        tabIndex={0}
         key={item.id}
         component={Link}
         href={getHref(item.url, item.slug)}
@@ -215,13 +207,14 @@ function renderMobileItems(
   return itens.flatMap((item) => {
     const filhos = item.filhos ?? [];
     const aberto = itensExpandidos.has(item.id);
-    const linkDireto = topicosSolucoes.has(item.slug);
 
-    if (filhos.length && !linkDireto) {
+    if (filhos.length) {
       return [
         <Fragment key={item.id}>
           <ListItemButton
-            onClick={() => alternarItem(item.id)}
+            component={Link}
+            href={getHref(item.url, item.slug)}
+            onClick={fecharMobile}
             sx={{ py: 0.75, pl: 2 + nivel * 2.5, borderRadius: 1 }}
           >
             <ListItemText
@@ -232,6 +225,15 @@ function renderMobileItems(
               }
             />
           </ListItemButton>
+          <Button
+            onClick={() => alternarItem(item.id)}
+            aria-expanded={aberto}
+            aria-label={`Exibir subcategorias de ${item.titulo}`}
+            size="small"
+            sx={{ ml: 2 + nivel * 2.5 }}
+          >
+            {aberto ? 'Ocultar subcategorias' : 'Exibir subcategorias'}
+          </Button>
           <Collapse in={aberto} timeout="auto" unmountOnExit>
             {renderMobileItems(filhos, fecharMobile, itensExpandidos, alternarItem, nivel + 1)}
           </Collapse>
@@ -286,14 +288,28 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
   const [itemDesktopExpandido, setItemDesktopExpandido] = useState<string | null>(null);
   const [itensMobileExpandidos, setItensMobileExpandidos] = useState<Set<string>>(new Set());
 
-  const abrirMenu = (event: MouseEvent<HTMLElement>, indice: number) => {
+  const fechamentoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const manterMenu = () => {
+    if (fechamentoTimer.current) clearTimeout(fechamentoTimer.current);
+  };
+  const agendarFechamento = () => {
+    manterMenu();
+    fechamentoTimer.current = setTimeout(() => fecharMenu(), 180);
+  };
+  useEffect(() => () => {
+    if (fechamentoTimer.current) clearTimeout(fechamentoTimer.current);
+  }, []);
+
+  const abrirMenu = (event: { currentTarget: HTMLElement }, indice: number) => {
+    manterMenu();
     setMenuEsgAtual(null);
     setMenuAtual(event.currentTarget);
     setIndiceAtual(indice);
     setItemDesktopExpandido(null);
   };
 
-  const abrirMenuEsg = (event: MouseEvent<HTMLElement>) => {
+  const abrirMenuEsg = (event: { currentTarget: HTMLElement }) => {
+    manterMenu();
     setMenuAtual(null);
     setIndiceAtual(null);
     setItemDesktopExpandido(null);
@@ -320,7 +336,7 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
   };
 
   const alternarItemDesktop = (id: string) => {
-    setItemDesktopExpandido((atual) => (atual === id ? null : id));
+    setItemDesktopExpandido(id);
   };
 
   const alternarItemMobile = (id: string) => {
@@ -391,51 +407,24 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
             >
               {menusSemEsg.map((menu, indice) => (
                 <Fragment key={menu.id}>
-                  {menu.itens.length &&
-                    menusComCliqueDireto.has(menu.slug) ? (
-                    <Button
-                      color="inherit"
-                      component={Link}
-                      href={getHref(menu.url, menu.slug)}
-                      scroll
-                      onClick={(
-                        event: MouseEvent<HTMLElement>,
-                      ) =>
-                        navegarParaTopoSeMesmaPagina(
-                          event,
-                          getHref(menu.url, menu.slug),
-                        )
-                      }
-                      sx={{
-                        color: "text.secondary",
-                      }}
-                    >
-                      {menu.titulo}
-                    </Button>
-                  ) : menu.itens.length ? (
-                    <Button
-                      color="inherit"
-                      onClick={(
-                        event: MouseEvent<HTMLElement>,
-                      ) => abrirMenu(event, indice)}
-                      sx={{
-                        color: "text.secondary",
-                      }}
-                    >
-                      {menu.titulo}
-                    </Button>
-                  ) : (
-                    <Button
-                      color="inherit"
-                      component={Link}
-                      href={getHref(menu.url, menu.slug)}
-                      sx={{
-                        color: "text.secondary",
-                      }}
-                    >
-                      {menu.titulo}
-                    </Button>
-                  )}
+                  <Button
+                    color="inherit"
+                    component={Link}
+                    href={getHref(menu.url, menu.slug).split('#')[0]}
+                    scroll
+                    onClick={(event: MouseEvent<HTMLElement>) =>
+                      navegarParaTopoSeMesmaPagina(event, getHref(menu.url, menu.slug))
+                    }
+                    onMouseEnter={(event) => menu.itens.length ? abrirMenu(event, indice) : fecharMenu()}
+                    onMouseLeave={agendarFechamento}
+                    onFocus={(event) => menu.itens.length ? abrirMenu(event, indice) : fecharMenu()}
+                    onKeyDown={(event) => { if (event.key === 'Escape') fecharMenu(); }}
+                    aria-expanded={menu.itens.length ? indiceAtual === indice : undefined}
+                    aria-controls={indiceAtual === indice ? `submenu-${menu.id}` : undefined}
+                    sx={{ color: "text.secondary" }}
+                  >
+                    {menu.titulo}
+                  </Button>
 
                   {/* ============================================
         ESG DEPOIS DE SEGMENTOS
@@ -446,7 +435,12 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                     itemEsg && (
                       <Button
                         color="inherit"
-                        onClick={abrirMenuEsg}
+                        component={Link}
+                        href={getHref(itemEsg.url, itemEsg.slug).split('#')[0]}
+                        onClick={(event: MouseEvent<HTMLElement>) => navegarParaTopoSeMesmaPagina(event, getHref(itemEsg.url, itemEsg.slug))}
+                        onFocus={abrirMenuEsg}
+                        onMouseEnter={abrirMenuEsg}
+                        onMouseLeave={agendarFechamento}
                         sx={{
                           color: "text.secondary",
                         }}
@@ -482,76 +476,35 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
         </Container>
       </AppBar>
 
-      <Menu
-        anchorEl={menuAtual}
-        open={Boolean(menuAtual)}
-        onClose={fecharMenu}
-        slotProps={{
-          paper: {
-            sx: {
-              mt: 1.25,
-              minWidth: 290,
-              maxWidth: 360,
-              maxHeight: "calc(100vh - 96px)",
-              borderRadius: 2,
-              border: "1px solid",
-              borderColor: "divider",
-              overflow: 'hidden',
-              boxShadow: "0 18px 42px rgba(15,23,42,0.18)",
-            },
-          },
-          list: {
-            sx: {
-              py: 0.75,
-            },
-          },
-        }}
+      <Popper
+        anchorEl={menuAtual ?? menuEsgAtual}
+        open={Boolean(menuAtual ?? menuEsgAtual)}
+        placement="bottom-start"
+        sx={{ zIndex: 1200 }}
       >
-        {indiceAtual !== null
-          ? renderDesktopItems(menusSemEsg[indiceAtual].itens, fecharMenu, itemDesktopExpandido, alternarItemDesktop)
-          : null}
-      </Menu>
-      {/* =====================================================
-    MENU ESG
-====================================================== */}
-
-      <Menu
-        anchorEl={menuEsgAtual}
-        open={Boolean(menuEsgAtual)}
-        onClose={() => setMenuEsgAtual(null)}
-        slotProps={{
-          paper: {
-            sx: {
-              mt: 1.25,
-
-              minWidth: 220,
-
-              borderRadius: 2,
-
-              border: "1px solid",
-              borderColor: "divider",
-
-              boxShadow:
-                "0 18px 42px rgba(15,23,42,0.18)",
-            },
-          },
-
-          list: {
-            sx: {
-              py: 0.75,
-            },
-          },
-        }}
-      >
-        {itemEsg
-          ? renderDesktopItems(
-            itemEsg.filhos ?? [],
-            () => setMenuEsgAtual(null),
-            itemDesktopExpandido,
-            alternarItemDesktop,
-          )
-          : null}
-      </Menu>
+        <Paper
+          id={indiceAtual !== null ? `submenu-${menusSemEsg[indiceAtual].id}` : 'submenu-esg'}
+          onMouseEnter={manterMenu}
+          onMouseLeave={agendarFechamento}
+          onKeyDown={(event) => { if (event.key === 'Escape') fecharMenu(); }}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) fecharMenu();
+          }}
+          sx={{
+            mt: 1, minWidth: 290, maxWidth: 360,
+            maxHeight: 'calc(100vh - 110px)', overflowY: 'auto',
+            borderRadius: 2, border: '1px solid', borderColor: 'divider',
+            boxShadow: '0 18px 42px rgba(15,23,42,0.18)', py: 0.75,
+          }}
+        >
+          <MenuList disablePadding>
+            {renderDesktopItems(
+              indiceAtual !== null ? menusSemEsg[indiceAtual].itens : itemEsg?.filhos ?? [],
+              fecharMenu, itemDesktopExpandido, alternarItemDesktop,
+            )}
+          </MenuList>
+        </Paper>
+      </Popper>
 
       <Drawer
         anchor="right"
@@ -578,29 +531,11 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
               <Fragment key={menu.id}>
                 <Box sx={{ mb: 1 }}>
                   <ListItemButton
-                    component={
-                      menu.itens.length && !menusComCliqueDireto.has(menu.slug)
-                        ? "button"
-                        : Link
-                    }
-                    href={
-                      menu.itens.length && !menusComCliqueDireto.has(menu.slug)
-                        ? undefined
-                        : getHref(menu.url, menu.slug)
-                    }
+                    component={Link}
+                    href={getHref(menu.url, menu.slug).split('#')[0]}
                     onClick={(event: MouseEvent<HTMLElement>) => {
-                      if (
-                        menu.itens.length &&
-                        !menusComCliqueDireto.has(menu.slug)
-                      ) {
-                        alternarItemMobile(menu.id);
-                      } else {
-                        setMobileAberto(false);
-                        navegarParaTopoSeMesmaPagina(
-                          event,
-                          getHref(menu.url, menu.slug),
-                        );
-                      }
+                      setMobileAberto(false);
+                      navegarParaTopoSeMesmaPagina(event, getHref(menu.url, menu.slug));
                     }}
                     sx={{ py: 1, width: "100%" }}
                   >
@@ -619,6 +554,16 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                     />
                   </ListItemButton>
 
+                  {menu.itens.length > 0 && (
+                    <Button
+                      onClick={() => alternarItemMobile(menu.id)}
+                      aria-expanded={itensMobileExpandidos.has(menu.id)}
+                      aria-label={`Exibir subcategorias de ${menu.titulo}`}
+                      size="small"
+                    >
+                      {itensMobileExpandidos.has(menu.id) ? 'Ocultar subcategorias' : 'Exibir subcategorias'}
+                    </Button>
+                  )}
                   <Collapse
                     in={itensMobileExpandidos.has(menu.id)}
                     timeout="auto"
