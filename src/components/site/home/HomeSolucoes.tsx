@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
@@ -1848,6 +1850,7 @@ export function HomeSolucoes({
         component="section"
         id="agregados-home"
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
 
           overflow: 'hidden',
@@ -1874,25 +1877,7 @@ export function HomeSolucoes({
 
           backgroundRepeat: 'no-repeat',
 
-          '&::after': {
-            content: '""',
 
-            position: 'absolute',
-
-            left: 0,
-            right: 0,
-            bottom: -1,
-
-            height: {
-              xs: 52,
-              md: 78,
-            },
-
-            bgcolor: '#ffffff',
-
-            clipPath:
-              'polygon(0 60%, 100% 18%, 100% 100%, 0% 100%)',
-          },
         }}
       >
         <Container

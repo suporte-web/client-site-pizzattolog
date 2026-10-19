@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import {
   Box,
   Button,
@@ -50,6 +52,7 @@ export function Hero({ hero }: HeroProps) {
     <Box
       component="section"
       sx={{
+        ...bannerCurveSx,
         minHeight: {
           xs: 620,
           md: 680,
@@ -484,8 +487,8 @@ export function Hero({ hero }: HeroProps) {
               position: 'absolute',
 
               bottom: {
-                xs: 22,
-                md: 28,
+                xs: 56,
+                md: 100,
               },
 
               left: '50%',

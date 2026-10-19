@@ -1,3 +1,4 @@
+import { bannerCurveSx } from '@/components/site/banner-curve';
 import {
   Box,
   Container,
@@ -89,6 +90,7 @@ export function HistoriaSection({
 
       <Box
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
 
           width: '100%',

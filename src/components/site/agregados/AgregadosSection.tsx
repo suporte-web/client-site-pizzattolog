@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
@@ -251,6 +253,7 @@ export function AgregadosSection({
         component="section"
         aria-label="Venha ser agregado Pizzattolog"
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
           minHeight: { xs: 330, md: 500 },
           bgcolor: 'primary.dark',
@@ -631,6 +634,7 @@ export function AgregadosSection({
       <Box
         component="section"
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
 
           width: '100%',

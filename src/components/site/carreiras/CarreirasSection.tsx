@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import CoffeeRoundedIcon from '@mui/icons-material/CoffeeRounded';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
@@ -837,6 +839,7 @@ export function CarreirasSection({
       <Box
         component="section"
         sx={{
+          ...bannerCurveSx,
           py: {
             xs: 5,
             md: 20,

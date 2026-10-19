@@ -1,3 +1,4 @@
+import { bannerCurveSx } from '@/components/site/banner-curve';
 import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import Diversity3RoundedIcon from '@mui/icons-material/Diversity3Rounded';
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
@@ -107,6 +108,7 @@ export default function SocialSection({
         component="section"
         aria-label="Social Pizzattolog"
         sx={{
+          ...bannerCurveSx,
           width: '100%',
 
           minHeight: {

@@ -1,3 +1,4 @@
+import { bannerCurveSx } from '@/components/site/banner-curve';
 import {
   AutoStoriesRounded,
   Diversity3Rounded,
@@ -142,6 +143,7 @@ export function NossoCompromissoEsgSection({
 
       <Box
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
 
           minHeight: {

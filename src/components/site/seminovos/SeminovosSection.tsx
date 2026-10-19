@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
@@ -233,7 +235,11 @@ export default function SeminovosSection({
       <Box
         component="section"
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
+
+          pt: { xs: 14, md: 16 },
+          pb: { xs: 3, md: 4 },
 
           minHeight: {
             xs: 520,
@@ -267,10 +273,6 @@ export default function SeminovosSection({
 
               position: 'relative',
 
-              top: {
-                xs: 35,
-                md: 90,
-              },
             }}
           >
             <Typography
@@ -1292,6 +1294,7 @@ export default function SeminovosSection({
       <Box
         component="section"
         sx={{
+          ...bannerCurveSx,
           position: 'relative',
           overflow: 'hidden',
 

@@ -1,3 +1,4 @@
+import { bannerCurveSx } from '@/components/site/banner-curve';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
@@ -97,6 +98,7 @@ export default function EspecialidadesSection({
       <Box
         component="section"
         sx={{
+          ...bannerCurveSx,
           pt: { xs: 14, md: 17 },
           pb: { xs: 7, md: 10 },
 

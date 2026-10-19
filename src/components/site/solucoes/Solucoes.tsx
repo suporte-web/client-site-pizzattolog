@@ -1,5 +1,7 @@
 'use client';
 
+import { bannerCurveSx } from '@/components/site/banner-curve';
+
 import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
@@ -495,6 +497,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
           {mostrarBanner ? (
             <Box
               sx={{
+                ...bannerCurveSx,
                 position: 'relative',
                 overflow: 'hidden',
 

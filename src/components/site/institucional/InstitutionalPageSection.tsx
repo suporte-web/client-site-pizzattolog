@@ -1,3 +1,4 @@
+import { bannerCurveSx } from '@/components/site/banner-curve';
 import {
   Box,
   Button,
@@ -142,6 +143,7 @@ export default async function InstitutionalPageSection({
         <Box
           component="section"
           sx={{
+            ...bannerCurveSx,
             pt: {
               xs: 14,
               md: 16,
