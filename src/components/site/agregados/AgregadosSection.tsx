@@ -467,7 +467,7 @@ export function AgregadosSection({ conteudo }: AgregadosSectionProps) {
                 }}
               >
                 <Stack spacing={2.25}>
-                  <Box
+                  {/* <Box
                     sx={{
                       width: 64,
                       height: 64,
@@ -479,7 +479,7 @@ export function AgregadosSection({ conteudo }: AgregadosSectionProps) {
                     }}
                   >
                     <LocalShippingRoundedIcon sx={{ fontSize: 36 }} />
-                  </Box>
+                  </Box> */}
                   <Typography
                     variant="h2"
                     sx={{ fontSize: { xs: "2rem", md: "2.8rem" } }}
