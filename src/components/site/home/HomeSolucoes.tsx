@@ -1,29 +1,20 @@
-'use client';
-
-import { bannerCurveSx } from '@/components/site/banner-curve';
-
-import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
-import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
-import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
-import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
-
-import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import Diversity3RoundedIcon from '@mui/icons-material/Diversity3Rounded';
-import HubRoundedIcon from '@mui/icons-material/HubRounded';
-import QueryStatsRoundedIcon from '@mui/icons-material/QueryStatsRounded';
-import SecurityRoundedIcon from '@mui/icons-material/SecurityRounded';
-import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
-
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
-import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
-import WarehouseRoundedIcon from '@mui/icons-material/WarehouseRounded';
-
-import { useTheme } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
-
+"use client";
+import { bannerCurveSx } from "@/components/site/banner-curve";
+import { NumbersBackground } from "@/components/site/numeros/NumbersBackground";
+import AutoGraphRoundedIcon from "@mui/icons-material/AutoGraphRounded";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import Diversity3RoundedIcon from "@mui/icons-material/Diversity3Rounded";
+import HubRoundedIcon from "@mui/icons-material/HubRounded";
+import QueryStatsRoundedIcon from "@mui/icons-material/QueryStatsRounded";
+import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
+import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
+import WarehouseRoundedIcon from "@mui/icons-material/WarehouseRounded";
+import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -34,14 +25,13 @@ import {
   Typography,
   IconButton,
   useMediaQuery,
-} from '@mui/material';
-
-import { SectionLabel } from '@/components/site/section-label';
-import { trackWhatsappClicado } from '@/lib/analytics/tracking';
-
-import type { Solucao } from '@/types/site';
-
-
+} from "@mui/material";
+import { SectionLabel } from "@/components/site/section-label";
+import { trackWhatsappClicado } from "@/lib/analytics/tracking";
+import type { Solucao } from "@/types/site";
+import CosmeticosImg from "../../icons/Home/Cosméticos (1).png";
+import ProdutosQuimicosImg from "../../icons/Home/Produtos Químicos.png";
+import PetsImg from "../../icons/Home/PET (1).png";
 
 /* =========================================================
    TIPOS
@@ -58,8 +48,7 @@ interface HomeSolucoesProps {
 // Agregados imagens
 
 const imagemAgregados =
-  'https://pizzattolog.com.br/wp-content/uploads/2026/03/bannerrrrr-AGREGADOS-e1776274417156.png';
-
+  "https://pizzattolog.com.br/wp-content/uploads/2026/03/bannerrrrr-AGREGADOS-e1776274417156.png";
 
 /* =========================================================
  BOTÕES DAS SOLUÇÕES
@@ -67,27 +56,24 @@ const imagemAgregados =
 
 const configuracaoSolucoes = {
   armazenagem: {
-    botaoTexto:
-      'Garanta a segurança do seu estoque',
+    botaoTexto: "Garanta a segurança do seu estoque",
 
     botaoUrl:
-      'https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20armazenagem%20da%20Pizzattolog.',
+      "https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20armazenagem%20da%20Pizzattolog.",
   },
 
-  'operador-logistico': {
-    botaoTexto:
-      'Descubra a execução que garante a eficiência',
+  "operador-logistico": {
+    botaoTexto: "Descubra a execução que garante a eficiência",
 
     botaoUrl:
-      'https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20log%C3%ADstica%20da%20Pizzattolog.',
+      "https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20log%C3%ADstica%20da%20Pizzattolog.",
   },
 
-  'transporte-de-cargas': {
-    botaoTexto:
-      'Planeje seu transporte com segurança',
+  "transporte-de-cargas": {
+    botaoTexto: "Planeje seu transporte com segurança",
 
     botaoUrl:
-      'https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20transporte%20da%20Pizzattolog.',
+      "https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20transporte%20da%20Pizzattolog.",
   },
 } as const;
 
@@ -96,9 +82,9 @@ const configuracaoSolucoes = {
 ========================================================= */
 
 const ordemHome = [
-  'armazenagem',
-  'operador-logistico',
-  'transporte-de-cargas',
+  "armazenagem",
+  "operador-logistico",
+  "transporte-de-cargas",
 ] as const;
 
 /* =========================================================
@@ -106,11 +92,11 @@ const ordemHome = [
 ========================================================= */
 
 const coresSolucoes: Record<string, string> = {
-  armazenagem: '#ffb71b',
+  armazenagem: "#ffb71b",
 
-  'operador-logistico': '#ff5805',
+  "operador-logistico": "#ff5805",
 
-  'transporte-de-cargas': '#f23f35',
+  "transporte-de-cargas": "#f23f35",
 };
 
 /* =========================================================
@@ -122,48 +108,19 @@ const coresSolucoes: Record<string, string> = {
 
 const segmentos = [
   {
-    titulo:
-      'Cosméticos e Higiene Pessoal',
-
-    icone: (
-      <SpaRoundedIcon
-        sx={{
-          fontSize: 76,
-        }}
-      />
-    ),
-
-    cor: '#ffb71b',
+    titulo: "Cosméticos e Higiene Pessoal",
+    imagem: CosmeticosImg.src,
+    cor: "#ffb71b",
   },
-
   {
-    titulo:
-      'Produtos Químicos',
-
-    icone: (
-      <BiotechRoundedIcon
-        sx={{
-          fontSize: 76,
-        }}
-      />
-    ),
-
-    cor: '#ff5805',
+    titulo: "Produtos Químicos",
+    imagem: ProdutosQuimicosImg.src,
+    cor: "#ff5805",
   },
-
   {
-    titulo:
-      'Higiene, Nutrição e Saúde Pets',
-
-    icone: (
-      <PetsRoundedIcon
-        sx={{
-          fontSize: 76,
-        }}
-      />
-    ),
-
-    cor: '#f23f35',
+    titulo: "Higiene, Nutrição e Saúde Pets",
+    imagem: PetsImg.src,
+    cor: "#f23f35",
   },
 ];
 
@@ -180,7 +137,7 @@ interface SectionHeaderProps {
 
   description?: string;
 
-  align?: 'left' | 'center';
+  align?: "left" | "center";
 
   titleMaxWidth?: number;
 
@@ -191,7 +148,7 @@ function SectionHeader({
   label,
   title,
   description,
-  align = 'center',
+  align = "center",
   titleMaxWidth = 900,
   descriptionMaxWidth = 880,
 }: SectionHeaderProps) {
@@ -199,39 +156,28 @@ function SectionHeader({
     <Stack
       spacing={2}
       sx={{
-        alignItems:
-          align === 'center'
-            ? 'center'
-            : 'flex-start',
+        alignItems: align === "center" ? "center" : "flex-start",
 
         textAlign: align,
-
-
       }}
     >
-      {label ? (
-        <SectionLabel>
-          {label}
-        </SectionLabel>
-      ) : null}
+      {label ? <SectionLabel>{label}</SectionLabel> : null}
 
       <Typography
         variant="h2"
         sx={{
           maxWidth: titleMaxWidth,
 
-
-
           fontSize: {
-            xs: '2rem',
-            md: '3rem',
+            xs: "2rem",
+            md: "3rem",
           },
 
           fontWeight: 800,
 
           lineHeight: 1.12,
 
-          color: 'text.primary',
+          color: "text.primary",
         }}
       >
         {title}
@@ -240,15 +186,11 @@ function SectionHeader({
       {description ? (
         <Typography
           sx={{
-            maxWidth:
-              descriptionMaxWidth,
+            maxWidth: descriptionMaxWidth,
 
+            color: "text.secondary",
 
-
-            color:
-              'text.secondary',
-
-            fontSize: '16px',
+            fontSize: "16px",
 
             fontWeight: 400,
 
@@ -262,88 +204,81 @@ function SectionHeader({
   );
 }
 
-
 const diferenciais = [
   {
-    titulo: 'Logística Integrada',
-    destaque:
-      'Sua operação conectada de ponta a ponta.',
+    titulo: "Logística Integrada",
+    destaque: "Sua operação conectada de ponta a ponta.",
     texto:
-      'Com processos inteligentes e comunicação ativa, entregamos fluidez, previsibilidade e alinhamento total com a estratégia do cliente.',
+      "Com processos inteligentes e comunicação ativa, entregamos fluidez, previsibilidade e alinhamento total com a estratégia do cliente.",
     icone: <HubRoundedIcon />,
-    cor: '#ffb71b',
+    cor: "#ffb71b",
   },
 
   {
-    titulo: 'Inteligência de Dados',
-    destaque:
-      'Informações em tempo real.',
+    titulo: "Inteligência de Dados",
+    destaque: "Informações em tempo real.",
     texto:
-      'Consolidamos sistemas de alta tecnologia, rastreamento e dashboards inteligentes para assegurar visibilidade estratégica, agilidade e segurança às suas operações.',
+      "Consolidamos sistemas de alta tecnologia, rastreamento e dashboards inteligentes para assegurar visibilidade estratégica, agilidade e segurança às suas operações.",
     icone: <QueryStatsRoundedIcon />,
-    cor: '#ff5805',
+    cor: "#ff5805",
   },
 
   {
-    titulo: 'Parceria Estratégica',
-    destaque:
-      'Logística desenhada para o seu negócio.',
+    titulo: "Parceria Estratégica",
+    destaque: "Logística desenhada para o seu negócio.",
     texto:
-      'Além de seu transportador, somos o seu parceiro estratégico. Criamos soluções sob medida para entender, prever e resolver as complexidades da sua cadeia logística.',
+      "Além de seu transportador, somos o seu parceiro estratégico. Criamos soluções sob medida para entender, prever e resolver as complexidades da sua cadeia logística.",
     icone: <Diversity3RoundedIcon />,
-    cor: '#f23f35',
+    cor: "#f23f35",
   },
 
   {
-    titulo: 'Segurança Operacional',
-    destaque:
-      'A carga é sua, o cuidado é nosso.',
+    titulo: "Segurança Operacional",
+    destaque: "A carga é sua, o cuidado é nosso.",
     texto:
-      'Operamos com frota monitorada e protocolos rigorosos para garantir a preservação da sua carga, a segurança viária e a excelência em cada rota.',
+      "Operamos com frota monitorada e protocolos rigorosos para garantir a preservação da sua carga, a segurança viária e a excelência em cada rota.",
     icone: <SecurityRoundedIcon />,
-    cor: '#ffb71b',
+    cor: "#ffb71b",
   },
 
   {
-    titulo: 'ESG',
-    destaque:
-      'Compromisso com o futuro.',
+    titulo: "ESG",
+    destaque: "Compromisso com o futuro.",
     texto:
-      'Através de governança ética, inclusão e projetos contínuos, avançamos na construção de uma logística consciente que agrega valor real aos parceiros.',
+      "Através de governança ética, inclusão e projetos contínuos, avançamos na construção de uma logística consciente que agrega valor real aos parceiros.",
     icone: <VerifiedRoundedIcon />,
-    cor: '#ff5805',
+    cor: "#ff5805",
   },
 
   {
-    titulo: 'Eficiência',
-    destaque:
-      'Menos desperdício, mais performance.',
+    titulo: "Eficiência",
+    destaque: "Menos desperdício, mais performance.",
     texto:
-      'Aplicamos a filosofia Lean Thinking para otimizar fluxos e eliminar desperdícios, garantindo máxima produtividade e uma logística ágil focada no que gera valor real.',
+      "Aplicamos a filosofia Lean Thinking para otimizar fluxos e eliminar desperdícios, garantindo máxima produtividade e uma logística ágil focada no que gera valor real.",
     icone: <AutoGraphRoundedIcon />,
-    cor: '#f23f35',
+    cor: "#f23f35",
   },
 ];
 
 const numeros = [
   {
-    valor: '+50 anos',
-    rotulo: 'de história',
+    valor: "+50 anos",
+    rotulo: "de história",
     icone: <FavoriteBorderRoundedIcon />,
   },
   {
-    valor: '+740',
-    rotulo: 'ativos',
+    valor: "+740",
+    rotulo: "ativos",
     icone: <LocalShippingRoundedIcon />,
   },
   {
-    valor: '+850',
-    rotulo: 'colaboradores',
+    valor: "+850",
+    rotulo: "colaboradores",
     icone: <GroupsRoundedIcon />,
   },
   {
-    valor: '+490 mil',
-    rotulo: 'toneladas/ano',
+    valor: "+490 mil",
+    rotulo: "toneladas/ano",
     icone: <WarehouseRoundedIcon />,
   },
 ];
@@ -352,31 +287,17 @@ const numeros = [
    COMPONENTE PRINCIPAL
 ========================================================= */
 
-export function HomeSolucoes({
-  solucoes = [],
-}: HomeSolucoesProps) {
+export function HomeSolucoes({ solucoes = [] }: HomeSolucoesProps) {
   const theme = useTheme();
 
-  const desktop = useMediaQuery(
-    theme.breakpoints.up('md'),
-  );
+  const desktop = useMediaQuery(theme.breakpoints.up("md"));
 
-  const tablet = useMediaQuery(
-    theme.breakpoints.up('sm'),
-  );
-  const cardsPorPagina = desktop
-    ? 3
-    : tablet
-      ? 2
-      : 1;
+  const tablet = useMediaQuery(theme.breakpoints.up("sm"));
+  const cardsPorPagina = desktop ? 3 : tablet ? 2 : 1;
 
-  const totalPaginas = Math.ceil(
-    diferenciais.length /
-    cardsPorPagina,
-  );
+  const totalPaginas = Math.ceil(diferenciais.length / cardsPorPagina);
 
-  const [paginaDiferenciais, setPaginaDiferenciais] =
-    useState(0);
+  const [paginaDiferenciais, setPaginaDiferenciais] = useState(0);
 
   useEffect(() => {
     setPaginaDiferenciais(0);
@@ -387,78 +308,51 @@ export function HomeSolucoes({
       return;
     }
 
-    const intervalo =
-      window.setInterval(() => {
-        setPaginaDiferenciais(
-          (paginaAtual) =>
-            (paginaAtual + 1) %
-            totalPaginas,
-        );
-      }, 5500);
+    const intervalo = window.setInterval(() => {
+      setPaginaDiferenciais((paginaAtual) => (paginaAtual + 1) % totalPaginas);
+    }, 5500);
 
     return () => {
-      window.clearInterval(
-        intervalo,
-      );
+      window.clearInterval(intervalo);
     };
   }, [totalPaginas]);
 
-  const paginasDiferenciais =
-    Array.from(
-      {
-        length: totalPaginas,
-      },
-      (_, pagina) =>
-        diferenciais.slice(
-          pagina *
-          cardsPorPagina,
+  const paginasDiferenciais = Array.from(
+    {
+      length: totalPaginas,
+    },
+    (_, pagina) =>
+      diferenciais.slice(
+        pagina * cardsPorPagina,
 
-          pagina *
-          cardsPorPagina +
-          cardsPorPagina,
-        ),
-    );
+        pagina * cardsPorPagina + cardsPorPagina,
+      ),
+  );
 
   function paginaAnterior() {
-    setPaginaDiferenciais(
-      (paginaAtual) =>
-        paginaAtual === 0
-          ? totalPaginas - 1
-          : paginaAtual - 1,
+    setPaginaDiferenciais((paginaAtual) =>
+      paginaAtual === 0 ? totalPaginas - 1 : paginaAtual - 1,
     );
   }
 
   function proximaPagina() {
-    setPaginaDiferenciais(
-      (paginaAtual) =>
-        (paginaAtual + 1) %
-        totalPaginas,
-    );
+    setPaginaDiferenciais((paginaAtual) => (paginaAtual + 1) % totalPaginas);
   }
-  const solucoesHome =
-    ordemHome.flatMap(
-      (slug) => {
-        const solucao =
-          solucoes.find(
-            (item) =>
-              item.slug === slug,
-          );
+  const solucoesHome = ordemHome.flatMap((slug) => {
+    const solucao = solucoes.find((item) => item.slug === slug);
 
-        if (!solucao) {
-          return [];
-        }
+    if (!solucao) {
+      return [];
+    }
 
-        return [
-          {
-            ...solucao,
+    return [
+      {
+        ...solucao,
 
-            ...configuracaoSolucoes[
-            slug
-            ],
-          },
-        ];
+        ...configuracaoSolucoes[slug],
       },
-    );
+    ];
+  });
 
   return (
     <>
@@ -475,35 +369,29 @@ export function HomeSolucoes({
             md: 12,
           },
 
-          bgcolor:
-            'background.default',
+          bgcolor: "background.default",
 
-
-
-          '@keyframes solucaoSobe': {
-            '0%': {
+          "@keyframes solucaoSobe": {
+            "0%": {
               opacity: 0,
 
-              transform:
-                'translateY(44px)',
+              transform: "translateY(44px)",
             },
 
-            '100%': {
+            "100%": {
               opacity: 1,
 
-              transform:
-                'translateY(0)',
+              transform: "translateY(0)",
             },
           },
 
-          '@media (prefers-reduced-motion: reduce)': {
-            '.solucao-home-animada':
-            {
-              animation: 'none',
+          "@media (prefers-reduced-motion: reduce)": {
+            ".solucao-home-animada": {
+              animation: "none",
 
               opacity: 1,
 
-              transform: 'none',
+              transform: "none",
             },
           },
         }}
@@ -540,304 +428,221 @@ export function HomeSolucoes({
               md: 10,
             }}
           >
-            {solucoesHome.map(
-              (
-                solucao,
-                indice,
-              ) => {
-                const corSolucao =
-                  coresSolucoes[
-                  solucao.slug
-                  ] ??
-                  '#ff5805';
+            {solucoesHome.map((solucao, indice) => {
+              const corSolucao = coresSolucoes[solucao.slug] ?? "#ff5805";
 
-                const inverter =
-                  indice % 2 === 1;
+              const inverter = indice % 2 === 1;
 
-                return (
-                  <Box
-                    key={
-                      solucao.id
-                    }
-                    id={
-                      solucao.slug
-                    }
-                    className="solucao-home-animada"
+              return (
+                <Box
+                  key={solucao.id}
+                  id={solucao.slug}
+                  className="solucao-home-animada"
+                  sx={{
+                    opacity: 0,
+
+                    transform: "translateY(44px)",
+
+                    animation:
+                      "solucaoSobe 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+
+                    animationDelay: `${indice * 0.14}s`,
+                  }}
+                >
+                  <Grid
+                    container
+                    spacing={{
+                      xs: 4,
+                      md: 7,
+                    }}
                     sx={{
-                      opacity: 0,
+                      alignItems: "center",
 
-                      transform:
-                        'translateY(44px)',
-
-                      animation:
-                        'solucaoSobe 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-
-                      animationDelay:
-                        `${indice * 0.14}s`,
+                      flexDirection: {
+                        md: inverter ? "row-reverse" : "row",
+                      },
                     }}
                   >
-                    <Grid
-                      container
-                      spacing={{
-                        xs: 4,
-                        md: 7,
-                      }}
-                      sx={{
-                        alignItems:
-                          'center',
-
-                        flexDirection:
-                        {
-                          md: inverter
-                            ? 'row-reverse'
-                            : 'row',
-                        },
-                      }}
-                    >
-                      {/* =================================
+                    {/* =================================
                           IMAGEM
                       ================================= */}
 
-                      <Grid
-                        size={{
-                          xs: 12,
-                          md: 5,
+                    <Grid
+                      size={{
+                        xs: 12,
+                        md: 5,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          position: "relative",
+
+                          width: "100%",
+
+                          maxWidth: 520,
+
+                          mx: "auto",
                         }}
                       >
-                        <Box
-                          sx={{
-                            position:
-                              'relative',
+                        {solucao.imagemUrl ? (
+                          <Box
+                            component="img"
+                            src={solucao.imagemUrl}
+                            alt={solucao.titulo}
+                            sx={{
+                              position: "relative",
 
-                            width:
-                              '100%',
+                              zIndex: 1,
 
-                            maxWidth:
-                              520,
+                              display: "block",
 
-                            mx: 'auto',
-                          }}
-                        >
-                          {solucao.imagemUrl ? (
-                            <Box
-                              component="img"
-                              src={
-                                solucao.imagemUrl
-                              }
-                              alt={
-                                solucao.titulo
-                              }
-                              sx={{
-                                position:
-                                  'relative',
+                              width: "100%",
 
-                                zIndex:
-                                  1,
+                              height: "auto",
 
-                                display:
-                                  'block',
+                              objectFit: "contain",
 
-                                width:
-                                  '100%',
+                              objectPosition: "center",
 
-                                height:
-                                  'auto',
+                              filter: `drop-shadow(0 24px 34px ${corSolucao}22)`,
+                            }}
+                          />
+                        ) : (
+                          <Box
+                            sx={{
+                              width: "100%",
 
-                                objectFit:
-                                  'contain',
+                              aspectRatio: "1 / 1",
 
-                                objectPosition:
-                                  'center',
+                              borderRadius: 3,
 
-                                filter:
-                                  `drop-shadow(0 24px 34px ${corSolucao}22)`,
-                              }}
-                            />
-                          ) : (
-                            <Box
-                              sx={{
-                                width:
-                                  '100%',
+                              bgcolor: "rgba(0,0,0,0.03)",
+                            }}
+                          />
+                        )}
+                      </Box>
+                    </Grid>
 
-                                aspectRatio:
-                                  '1 / 1',
-
-                                borderRadius:
-                                  3,
-
-                                bgcolor:
-                                  'rgba(0,0,0,0.03)',
-                              }}
-                            />
-                          )}
-                        </Box>
-                      </Grid>
-
-                      {/* =================================
+                    {/* =================================
                           TEXTO
                       ================================= */}
 
-                      <Grid
-                        size={{
-                          xs: 12,
-                          md: 7,
+                    <Grid
+                      size={{
+                        xs: 12,
+                        md: 7,
+                      }}
+                    >
+                      <Stack
+                        spacing={2.25}
+                        sx={{
+                          maxWidth: 620,
+
+                          mx: {
+                            xs: 0,
+
+                            md: inverter ? "auto" : 0,
+                          },
                         }}
                       >
-                        <Stack
-                          spacing={
-                            2.25
-                          }
+                        {/* TÍTULO */}
+
+                        <Typography
+                          variant="h3"
                           sx={{
-                            maxWidth:
-                              620,
+                            fontSize: {
+                              xs: "2rem",
 
-                            mx: {
-                              xs: 0,
-
-                              md: inverter
-                                ? 'auto'
-                                : 0,
+                              md: "2.55rem",
                             },
+
+                            fontWeight: 800,
+
+                            lineHeight: 1.15,
+
+                            color: "text.primary",
                           }}
                         >
-                          {/* TÍTULO */}
+                          {solucao.titulo}
+                        </Typography>
 
-                          <Typography
-                            variant="h3"
+                        {/* DESCRIÇÃO */}
+
+                        <Typography
+                          sx={{
+                            color: "text.secondary",
+
+                            fontSize: "16px",
+
+                            fontWeight: 400,
+
+                            lineHeight: 1.75,
+                          }}
+                        >
+                          {solucao.descricao}
+                        </Typography>
+
+                        {/* BOTÃO */}
+
+                        <Box
+                          sx={{
+                            pt: 1,
+                          }}
+                        >
+                          <Button
+                            component="a"
+                            href={solucao.botaoUrl}
+                            onClick={() => trackWhatsappClicado(solucao.titulo)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="contained"
+                            size="large"
                             sx={{
+                              width: {
+                                xs: "100%",
 
-
-                              fontSize:
-                              {
-                                xs: '2rem',
-
-                                md: '2.55rem',
+                                sm: "fit-content",
                               },
 
-                              fontWeight:
-                                800,
+                              minHeight: 46,
 
-                              lineHeight:
-                                1.15,
+                              px: 3,
 
-                              color:
-                                'text.primary',
+                              borderRadius: 2,
+
+                              bgcolor: corSolucao,
+
+                              color: "#ffffff",
+
+                              fontSize: "15px",
+
+                              fontWeight: 700,
+
+                              textTransform: "none",
+
+                              boxShadow: "none",
+
+                              transition:
+                                "transform 0.2s ease, box-shadow 0.2s ease",
+
+                              "&:hover": {
+                                bgcolor: corSolucao,
+
+                                boxShadow: `0 10px 24px ${corSolucao}38`,
+
+                                transform: "translateY(-1px)",
+                              },
                             }}
                           >
-                            {
-                              solucao.titulo
-                            }
-                          </Typography>
-
-                          {/* DESCRIÇÃO */}
-
-                          <Typography
-                            sx={{
-
-
-                              color:
-                                'text.secondary',
-
-                              fontSize:
-                                '16px',
-
-                              fontWeight:
-                                400,
-
-                              lineHeight:
-                                1.75,
-                            }}
-                          >
-                            {
-                              solucao.descricao
-                            }
-                          </Typography>
-
-                          {/* BOTÃO */}
-
-                          <Box
-                            sx={{
-                              pt: 1,
-                            }}
-                          >
-                            <Button
-                              component="a"
-                              href={
-                                solucao.botaoUrl
-                              }
-                              onClick={() =>
-                                trackWhatsappClicado(
-                                  solucao.titulo,
-                                )
-                              }
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              variant="contained"
-                              size="large"
-                              sx={{
-                                width:
-                                {
-                                  xs: '100%',
-
-                                  sm: 'fit-content',
-                                },
-
-                                minHeight:
-                                  46,
-
-                                px: 3,
-
-                                borderRadius:
-                                  2,
-
-                                bgcolor:
-                                  corSolucao,
-
-                                color:
-                                  '#ffffff',
-
-
-
-                                fontSize:
-                                  '15px',
-
-                                fontWeight:
-                                  700,
-
-                                textTransform:
-                                  'none',
-
-                                boxShadow:
-                                  'none',
-
-                                transition:
-                                  'transform 0.2s ease, box-shadow 0.2s ease',
-
-                                '&:hover':
-                                {
-                                  bgcolor:
-                                    corSolucao,
-
-                                  boxShadow:
-                                    `0 10px 24px ${corSolucao}38`,
-
-                                  transform:
-                                    'translateY(-1px)',
-                                },
-                              }}
-                            >
-                              {
-                                solucao.botaoTexto
-                              }
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Grid>
+                            {solucao.botaoTexto}
+                          </Button>
+                        </Box>
+                      </Stack>
                     </Grid>
-                  </Box>
-                );
-              },
-            )}
+                  </Grid>
+                </Box>
+              );
+            })}
           </Stack>
         </Container>
       </Box>
@@ -855,9 +660,7 @@ export function HomeSolucoes({
             md: 11,
           },
 
-          bgcolor: '#ffffff',
-
-
+          bgcolor: "#ffffff",
         }}
       >
         <Container maxWidth="xl">
@@ -868,8 +671,7 @@ export function HomeSolucoes({
               md: 7,
             }}
             sx={{
-              alignItems:
-                'center',
+              alignItems: "center",
             }}
           >
             {/* ===============================================
@@ -902,174 +704,124 @@ export function HomeSolucoes({
                 md: 7,
               }}
             >
-              <Grid
-                container
-                spacing={3}
-              >
-                {segmentos.map(
-                  (
-                    segmento,
-                  ) => (
-                    <Grid
-                      key={
-                        segmento.titulo
-                      }
-                      size={{
-                        xs: 12,
-                        sm: 4,
+              <Grid container spacing={3}>
+                {segmentos.map((segmento) => (
+                  <Grid
+                    key={segmento.titulo}
+                    size={{
+                      xs: 12,
+                      sm: 4,
+                    }}
+                  >
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        position: "relative",
+
+                        overflow: "hidden",
+
+                        height: "100%",
+
+                        minHeight: {
+                          xs: 220,
+
+                          md: 264,
+                        },
+
+                        p: {
+                          xs: 3,
+
+                          md: 3.5,
+                        },
+
+                        display: "flex",
+
+                        flexDirection: "column",
+
+                        alignItems: "center",
+
+                        justifyContent: "center",
+
+                        textAlign: "center",
+
+                        border: "1px solid rgba(15, 23, 42, 0.05)",
+
+                        bgcolor: "#ECECEC",
+
+                        borderRadius: 3,
+
+                        boxShadow: "0 16px 34px rgba(19, 39, 57, 0.08)",
+
+                        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+
+                        /* BARRA COLORIDA */
+
+                        "&::before": {
+                          content: '""',
+
+                          position: "absolute",
+
+                          top: 0,
+
+                          left: "50%",
+
+                          width: 94,
+
+                          height: 7,
+
+                          bgcolor: segmento.cor,
+
+                          borderRadius: "0 0 8px 8px",
+
+                          transform: "translateX(-50%)",
+                        },
+
+                        "&:hover": {
+                          transform: "translateY(-4px)",
+
+                          boxShadow: `0 22px 42px ${segmento.cor}33`,
+                        },
                       }}
                     >
-                      <Paper
-                        elevation={0}
+                      {/* ÍCONE */}
+
+                      <Box
+                        component="img"
+                        src={segmento.imagem}
+                        alt={segmento.titulo}
                         sx={{
-                          position:
-                            'relative',
+                          width: 76,
+                          height: 76,
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
 
-                          overflow:
-                            'hidden',
+                      {/* TÍTULO */}
 
-                          height:
-                            '100%',
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          maxWidth: 240,
 
-                          minHeight:
-                          {
-                            xs: 220,
+                          fontWeight: 900,
 
-                            md: 264,
+                          fontSize: {
+                            xs: "1.25rem",
+
+                            md: "1.35rem",
                           },
 
-                          p: {
-                            xs: 3,
+                          lineHeight: 1.16,
 
-                            md: 3.5,
-                          },
-
-                          display:
-                            'flex',
-
-                          flexDirection:
-                            'column',
-
-                          alignItems:
-                            'center',
-
-                          justifyContent:
-                            'center',
-
-                          textAlign:
-                            'center',
-
-                          border:
-                            '1px solid rgba(15, 23, 42, 0.05)',
-
-                          bgcolor:
-                            '#ECECEC',
-
-                          borderRadius:
-                            3,
-
-                          boxShadow:
-                            '0 16px 34px rgba(19, 39, 57, 0.08)',
-
-                          transition:
-                            'transform 0.2s ease, box-shadow 0.2s ease',
-
-                          /* BARRA COLORIDA */
-
-                          '&::before':
-                          {
-                            content:
-                              '""',
-
-                            position:
-                              'absolute',
-
-                            top: 0,
-
-                            left:
-                              '50%',
-
-                            width:
-                              94,
-
-                            height:
-                              7,
-
-                            bgcolor:
-                              segmento.cor,
-
-                            borderRadius:
-                              '0 0 8px 8px',
-
-                            transform:
-                              'translateX(-50%)',
-                          },
-
-                          '&:hover':
-                          {
-                            transform:
-                              'translateY(-4px)',
-
-                            boxShadow:
-                              `0 22px 42px ${segmento.cor}33`,
-                          },
+                          color: "text.primary",
                         }}
                       >
-                        {/* ÍCONE */}
-
-                        <Box
-                          sx={{
-                            display:
-                              'grid',
-
-                            placeItems:
-                              'center',
-
-                            color:
-                              segmento.cor,
-
-                            mb: 3,
-                          }}
-                        >
-                          {
-                            segmento.icone
-                          }
-                        </Box>
-
-                        {/* TÍTULO */}
-
-                        <Typography
-                          variant="h5"
-                          sx={{
-                            maxWidth:
-                              240,
-
-
-                            fontWeight:
-                              900,
-
-                            fontSize:
-                            {
-                              xs: '1.25rem',
-
-                              md: '1.35rem',
-                            },
-
-                            lineHeight:
-                              1.16,
-
-                            color:
-                              'text.primary',
-                          }}
-                        >
-                          {
-                            segmento.titulo
-                          }
-                        </Typography>
-                      </Paper>
-                    </Grid>
-                  ),
-                )}
+                        {segmento.titulo}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                ))}
               </Grid>
             </Grid>
           </Grid>
@@ -1083,9 +835,9 @@ export function HomeSolucoes({
         component="section"
         id="nossos-diferenciais"
         sx={{
-          position: 'relative',
+          position: "relative",
 
-          overflow: 'hidden',
+          overflow: "hidden",
 
           pt: {
             xs: 10,
@@ -1097,40 +849,37 @@ export function HomeSolucoes({
             md: 10,
           },
 
-
-
           background:
-            'linear-gradient(135deg, #ffb71b 0%, #ff8a18 42%, #ff5805 68%, #f23f35 100%)',
+            "linear-gradient(135deg, #ffb71b 0%, #ff8a18 42%, #ff5805 68%, #f23f35 100%)",
 
           /*
            * Cria a curva branca no topo,
            * como na referência.
            */
-          '&::before': {
+          "&::before": {
             content: '""',
 
-            position: 'absolute',
+            position: "absolute",
 
             top: -1,
             left: 0,
 
-            width: '100%',
+            width: "100%",
             height: {
               xs: 35,
               md: 55,
             },
 
-            bgcolor: '#ffffff',
+            bgcolor: "#ffffff",
 
-            clipPath:
-              'ellipse(62% 55% at 50% 0%)',
+            clipPath: "ellipse(62% 55% at 50% 0%)",
           },
         }}
       >
         <Container
           maxWidth="xl"
           sx={{
-            position: 'relative',
+            position: "relative",
             zIndex: 1,
           }}
         >
@@ -1146,26 +895,22 @@ export function HomeSolucoes({
                 md: 6,
               },
 
-              textAlign: 'center',
-
-
+              textAlign: "center",
 
               fontSize: {
-                xs: '2.25rem',
-                md: '3rem',
+                xs: "2.25rem",
+                md: "3rem",
               },
 
               fontWeight: 800,
 
               lineHeight: 1.1,
 
-              color: '#ffffff',
+              color: "#ffffff",
             }}
           >
             Nossos diferenciais
           </Typography>
-
-
 
           {/* ===============================================
         CARROSSEL
@@ -1173,7 +918,7 @@ export function HomeSolucoes({
 
           <Box
             sx={{
-              position: 'relative',
+              position: "relative",
             }}
           >
             {/* SETA ESQUERDA */}
@@ -1184,19 +929,18 @@ export function HomeSolucoes({
                 aria-label="Diferenciais anteriores"
                 onClick={paginaAnterior}
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
 
                   left: {
                     xs: -8,
                     md: -26,
                   },
 
-                  top: '50%',
+                  top: "50%",
 
                   zIndex: 5,
 
-                  transform:
-                    'translateY(-50%)',
+                  transform: "translateY(-50%)",
 
                   width: {
                     xs: 30,
@@ -1208,16 +952,14 @@ export function HomeSolucoes({
                     md: 34,
                   },
 
-                  bgcolor:
-                    'rgba(255,255,255,0.95)',
+                  bgcolor: "rgba(255,255,255,0.95)",
 
-                  color: '#ff5805',
+                  color: "#ff5805",
 
-                  boxShadow:
-                    '0 8px 24px rgba(0,0,0,0.14)',
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.14)",
 
-                  '&:hover': {
-                    bgcolor: '#ffffff',
+                  "&:hover": {
+                    bgcolor: "#ffffff",
                   },
                 }}
               >
@@ -1229,7 +971,7 @@ export function HomeSolucoes({
 
             <Box
               sx={{
-                overflow: 'hidden',
+                overflow: "hidden",
 
                 px: {
                   xs: 1,
@@ -1241,264 +983,193 @@ export function HomeSolucoes({
 
               <Box
                 sx={{
-                  display: 'flex',
+                  display: "flex",
 
-                  width: '100%',
+                  width: "100%",
 
-                  transform:
-                    `translateX(-${paginaDiferenciais * 100}%)`,
+                  transform: `translateX(-${paginaDiferenciais * 100}%)`,
 
-                  transition:
-                    'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)',
+                  transition: "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                {paginasDiferenciais.map(
-                  (
-                    pagina,
-                    indicePagina,
-                  ) => (
-                    <Box
-                      key={
-                        indicePagina
-                      }
-                      sx={{
-                        width: '100%',
+                {paginasDiferenciais.map((pagina, indicePagina) => (
+                  <Box
+                    key={indicePagina}
+                    sx={{
+                      width: "100%",
 
-                        flex:
-                          '0 0 100%',
+                      flex: "0 0 100%",
 
-                        px: {
-                          xs: 0.5,
-                          md: 1,
-                        },
+                      px: {
+                        xs: 0.5,
+                        md: 1,
+                      },
+                    }}
+                  >
+                    <Grid
+                      container
+                      spacing={{
+                        xs: 2.5,
+                        md: 3,
                       }}
                     >
-                      <Grid
-                        container
-                        spacing={{
-                          xs: 2.5,
-                          md: 3,
-                        }}
-                      >
-                        {pagina.map(
-                          (item) => (
-                            <Grid
-                              key={
-                                item.titulo
-                              }
-                              size={{
-                                xs: 12,
-                                sm: 6,
-                                md: 4,
-                              }}
-                            >
-                              <Paper
-                                elevation={0}
+                      {pagina.map((item) => (
+                        <Grid
+                          key={item.titulo}
+                          size={{
+                            xs: 12,
+                            sm: 6,
+                            md: 4,
+                          }}
+                        >
+                          <Paper
+                            elevation={0}
+                            sx={{
+                              position: "relative",
+
+                              height: "100%",
+
+                              minHeight: {
+                                xs: 300,
+
+                                md: 315,
+                              },
+
+                              p: {
+                                xs: 3,
+
+                                md: 3.5,
+                              },
+
+                              overflow: "hidden",
+
+                              bgcolor: "#ffffff",
+
+                              borderRadius: 3,
+
+                              border: "1px solid rgba(15, 23, 42, 0.06)",
+
+                              boxShadow: "0 18px 42px rgba(15,23,42,0.14)",
+
+                              transition:
+                                "transform 0.25s ease, box-shadow 0.25s ease",
+
+                              /*
+                               * Barra superior.
+                               */
+                              "&::before": {
+                                content: '""',
+
+                                position: "absolute",
+
+                                top: 0,
+
+                                left: 24,
+
+                                width: 76,
+
+                                height: 5,
+
+                                bgcolor: item.cor,
+
+                                borderRadius: "0 0 8px 8px",
+                              },
+
+                              "&:hover": {
+                                transform: {
+                                  md: "translateY(-6px)",
+                                },
+
+                                boxShadow: "0 24px 50px rgba(15,23,42,0.20)",
+                              },
+                            }}
+                          >
+                            <Stack spacing={2}>
+                              {/* ÍCONE */}
+
+                              <Box
                                 sx={{
-                                  position:
-                                    'relative',
+                                  width: 76,
 
-                                  height:
-                                    '100%',
+                                  height: 76,
 
-                                  minHeight:
-                                  {
-                                    xs: 300,
+                                  display: "grid",
 
-                                    md: 315,
-                                  },
+                                  placeItems: "center",
 
-                                  p: {
-                                    xs: 3,
+                                  borderRadius: 2,
 
-                                    md: 3.5,
-                                  },
+                                  bgcolor: "#f23f35",
 
-                                  overflow:
-                                    'hidden',
+                                  color: "#ffffff",
 
-                                  bgcolor:
-                                    '#ffffff',
-
-                                  borderRadius:
-                                    3,
-
-                                  border:
-                                    '1px solid rgba(15, 23, 42, 0.06)',
-
-                                  boxShadow:
-                                    '0 18px 42px rgba(15,23,42,0.14)',
-
-                                  transition:
-                                    'transform 0.25s ease, box-shadow 0.25s ease',
-
-                                  /*
-                                   * Barra superior.
-                                   */
-                                  '&::before':
-                                  {
-                                    content:
-                                      '""',
-
-                                    position:
-                                      'absolute',
-
-                                    top: 0,
-
-                                    left: 24,
-
-                                    width:
-                                      76,
-
-                                    height:
-                                      5,
-
-                                    bgcolor:
-                                      item.cor,
-
-                                    borderRadius:
-                                      '0 0 8px 8px',
-                                  },
-
-                                  '&:hover':
-                                  {
-                                    transform:
-                                    {
-                                      md: 'translateY(-6px)',
-                                    },
-
-                                    boxShadow:
-                                      '0 24px 50px rgba(15,23,42,0.20)',
+                                  "& svg": {
+                                    fontSize: 42,
                                   },
                                 }}
                               >
-                                <Stack
-                                  spacing={
-                                    2
-                                  }
-                                >
-                                  {/* ÍCONE */}
+                                {item.icone}
+                              </Box>
 
-                                  <Box
-                                    sx={{
-                                      width:
-                                        76,
+                              {/* TÍTULO */}
 
-                                      height:
-                                        76,
+                              <Typography
+                                component="h3"
+                                sx={{
+                                  fontSize: {
+                                    xs: "1.35rem",
 
-                                      display:
-                                        'grid',
+                                    md: "1.5rem",
+                                  },
 
-                                      placeItems:
-                                        'center',
+                                  fontWeight: 800,
 
-                                      borderRadius:
-                                        2,
+                                  lineHeight: 1.15,
 
-                                      bgcolor:
-                                        '#f23f35',
+                                  color: "#17212B",
+                                }}
+                              >
+                                {item.titulo}
+                              </Typography>
 
-                                      color:
-                                        '#ffffff',
+                              {/* SUBTÍTULO */}
 
-                                      '& svg':
-                                      {
-                                        fontSize:
-                                          42,
-                                      },
-                                    }}
-                                  >
-                                    {
-                                      item.icone
-                                    }
-                                  </Box>
+                              <Typography
+                                sx={{
+                                  fontSize: "16px",
 
-                                  {/* TÍTULO */}
+                                  fontWeight: 700,
 
-                                  <Typography
-                                    component="h3"
-                                    sx={{
+                                  lineHeight: 1.45,
 
+                                  color: "#17212B",
+                                }}
+                              >
+                                {item.destaque}
+                              </Typography>
 
-                                      fontSize:
-                                      {
-                                        xs: '1.35rem',
+                              {/* DESCRIÇÃO */}
 
-                                        md: '1.5rem',
-                                      },
+                              <Typography
+                                sx={{
+                                  fontSize: "16px",
 
-                                      fontWeight:
-                                        800,
+                                  fontWeight: 400,
 
-                                      lineHeight:
-                                        1.15,
+                                  lineHeight: 1.55,
 
-                                      color:
-                                        '#17212B',
-                                    }}
-                                  >
-                                    {
-                                      item.titulo
-                                    }
-                                  </Typography>
-
-                                  {/* SUBTÍTULO */}
-
-                                  <Typography
-                                    sx={{
-
-
-                                      fontSize:
-                                        '16px',
-
-                                      fontWeight:
-                                        700,
-
-                                      lineHeight:
-                                        1.45,
-
-                                      color:
-                                        '#17212B',
-                                    }}
-                                  >
-                                    {
-                                      item.destaque
-                                    }
-                                  </Typography>
-
-                                  {/* DESCRIÇÃO */}
-
-                                  <Typography
-                                    sx={{
-
-
-                                      fontSize:
-                                        '16px',
-
-                                      fontWeight:
-                                        400,
-
-                                      lineHeight:
-                                        1.55,
-
-                                      color:
-                                        '#3f3f3f',
-                                    }}
-                                  >
-                                    {
-                                      item.texto
-                                    }
-                                  </Typography>
-                                </Stack>
-                              </Paper>
-                            </Grid>
-                          ),
-                        )}
-                      </Grid>
-                    </Box>
-                  ),
-                )}
+                                  color: "#3f3f3f",
+                                }}
+                              >
+                                {item.texto}
+                              </Typography>
+                            </Stack>
+                          </Paper>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Box>
+                ))}
               </Box>
             </Box>
 
@@ -1510,19 +1181,18 @@ export function HomeSolucoes({
                 aria-label="Próximos diferenciais"
                 onClick={proximaPagina}
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
 
                   right: {
                     xs: -8,
                     md: -26,
                   },
 
-                  top: '50%',
+                  top: "50%",
 
                   zIndex: 5,
 
-                  transform:
-                    'translateY(-50%)',
+                  transform: "translateY(-50%)",
 
                   width: {
                     xs: 30,
@@ -1534,16 +1204,14 @@ export function HomeSolucoes({
                     md: 34,
                   },
 
-                  bgcolor:
-                    'rgba(255,255,255,0.95)',
+                  bgcolor: "rgba(255,255,255,0.95)",
 
-                  color: '#ff5805',
+                  color: "#ff5805",
 
-                  boxShadow:
-                    '0 8px 24px rgba(0,0,0,0.14)',
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.14)",
 
-                  '&:hover': {
-                    bgcolor: '#ffffff',
+                  "&:hover": {
+                    bgcolor: "#ffffff",
                   },
                 }}
               >
@@ -1563,35 +1231,24 @@ export function HomeSolucoes({
               sx={{
                 mt: 5,
 
-                alignItems: 'center',
+                alignItems: "center",
 
-                justifyContent:
-                  'center',
+                justifyContent: "center",
               }}
             >
               {Array.from(
                 {
-                  length:
-                    totalPaginas,
+                  length: totalPaginas,
                 },
                 (_, index) => (
                   <Box
                     key={index}
                     component="button"
                     type="button"
-                    aria-label={`Ir para página ${index + 1
-                      } dos diferenciais`}
-                    onClick={() =>
-                      setPaginaDiferenciais(
-                        index,
-                      )
-                    }
+                    aria-label={`Ir para página ${index + 1} dos diferenciais`}
+                    onClick={() => setPaginaDiferenciais(index)}
                     sx={{
-                      width:
-                        index ===
-                          paginaDiferenciais
-                          ? 26
-                          : 9,
+                      width: index === paginaDiferenciais ? 26 : 9,
 
                       height: 9,
 
@@ -1599,20 +1256,16 @@ export function HomeSolucoes({
 
                       border: 0,
 
-                      borderRadius:
-                        99,
+                      borderRadius: 99,
 
-                      cursor:
-                        'pointer',
+                      cursor: "pointer",
 
                       bgcolor:
-                        index ===
-                          paginaDiferenciais
-                          ? '#ffffff'
-                          : 'rgba(255,255,255,0.38)',
+                        index === paginaDiferenciais
+                          ? "#ffffff"
+                          : "rgba(255,255,255,0.38)",
 
-                      transition:
-                        'all 0.3s ease',
+                      transition: "all 0.3s ease",
                     }}
                   />
                 ),
@@ -1629,19 +1282,17 @@ export function HomeSolucoes({
         component="section"
         id="nossos-numeros"
         sx={{
-          position: 'relative',
-          overflow: 'hidden',
+          position: "relative",
+          overflow: "hidden",
 
           py: {
             xs: 8,
             md: 11,
           },
 
-          bgcolor: '#ffffff',
+          bgcolor: "#ffffff",
         }}
       >
-
-
         {/* ===================================================
       FUNDO GEOMÉTRICO
   =================================================== */}
@@ -1651,7 +1302,7 @@ export function HomeSolucoes({
         <Container
           maxWidth="xl"
           sx={{
-            position: 'relative',
+            position: "relative",
             zIndex: 1,
           }}
         >
@@ -1666,10 +1317,7 @@ export function HomeSolucoes({
               },
             }}
           >
-            <SectionHeader
-              label=""
-              title="Nossos números"
-            />
+            <SectionHeader label="" title="Nossos números" />
           </Box>
 
           {/* =================================================
@@ -1695,11 +1343,11 @@ export function HomeSolucoes({
                 <Paper
                   elevation={0}
                   sx={{
-                    position: 'relative',
+                    position: "relative",
 
-                    overflow: 'hidden',
+                    overflow: "hidden",
 
-                    height: '100%',
+                    height: "100%",
 
                     minHeight: {
                       xs: 230,
@@ -1711,42 +1359,33 @@ export function HomeSolucoes({
                       md: 3.5,
                     },
 
-                    display: 'flex',
+                    display: "flex",
 
-                    flexDirection: 'column',
+                    flexDirection: "column",
 
-                    justifyContent:
-                      'space-between',
+                    justifyContent: "space-between",
 
-                    border:
-                      '4px solid #ffb71b',
+                    border: "4px solid #ffb71b",
 
                     borderTopWidth: 5,
 
-                    borderRadius:
-                      '0 34px 0 34px',
+                    borderRadius: "0 34px 0 34px",
 
-                    bgcolor:
-                      'rgba(255,255,255,0.96)',
+                    bgcolor: "rgba(255,255,255,0.96)",
 
-                    boxShadow:
-                      '0 16px 34px rgba(19,39,57,0.08)',
+                    boxShadow: "0 16px 34px rgba(19,39,57,0.08)",
 
-                    transition:
-                      'transform 0.2s ease, box-shadow 0.2s ease',
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
 
-                    '&:hover': {
+                    "&:hover": {
                       transform: {
-                        md: 'translateY(-5px)',
+                        md: "translateY(-5px)",
                       },
 
-                      boxShadow:
-                        '0 22px 44px rgba(255,183,27,0.22)',
+                      boxShadow: "0 22px 44px rgba(255,183,27,0.22)",
                     },
                   }}
                 >
-
-
                   {/* ===========================================
                 ÍCONE
             =========================================== */}
@@ -1763,17 +1402,17 @@ export function HomeSolucoes({
                         md: 74,
                       },
 
-                      display: 'grid',
+                      display: "grid",
 
-                      placeItems: 'center',
+                      placeItems: "center",
 
-                      bgcolor: '#f23f35',
+                      bgcolor: "#f23f35",
 
-                      color: '#ffffff',
+                      color: "#ffffff",
 
                       borderRadius: 2,
 
-                      '& svg': {
+                      "& svg": {
                         fontSize: {
                           xs: 34,
                           md: 40,
@@ -1800,15 +1439,13 @@ export function HomeSolucoes({
 
                         lineHeight: 0.95,
 
-                        letterSpacing: '-0.03em',
+                        letterSpacing: "-0.03em",
 
-                        color: '#292929',
+                        color: "#292929",
                       }}
                     >
                       {numero.valor}
                     </Typography>
-
-
 
                     {/* =========================================
                   DESCRIÇÃO
@@ -1827,15 +1464,14 @@ export function HomeSolucoes({
 
                         lineHeight: 1.05,
 
-                        letterSpacing: '-0.02em',
+                        letterSpacing: "-0.02em",
 
-                        color: '#292929',
+                        color: "#292929",
                       }}
                     >
                       {numero.rotulo}
                     </Typography>
                   </Box>
-
                 </Paper>
               </Grid>
             ))}
@@ -1851,39 +1487,36 @@ export function HomeSolucoes({
         id="agregados-home"
         sx={{
           ...bannerCurveSx,
-          position: 'relative',
+          position: "relative",
 
-          overflow: 'hidden',
+          overflow: "hidden",
 
           minHeight: {
             xs: 420,
             md: 520,
           },
 
-          display: 'flex',
+          display: "flex",
 
-          alignItems: 'center',
+          alignItems: "center",
 
-          color: '#ffffff',
+          color: "#ffffff",
 
-          backgroundColor: '#0b344d',
+          backgroundColor: "#0b344d",
 
-          backgroundImage:
-            'url("/images/agregados/banneragregados.jpg")',
+          backgroundImage: 'url("/images/agregados/banneragregados.jpg")',
 
-          backgroundSize: 'cover',
+          backgroundSize: "cover",
 
-          backgroundPosition: 'center',
+          backgroundPosition: "center",
 
-          backgroundRepeat: 'no-repeat',
-
-
+          backgroundRepeat: "no-repeat",
         }}
       >
         <Container
           maxWidth="xl"
           sx={{
-            position: 'relative',
+            position: "relative",
 
             zIndex: 1,
 
@@ -1938,32 +1571,31 @@ export function HomeSolucoes({
                 backgroundRepeat: 'no-repeat',
               }}
             > */}
-              <Typography
-                component="h2"
-                sx={{
-                  position: 'relative',
-                  zIndex: 1,
+            <Typography
+              component="h2"
+              sx={{
+                position: "relative",
+                zIndex: 1,
 
-                  maxWidth: 620,
+                maxWidth: 620,
 
-                  fontSize: {
-                    xs: '2.3rem',
-                    sm: '2.8rem',
-                    md: '3.45rem',
-                  },
+                fontSize: {
+                  xs: "2.3rem",
+                  sm: "2.8rem",
+                  md: "3.45rem",
+                },
 
-                  fontWeight: 900,
+                fontWeight: 900,
 
-                  lineHeight: 1.05,
+                lineHeight: 1.05,
 
-                  letterSpacing: '-0.035em',
+                letterSpacing: "-0.035em",
 
-                  color: '#ffffff',
-                }}
-              >
-                Venha ser agregado e conheça o Clube de Benefícios exclusivos.
-              </Typography>
-    
+                color: "#ffffff",
+              }}
+            >
+              Venha ser agregado e conheça o Clube de Benefícios exclusivos.
+            </Typography>
 
             {/* ===============================================
           BOTÃO
@@ -1974,7 +1606,7 @@ export function HomeSolucoes({
               variant="contained"
               size="large"
               sx={{
-                alignSelf: 'flex-start',
+                alignSelf: "flex-start",
 
                 px: {
                   xs: 3,
@@ -1983,23 +1615,22 @@ export function HomeSolucoes({
 
                 py: 1.35,
 
-                bgcolor: '#ff5805',
+                bgcolor: "#ff5805",
 
-                color: '#ffffff',
+                color: "#ffffff",
 
                 borderRadius: 2,
 
                 fontWeight: 800,
 
-                textTransform: 'none',
+                textTransform: "none",
 
-                boxShadow: 'none',
+                boxShadow: "none",
 
-                '&:hover': {
-                  bgcolor: '#e94f00',
+                "&:hover": {
+                  bgcolor: "#e94f00",
 
-                  boxShadow:
-                    '0 10px 26px rgba(255,88,5,0.26)',
+                  boxShadow: "0 10px 26px rgba(255,88,5,0.26)",
                 },
               }}
             >
@@ -2009,6 +1640,5 @@ export function HomeSolucoes({
         </Container>
       </Box>
     </>
-
   );
 }
