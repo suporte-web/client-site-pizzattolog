@@ -326,7 +326,6 @@ export function AgregadosSection({ conteudo }: AgregadosSectionProps) {
           ...bannerCurveSx,
           position: "relative",
           minHeight: { xs: 330, md: 500 },
-          bgcolor: "primary.dark",
           backgroundImage: `url("${bannerImagem}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -838,7 +837,7 @@ export function AgregadosSection({ conteudo }: AgregadosSectionProps) {
           display: "flex",
           alignItems: "center",
 
-          color: "white",
+          color: "#F4F6F7",
 
           backgroundImage: 'url("/images/agregados/banneragregados.jpg")',
 

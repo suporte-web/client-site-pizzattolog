@@ -379,11 +379,11 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
       <AppBar
         position="fixed"
         color="inherit"
-        elevation={0}
+        elevation={7}
         sx={{
           borderBottom: "1px solid",
           borderColor: "divider",
-          backgroundColor: "rgba(255,255,255,0.86)",
+          backgroundColor: "rgba(255,255,255,0.7)",
           backdropFilter: "blur(20px)",
         }}
       >
@@ -395,8 +395,11 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
               gap: 2,
               pt: 1.5,
               pb: 1,
-              display: "flex",
-              alignItems: "center",
+              display: { xs: "flex", lg: "grid" },
+              gridTemplateColumns: { lg: "1fr auto 1fr" },
+              gridTemplateRows: { lg: "auto" },
+              alignContent: "center",
+              alignItems: { xs: "center", lg: "end" },
               justifyContent: "space-between",
               position: "relative",
             }}
@@ -411,11 +414,12 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                 flexShrink: 0,
                 mr: 0,
                 zIndex: 2,
+                justifySelf: "start",
               }}
             >
               <Box
                 component="img"
-                src="/images/logo/logopreta.png"
+                src="/images/logo/logopreta1.png"
                 alt={nomeEmpresa}
                 sx={{
                   width: {
@@ -423,6 +427,7 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                     md: 180,
                   },
                   height: "auto",
+                  display: "block",
                 }}
               />
             </Stack>
@@ -434,9 +439,7 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                 display: { xs: "none", lg: "flex" },
                 alignItems: "center",
                 justifyContent: "center",
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
+                position: "relative",
                 whiteSpace: "nowrap",
                 zIndex: 1,
               }}
@@ -510,14 +513,17 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
               ))}
             </Stack>
 
-            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1, display: { lg: "none" } }} />
 
             <Button
               variant="contained"
               color="secondary"
               component={Link}
               href="/solicitar-cotacao"
-              sx={{ display: { xs: "none", sm: "inline-flex" } }}
+              sx={{
+                display: { xs: "none", sm: "inline-flex" },
+                justifySelf: "end",
+              }}
             >
               Solicitar cotação
             </Button>

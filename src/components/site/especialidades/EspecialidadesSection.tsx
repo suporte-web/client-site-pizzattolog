@@ -106,7 +106,6 @@ export default function EspecialidadesSection({
           display: 'flex',
           alignItems: 'center',
 
-          bgcolor: 'primary.dark',
 
           backgroundImage: imagemHero
             ? `url("${imagemHero}")`

@@ -54,7 +54,7 @@ export function SiteNewsletter() {
   }
 
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#ECECEC' }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#F4F6F7' }}>
       <Container maxWidth="xl">
         <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 1240, mx: 'auto' }}>
           <Stack spacing={3} sx={{ alignItems: 'center', textAlign: 'center' }}>

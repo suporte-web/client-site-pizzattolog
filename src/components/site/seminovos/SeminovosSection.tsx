@@ -1373,7 +1373,7 @@ export default function SeminovosSection({ conteudo }: SeminovosSectionProps) {
 
             <Typography
               sx={{
-                color: "rgba(255,255,255,0.76)",
+                color: "#F4F6F7",
 
                 fontSize: {
                   xs: "1rem",
@@ -1439,7 +1439,7 @@ export default function SeminovosSection({ conteudo }: SeminovosSectionProps) {
             md: 11,
           },
 
-          bgcolor: "#f8fafc",
+          bgcolor: "#F4F6F7",
         }}
       >
         <Container maxWidth="md">

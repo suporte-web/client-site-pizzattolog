@@ -87,7 +87,7 @@ export function Hero({ hero }: HeroProps) {
               height: "100%",
               flex: "0 0 100%",
               position: "relative",
-              bgcolor: slide.backgroundColor,
+              bgcolor: bannerCurveSx.bgcolor,
               overflow: "hidden",
             }}
           >

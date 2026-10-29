@@ -165,7 +165,6 @@ export default async function InstitutionalPageSection({
 
             color: 'white',
 
-            bgcolor: 'primary.dark',
 
             backgroundImage: isSolucoes || isCarreiras
               ? `url("${imagemHero}")`

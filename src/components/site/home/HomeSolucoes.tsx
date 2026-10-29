@@ -1502,7 +1502,6 @@ export function HomeSolucoes({ solucoes = [] }: HomeSolucoesProps) {
 
           color: "#ffffff",
 
-          backgroundColor: "#0b344d",
 
           backgroundImage: 'url("/images/agregados/banneragregados.jpg")',
 

@@ -6,6 +6,7 @@ const wave = encodeURIComponent(
 
 export const bannerCurveSx = {
   position: "relative",
+  bgcolor: corOnda,
   // Keep content above the highest point of the decorative wave.
   "& > .MuiContainer-root": {
     marginBottom: { xs: "66px", sm: "88px", md: "114px" },
