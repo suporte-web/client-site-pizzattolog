@@ -1,21 +1,15 @@
-'use client';
+"use client";
 
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from "@/components/site/banner-curve";
 
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import type { HeroPaginaInicial } from '@/types/site';
-import { buildHeroSlides } from './hero-slides';
+import type { HeroPaginaInicial } from "@/types/site";
+import { buildHeroSlides } from "./hero-slides";
 
 interface HeroProps {
   hero: HeroPaginaInicial;
@@ -58,12 +52,12 @@ export function Hero({ hero }: HeroProps) {
           md: 680,
         },
 
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'stretch',
+        position: "relative",
+        display: "flex",
+        alignItems: "stretch",
 
-        color: '#ffffff',
-        overflow: 'hidden',
+        color: "#ffffff",
+        overflow: "hidden",
       }}
     >
       {/* ======================================================
@@ -72,29 +66,29 @@ export function Hero({ hero }: HeroProps) {
 
       <Box
         sx={{
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
 
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
 
-          display: 'flex',
+          display: "flex",
 
           transform: `translateX(-${imagemAtual * 100}%)`,
 
-          transition: 'transform 0.8s ease-in-out',
+          transition: "transform 0.8s ease-in-out",
         }}
       >
         {slides.map((slide, index) => (
           <Box
             key={`${slide.imagem}-${index}`}
             sx={{
-              width: '100%',
-              height: '100%',
-              flex: '0 0 100%',
-              position: 'relative',
+              width: "100%",
+              height: "100%",
+              flex: "0 0 100%",
+              position: "relative",
               bgcolor: slide.backgroundColor,
-              overflow: 'hidden',
+              overflow: "hidden",
             }}
           >
             <Box
@@ -102,9 +96,9 @@ export function Hero({ hero }: HeroProps) {
               src={slide.imagem}
               alt={`Banner Pizzattolog ${index + 1}`}
               sx={{
-                width: '100%',
-                height: '100%',
-                display: 'block',
+                width: "100%",
+                height: "100%",
+                display: "block",
                 objectFit: slide.objectFit,
                 objectPosition: slide.objectPosition,
               }}
@@ -112,12 +106,12 @@ export function Hero({ hero }: HeroProps) {
 
             <Box
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 inset: 0,
 
-                background: 'none',
+                background: "none",
 
-                pointerEvents: 'none',
+                pointerEvents: "none",
               }}
             />
           </Box>
@@ -131,13 +125,13 @@ export function Hero({ hero }: HeroProps) {
       <Container
         maxWidth="xl"
         sx={{
-          position: 'relative',
+          position: "relative",
           zIndex: 2,
 
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
 
-          width: '100%',
+          width: "100%",
 
           py: {
             xs: 8,
@@ -151,7 +145,7 @@ export function Hero({ hero }: HeroProps) {
 
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
 
             left: {
               xs: 20,
@@ -170,14 +164,14 @@ export function Hero({ hero }: HeroProps) {
         >
           <Stack
             direction={{
-              xs: 'column',
-              sm: 'row',
+              xs: "column",
+              sm: "row",
             }}
             spacing={1.5}
             sx={{
               alignItems: {
-                xs: 'flex-start',
-                sm: 'center',
+                xs: "flex-start",
+                sm: "center",
               },
             }}
           >
@@ -192,32 +186,30 @@ export function Hero({ hero }: HeroProps) {
 
                 borderRadius: 2,
 
-                bgcolor: '#ff5805',
+                bgcolor: "#ff5805",
 
-                color: '#ffffff',
+                color: "#ffffff",
 
                 fontSize: {
-                  xs: '0.9rem',
-                  md: '1rem',
+                  xs: "0.9rem",
+                  md: "1rem",
                 },
 
                 fontWeight: 800,
 
-                textTransform: 'none',
+                textTransform: "none",
 
-                boxShadow:
-                  '0 12px 30px rgba(255, 88, 5, 0.30)',
+                boxShadow: "0 12px 30px rgba(255, 88, 5, 0.30)",
 
-                '&:hover': {
-                  bgcolor: '#e94f00',
+                "&:hover": {
+                  bgcolor: "#e94f00",
 
-                  transform: 'translateY(-2px)',
+                  transform: "translateY(-2px)",
 
-                  boxShadow:
-                    '0 16px 34px rgba(255, 88, 5, 0.38)',
+                  boxShadow: "0 16px 34px rgba(255, 88, 5, 0.38)",
                 },
 
-                transition: 'all 0.25s ease',
+                transition: "all 0.25s ease",
               }}
             >
               Solicitar cotação
@@ -234,32 +226,32 @@ export function Hero({ hero }: HeroProps) {
 
                 borderRadius: 2,
 
-                borderColor: 'rgba(255,255,255,0.75)',
+                borderColor: "rgba(255,255,255,0.75)",
 
-                color: '#ffffff',
+                color: "#ffffff",
 
                 fontSize: {
-                  xs: '0.9rem',
-                  md: '1rem',
+                  xs: "0.9rem",
+                  md: "1rem",
                 },
 
                 fontWeight: 700,
 
-                textTransform: 'none',
+                textTransform: "none",
 
-                bgcolor: 'rgba(15,23,42,0.18)',
+                bgcolor: "rgba(15,23,42,0.18)",
 
-                backdropFilter: 'blur(8px)',
+                backdropFilter: "blur(8px)",
 
-                '&:hover': {
-                  borderColor: '#ffffff',
+                "&:hover": {
+                  borderColor: "#ffffff",
 
-                  bgcolor: 'rgba(255,255,255,0.12)',
+                  bgcolor: "rgba(255,255,255,0.12)",
 
-                  transform: 'translateY(-2px)',
+                  transform: "translateY(-2px)",
                 },
 
-                transition: 'all 0.25s ease',
+                transition: "all 0.25s ease",
               }}
             >
               Ver soluções
@@ -371,20 +363,20 @@ export function Hero({ hero }: HeroProps) {
             SLIDE 2
         ================================================== */}
 
-        {slideAtual?.tipo === 'historia' && (
+        {slideAtual?.tipo === "historia" && (
           <Box
             sx={{
-              position: 'absolute',
+              position: "absolute",
               inset: 0,
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              pointerEvents: 'none',
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              pointerEvents: "none",
             }}
           >
             <Box
               sx={{
-                width: '100%',
+                width: "100%",
                 maxWidth: {
                   xs: 290,
                   sm: 340,
@@ -406,7 +398,7 @@ export function Hero({ hero }: HeroProps) {
                 },
 
                 transform: {
-                  md: 'translateY(-15px)',
+                  md: "translateY(-15px)",
                 },
               }}
             >
@@ -484,15 +476,15 @@ export function Hero({ hero }: HeroProps) {
             direction="row"
             spacing={1.5}
             sx={{
-              position: 'absolute',
+              position: "absolute",
 
               bottom: {
                 xs: 56,
                 md: 100,
               },
 
-              left: '50%',
-              transform: 'translateX(-50%)',
+              left: "50%",
+              transform: "translateX(-50%)",
 
               zIndex: 5,
             }}
@@ -511,20 +503,19 @@ export function Hero({ hero }: HeroProps) {
                   p: 0,
 
                   border: 0,
-                  borderRadius: '50%',
+                  borderRadius: "50%",
 
-                  cursor: 'pointer',
+                  cursor: "pointer",
 
                   bgcolor:
                     index === imagemAtual
-                      ? '#ffb000'
-                      : 'rgba(255, 183, 27, 0.25)',
+                      ? "#ffb000"
+                      : "rgba(255, 183, 27, 0.25)",
 
-                  transition:
-                    'background-color 0.3s ease, transform 0.3s ease',
+                  transition: "background-color 0.3s ease, transform 0.3s ease",
 
-                  '&:hover': {
-                    transform: 'scale(1.15)',
+                  "&:hover": {
+                    transform: "scale(1.15)",
                   },
                 }}
               />

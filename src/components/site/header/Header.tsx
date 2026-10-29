@@ -52,10 +52,7 @@ function encontrarItemPorSlug(
     }
 
     if (item.filhos?.length) {
-      const encontrado = encontrarItemPorSlug(
-        item.filhos,
-        slug,
-      );
+      const encontrado = encontrarItemPorSlug(item.filhos, slug);
 
       if (encontrado) {
         return encontrado;
@@ -66,10 +63,7 @@ function encontrarItemPorSlug(
   return null;
 }
 
-function removerItemPorSlug(
-  itens: ItemMenu[],
-  slug: string,
-): ItemMenu[] {
+function removerItemPorSlug(itens: ItemMenu[], slug: string): ItemMenu[] {
   return itens
     .filter((item) => item.slug !== slug)
     .map((item) => ({
@@ -103,12 +97,12 @@ function renderDesktopItems(
             onMouseEnter={() => alternarItem(item.id)}
             onFocus={() => alternarItem(item.id)}
             sx={{
-              width: '100%',
+              width: "100%",
               minHeight: 42,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              textAlign: 'left',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              textAlign: "left",
               py: 1,
               pl: 1.75 + nivel * 2,
               pr: 2,
@@ -125,8 +119,8 @@ function renderDesktopItems(
               sx={{
                 m: 0,
                 minWidth: 0,
-                flex: '1 1 auto',
-                textAlign: 'left',
+                flex: "1 1 auto",
+                textAlign: "left",
               }}
               slotProps={{
                 primary: {
@@ -134,15 +128,21 @@ function renderDesktopItems(
                     fontSize: 15.5,
                     fontWeight: 850,
                     lineHeight: 1.35,
-                    textAlign: 'left',
-                    overflowWrap: 'anywhere',
+                    textAlign: "left",
+                    overflowWrap: "anywhere",
                   },
                 },
               }}
             />
           </MenuItem>
           <Collapse in={aberto} timeout="auto" unmountOnExit>
-            {renderDesktopItems(filhos, fecharMenu, itemExpandido, alternarItem, nivel + 1)}
+            {renderDesktopItems(
+              filhos,
+              fecharMenu,
+              itemExpandido,
+              alternarItem,
+              nivel + 1,
+            )}
           </Collapse>
         </Fragment>,
       ];
@@ -157,10 +157,10 @@ function renderDesktopItems(
         onClick={fecharMenu}
         sx={{
           minHeight: 42,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          textAlign: 'left',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          textAlign: "left",
           py: 1,
           pl: 1.75 + nivel * 2,
           pr: 2,
@@ -177,8 +177,8 @@ function renderDesktopItems(
           sx={{
             m: 0,
             minWidth: 0,
-            flex: '1 1 auto',
-            textAlign: 'left',
+            flex: "1 1 auto",
+            textAlign: "left",
           }}
           slotProps={{
             primary: {
@@ -186,8 +186,8 @@ function renderDesktopItems(
                 fontSize: 15.5,
                 fontWeight: 600,
                 lineHeight: 1.35,
-                textAlign: 'left',
-                overflowWrap: 'anywhere',
+                textAlign: "left",
+                overflowWrap: "anywhere",
               },
             },
           }}
@@ -219,7 +219,13 @@ function renderMobileItems(
           >
             <ListItemText
               primary={
-                <Typography sx={{ fontWeight: 800, color: "text.primary", overflowWrap: 'anywhere' }}>
+                <Typography
+                  sx={{
+                    fontWeight: 800,
+                    color: "text.primary",
+                    overflowWrap: "anywhere",
+                  }}
+                >
                   {item.titulo}
                 </Typography>
               }
@@ -232,10 +238,16 @@ function renderMobileItems(
             size="small"
             sx={{ ml: 2 + nivel * 2.5 }}
           >
-            {aberto ? 'Ocultar subcategorias' : 'Exibir subcategorias'}
+            {aberto ? "Ocultar subcategorias" : "Exibir subcategorias"}
           </Button>
           <Collapse in={aberto} timeout="auto" unmountOnExit>
-            {renderMobileItems(filhos, fecharMobile, itensExpandidos, alternarItem, nivel + 1)}
+            {renderMobileItems(
+              filhos,
+              fecharMobile,
+              itensExpandidos,
+              alternarItem,
+              nivel + 1,
+            )}
           </Collapse>
         </Fragment>,
       ];
@@ -255,7 +267,7 @@ function renderMobileItems(
               sx={{
                 fontWeight: filhos.length ? 800 : 500,
                 color: filhos.length ? "text.primary" : "text.secondary",
-                overflowWrap: 'anywhere',
+                overflowWrap: "anywhere",
               }}
             >
               {item.titulo}
@@ -282,11 +294,14 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
 
   const [menuAtual, setMenuAtual] = useState<HTMLElement | null>(null);
   const [indiceAtual, setIndiceAtual] = useState<number | null>(null);
-  const [menuEsgAtual, setMenuEsgAtual] =
-    useState<HTMLElement | null>(null);
+  const [menuEsgAtual, setMenuEsgAtual] = useState<HTMLElement | null>(null);
   const [mobileAberto, setMobileAberto] = useState(false);
-  const [itemDesktopExpandido, setItemDesktopExpandido] = useState<string | null>(null);
-  const [itensMobileExpandidos, setItensMobileExpandidos] = useState<Set<string>>(new Set());
+  const [itemDesktopExpandido, setItemDesktopExpandido] = useState<
+    string | null
+  >(null);
+  const [itensMobileExpandidos, setItensMobileExpandidos] = useState<
+    Set<string>
+  >(new Set());
 
   const fechamentoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const manterMenu = () => {
@@ -296,9 +311,12 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
     manterMenu();
     fechamentoTimer.current = setTimeout(() => fecharMenu(), 180);
   };
-  useEffect(() => () => {
-    if (fechamentoTimer.current) clearTimeout(fechamentoTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (fechamentoTimer.current) clearTimeout(fechamentoTimer.current);
+    },
+    [],
+  );
 
   const abrirMenu = (event: { currentTarget: HTMLElement }, indice: number) => {
     manterMenu();
@@ -316,7 +334,10 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
     setMenuEsgAtual(event.currentTarget);
   };
 
-  const navegarParaTopoSeMesmaPagina = (event: MouseEvent<HTMLElement>, href: string) => {
+  const navegarParaTopoSeMesmaPagina = (
+    event: MouseEvent<HTMLElement>,
+    href: string,
+  ) => {
     const [path] = href.split("#");
 
     if (normalizePathname(pathname) === normalizePathname(path)) {
@@ -374,6 +395,10 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
               gap: 2,
               pt: 1.5,
               pb: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              position: "relative",
             }}
           >
             <Stack
@@ -383,7 +408,9 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
               spacing={1.2}
               sx={{
                 alignItems: "center",
-                mr: { xs: 1, lg: 4 },
+                flexShrink: 0,
+                mr: 0,
+                zIndex: 2,
               }}
             >
               <Box
@@ -395,7 +422,7 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                     xs: 150,
                     md: 180,
                   },
-                  height: 'auto',
+                  height: "auto",
                 }}
               />
             </Stack>
@@ -403,24 +430,50 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
             <Stack
               direction="row"
               spacing={0.5}
-              sx={{ display: { xs: "none", lg: "flex" } }}
+              sx={{
+                display: { xs: "none", lg: "flex" },
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+                whiteSpace: "nowrap",
+                zIndex: 1,
+              }}
             >
               {menusSemEsg.map((menu, indice) => (
                 <Fragment key={menu.id}>
                   <Button
                     color="inherit"
                     component={Link}
-                    href={getHref(menu.url, menu.slug).split('#')[0]}
+                    href={getHref(menu.url, menu.slug).split("#")[0]}
                     scroll
                     onClick={(event: MouseEvent<HTMLElement>) =>
-                      navegarParaTopoSeMesmaPagina(event, getHref(menu.url, menu.slug))
+                      navegarParaTopoSeMesmaPagina(
+                        event,
+                        getHref(menu.url, menu.slug),
+                      )
                     }
-                    onMouseEnter={(event) => menu.itens.length ? abrirMenu(event, indice) : fecharMenu()}
+                    onMouseEnter={(event) =>
+                      menu.itens.length
+                        ? abrirMenu(event, indice)
+                        : fecharMenu()
+                    }
                     onMouseLeave={agendarFechamento}
-                    onFocus={(event) => menu.itens.length ? abrirMenu(event, indice) : fecharMenu()}
-                    onKeyDown={(event) => { if (event.key === 'Escape') fecharMenu(); }}
-                    aria-expanded={menu.itens.length ? indiceAtual === indice : undefined}
-                    aria-controls={indiceAtual === indice ? `submenu-${menu.id}` : undefined}
+                    onFocus={(event) =>
+                      menu.itens.length
+                        ? abrirMenu(event, indice)
+                        : fecharMenu()
+                    }
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") fecharMenu();
+                    }}
+                    aria-expanded={
+                      menu.itens.length ? indiceAtual === indice : undefined
+                    }
+                    aria-controls={
+                      indiceAtual === indice ? `submenu-${menu.id}` : undefined
+                    }
                     sx={{ color: "text.secondary" }}
                   >
                     {menu.titulo}
@@ -436,8 +489,13 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                       <Button
                         color="inherit"
                         component={Link}
-                        href={getHref(itemEsg.url, itemEsg.slug).split('#')[0]}
-                        onClick={(event: MouseEvent<HTMLElement>) => navegarParaTopoSeMesmaPagina(event, getHref(itemEsg.url, itemEsg.slug))}
+                        href={getHref(itemEsg.url, itemEsg.slug).split("#")[0]}
+                        onClick={(event: MouseEvent<HTMLElement>) =>
+                          navegarParaTopoSeMesmaPagina(
+                            event,
+                            getHref(itemEsg.url, itemEsg.slug),
+                          )
+                        }
                         onFocus={abrirMenuEsg}
                         onMouseEnter={abrirMenuEsg}
                         onMouseLeave={agendarFechamento}
@@ -448,7 +506,6 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                         ESG
                       </Button>
                     )}
-
                 </Fragment>
               ))}
             </Stack>
@@ -483,24 +540,43 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
         sx={{ zIndex: 1200 }}
       >
         <Paper
-          id={indiceAtual !== null ? `submenu-${menusSemEsg[indiceAtual].id}` : 'submenu-esg'}
+          id={
+            indiceAtual !== null
+              ? `submenu-${menusSemEsg[indiceAtual].id}`
+              : "submenu-esg"
+          }
           onMouseEnter={manterMenu}
           onMouseLeave={agendarFechamento}
-          onKeyDown={(event) => { if (event.key === 'Escape') fecharMenu(); }}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") fecharMenu();
+          }}
           onBlur={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) fecharMenu();
+            if (
+              !event.currentTarget.contains(event.relatedTarget as Node | null)
+            )
+              fecharMenu();
           }}
           sx={{
-            mt: 1, minWidth: 290, maxWidth: 360,
-            maxHeight: 'calc(100vh - 110px)', overflowY: 'auto',
-            borderRadius: 2, border: '1px solid', borderColor: 'divider',
-            boxShadow: '0 18px 42px rgba(15,23,42,0.18)', py: 0.75,
+            mt: 1,
+            minWidth: 290,
+            maxWidth: 360,
+            maxHeight: "calc(100vh - 110px)",
+            overflowY: "auto",
+            borderRadius: 2,
+            border: "1px solid",
+            borderColor: "divider",
+            boxShadow: "0 18px 42px rgba(15,23,42,0.18)",
+            py: 0.75,
           }}
         >
           <MenuList disablePadding>
             {renderDesktopItems(
-              indiceAtual !== null ? menusSemEsg[indiceAtual].itens : itemEsg?.filhos ?? [],
-              fecharMenu, itemDesktopExpandido, alternarItemDesktop,
+              indiceAtual !== null
+                ? menusSemEsg[indiceAtual].itens
+                : (itemEsg?.filhos ?? []),
+              fecharMenu,
+              itemDesktopExpandido,
+              alternarItemDesktop,
             )}
           </MenuList>
         </Paper>
@@ -511,7 +587,13 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
         open={mobileAberto}
         onClose={() => setMobileAberto(false)}
       >
-        <Box sx={{ width: { xs: 'min(100vw, 340px)', sm: 360 }, boxSizing: 'border-box', p: 2 }}>
+        <Box
+          sx={{
+            width: { xs: "min(100vw, 340px)", sm: 360 },
+            boxSizing: "border-box",
+            p: 2,
+          }}
+        >
           <Stack
             direction="row"
             sx={{
@@ -521,7 +603,10 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
             }}
           >
             <Typography sx={{ fontWeight: 800 }}>Navegação</Typography>
-            <IconButton aria-label="Fechar menu" onClick={() => setMobileAberto(false)}>
+            <IconButton
+              aria-label="Fechar menu"
+              onClick={() => setMobileAberto(false)}
+            >
               <CloseRoundedIcon />
             </IconButton>
           </Stack>
@@ -532,10 +617,13 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                 <Box sx={{ mb: 1 }}>
                   <ListItemButton
                     component={Link}
-                    href={getHref(menu.url, menu.slug).split('#')[0]}
+                    href={getHref(menu.url, menu.slug).split("#")[0]}
                     onClick={(event: MouseEvent<HTMLElement>) => {
                       setMobileAberto(false);
-                      navegarParaTopoSeMesmaPagina(event, getHref(menu.url, menu.slug));
+                      navegarParaTopoSeMesmaPagina(
+                        event,
+                        getHref(menu.url, menu.slug),
+                      );
                     }}
                     sx={{ py: 1, width: "100%" }}
                   >
@@ -561,7 +649,9 @@ export function Header({ menus, nomeEmpresa }: HeaderProps) {
                       aria-label={`Exibir subcategorias de ${menu.titulo}`}
                       size="small"
                     >
-                      {itensMobileExpandidos.has(menu.id) ? 'Ocultar subcategorias' : 'Exibir subcategorias'}
+                      {itensMobileExpandidos.has(menu.id)
+                        ? "Ocultar subcategorias"
+                        : "Exibir subcategorias"}
                     </Button>
                   )}
                   <Collapse
