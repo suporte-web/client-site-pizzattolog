@@ -255,7 +255,7 @@ export default async function InstitutionalPageSection({
               md: 9,
             },
 
-            bgcolor: 'white',
+            bgcolor: '#F4F6F7',
           }}
         >
           <Container maxWidth="lg">

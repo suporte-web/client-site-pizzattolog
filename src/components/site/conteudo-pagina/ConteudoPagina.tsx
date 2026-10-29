@@ -65,7 +65,7 @@ export function ConteudoPagina({ conteudo }: ConteudoPaginaProps) {
                 borderRadius: 2,
                 border: '1px solid',
                 borderColor: 'divider',
-                bgcolor: 'background.default',
+                bgcolor: '#F4F6F7',
               }}
             >
               <Box

@@ -463,7 +463,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
             xs: 8,
             md: 12,
           },
-          bgcolor: 'background.default',
+          bgcolor: '#F4F6F7',
           '@keyframes solucaoSobe': {
             '0%': {
               opacity: 0,
@@ -615,7 +615,7 @@ export function Solucoes({ solucoes, conteudo, mostrarBanner = true, mostrarComp
                               p: { xs: 3, md: 3.25 },
                               borderRadius: 2,
                               border: '1px solid rgba(15, 23, 42, 0.05)',
-                              bgcolor: '#ECECEC',
+                              bgcolor: '##F4F6F7',
                               overflow: 'hidden',
                               boxShadow: '0 16px 34px rgba(19, 39, 57, 0.08)',
                               transition: 'transform 0.2s ease, box-shadow 0.2s ease',

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from "@/components/site/banner-curve";
 
-import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
-import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
-import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
-import HandshakeRoundedIcon from '@mui/icons-material/HandshakeRounded';
-import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
-import RouteRoundedIcon from '@mui/icons-material/RouteRounded';
-import SecurityRoundedIcon from '@mui/icons-material/SecurityRounded';
-import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
-import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
+import FactCheckRoundedIcon from "@mui/icons-material/FactCheckRounded";
+import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
+import HandshakeRoundedIcon from "@mui/icons-material/HandshakeRounded";
+import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
+import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
+import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
+import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
+import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
 
 import {
   Accordion,
@@ -26,15 +26,15 @@ import {
   Grid,
   Stack,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-import Link from 'next/link';
-import { SectionLabel } from '@/components/site/section-label';
+import Link from "next/link";
+import { SectionLabel } from "@/components/site/section-label";
 import {
   getContentString,
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from "@/utils/site-content";
 
 /* =========================================================
    BENEFÍCIOS
@@ -42,45 +42,48 @@ import {
 
 const beneficios = [
   {
-    titulo: 'Transparência total',
+    titulo: "Transparência total",
     descricao:
-      'Cada seminovo Pizzattolog vem com histórico, revisões e quilometragem documentados, garantindo procedência clara.',
+      "Cada seminovo Pizzattolog vem com histórico, revisões e quilometragem documentados, garantindo procedência clara.",
     icon: <FactCheckRoundedIcon />,
   },
   {
-    titulo: 'Manutenção em dia',
+    titulo: "Manutenção em dia",
     descricao:
-      'Todos os veículos passam por checagem completa feita por especialistas e são entregues prontos para rodar.',
+      "Todos os veículos passam por checagem completa feita por especialistas e são entregues prontos para rodar.",
     icon: <BuildRoundedIcon />,
   },
   {
-    titulo: 'Segurança garantida',
+    titulo: "Segurança garantida",
     descricao:
-      'Frota preparada para oferecer desempenho com segurança e reduzir riscos de paradas inesperadas.',
+      "Frota preparada para oferecer desempenho com segurança e reduzir riscos de paradas inesperadas.",
     icon: <SecurityRoundedIcon />,
   },
   {
-    titulo: 'Pronto para crescer',
+    titulo: "Pronto para crescer",
     descricao:
-      'Regularizados e liberados para uso imediato: compre hoje e coloque seu veículo em operação.',
+      "Regularizados e liberados para uso imediato: compre hoje e coloque seu veículo em operação.",
     icon: <LocalShippingRoundedIcon />,
   },
 ];
 
 const introducaoPilares = [
   {
-    titulo: 'Procedência conferida',
-    texto: 'Histórico, quilometragem e documentação avaliados antes da negociação.',
+    titulo: "Procedência conferida",
+    texto:
+      "Histórico, quilometragem e documentação avaliados antes da negociação.",
     icon: <FactCheckRoundedIcon />,
   },
   {
-    titulo: 'Frota preparada',
-    texto: 'Veículos revisados para voltar à operação com segurança e previsibilidade.',
+    titulo: "Frota preparada",
+    texto:
+      "Veículos revisados para voltar à operação com segurança e previsibilidade.",
     icon: <SettingsSuggestRoundedIcon />,
   },
   {
-    titulo: 'Escolha orientada',
-    texto: 'Apoio consultivo para encontrar o caminhão certo para a sua necessidade.',
+    titulo: "Escolha orientada",
+    texto:
+      "Apoio consultivo para encontrar o caminhão certo para a sua necessidade.",
     icon: <HandshakeRoundedIcon />,
   },
 ];
@@ -91,33 +94,33 @@ const introducaoPilares = [
 
 const diferenciais = [
   {
-    titulo: 'Documentação 100% regularizada',
+    titulo: "Documentação 100% regularizada",
     descricao:
-      'Sem burocracia: caminhões com documentação em dia e preparados para rodar com segurança.',
+      "Sem burocracia: caminhões com documentação em dia e preparados para rodar com segurança.",
     icon: <Inventory2RoundedIcon />,
   },
   {
-    titulo: 'Check-up completo antes da entrega',
+    titulo: "Check-up completo antes da entrega",
     descricao:
-      'Os veículos passam por inspeção técnica rigorosa, proporcionando maior confiabilidade desde o primeiro dia.',
+      "Os veículos passam por inspeção técnica rigorosa, proporcionando maior confiabilidade desde o primeiro dia.",
     icon: <SettingsSuggestRoundedIcon />,
   },
   {
-    titulo: 'Modelos multimarcas à sua disposição',
+    titulo: "Modelos multimarcas à sua disposição",
     descricao:
-      'Diversas marcas e modelos para você escolher o caminhão mais adequado à sua operação.',
+      "Diversas marcas e modelos para você escolher o caminhão mais adequado à sua operação.",
     icon: <RouteRoundedIcon />,
   },
   {
-    titulo: 'Suporte consultivo na escolha',
+    titulo: "Suporte consultivo na escolha",
     descricao:
-      'Uma equipe especializada ajuda você a encontrar o veículo mais adequado às necessidades da sua frota.',
+      "Uma equipe especializada ajuda você a encontrar o veículo mais adequado às necessidades da sua frota.",
     icon: <HandshakeRoundedIcon />,
   },
   {
-    titulo: 'A confiança de quem entende de logística',
+    titulo: "A confiança de quem entende de logística",
     descricao:
-      'Experiência no setor para oferecer não apenas veículos, mas segurança para o seu investimento.',
+      "Experiência no setor para oferecer não apenas veículos, mas segurança para o seu investimento.",
     icon: <VerifiedRoundedIcon />,
   },
 ];
@@ -128,22 +131,22 @@ const diferenciais = [
 
 const depoimentos = [
   {
-    nome: 'Carlos M.',
-    cargo: 'Transportador Autônomo',
+    nome: "Carlos M.",
+    cargo: "Transportador Autônomo",
     texto:
-      'Quando precisei ampliar minha frota, encontrei na Pizzattolog não só caminhões em excelente estado, mas também orientação para escolher o modelo mais adequado. Hoje, minha operação roda com menos paradas e muito mais eficiência.',
+      "Quando precisei ampliar minha frota, encontrei na Pizzattolog não só caminhões em excelente estado, mas também orientação para escolher o modelo mais adequado. Hoje, minha operação roda com menos paradas e muito mais eficiência.",
   },
   {
-    nome: 'Logística Rápida SP',
-    cargo: 'Empresa de transportes',
+    nome: "Logística Rápida SP",
+    cargo: "Empresa de transportes",
     texto:
-      'A procedência transparente fez toda a diferença na nossa decisão. O histórico detalhado nos deu segurança para investir e, desde então, os caminhões têm sido fundamentais para aumentar nossa produtividade.',
+      "A procedência transparente fez toda a diferença na nossa decisão. O histórico detalhado nos deu segurança para investir e, desde então, os caminhões têm sido fundamentais para aumentar nossa produtividade.",
   },
   {
-    nome: 'Fernanda S.',
-    cargo: 'Empresária do Setor de Transportes',
+    nome: "Fernanda S.",
+    cargo: "Empresária do Setor de Transportes",
     texto:
-      'Na Pizzattolog percebi que seminovo não é apenas um veículo usado, mas sim uma solução pronta para rodar. Foi o melhor investimento para o meu negócio.',
+      "Na Pizzattolog percebi que seminovo não é apenas um veículo usado, mas sim uma solução pronta para rodar. Foi o melhor investimento para o meu negócio.",
   },
 ];
 
@@ -153,30 +156,30 @@ const depoimentos = [
 
 const perguntas = [
   {
-    pergunta: 'Os caminhões seminovos da Pizzattolog têm garantia?',
+    pergunta: "Os caminhões seminovos da Pizzattolog têm garantia?",
     resposta:
-      'As condições de garantia podem variar de acordo com o veículo. Nossa equipe apresenta todas as informações e condições antes da negociação.',
+      "As condições de garantia podem variar de acordo com o veículo. Nossa equipe apresenta todas as informações e condições antes da negociação.",
   },
   {
-    pergunta: 'Posso financiar a compra do caminhão?',
+    pergunta: "Posso financiar a compra do caminhão?",
     resposta:
-      'As possibilidades de financiamento podem ser avaliadas durante a negociação. Entre em contato com nossa equipe comercial para conhecer as opções disponíveis.',
+      "As possibilidades de financiamento podem ser avaliadas durante a negociação. Entre em contato com nossa equipe comercial para conhecer as opções disponíveis.",
   },
   {
-    pergunta: 'Vocês trabalham apenas com uma marca de caminhão?',
+    pergunta: "Vocês trabalham apenas com uma marca de caminhão?",
     resposta:
-      'Não. Nossa disponibilidade pode incluir veículos de diferentes marcas, modelos e configurações.',
+      "Não. Nossa disponibilidade pode incluir veículos de diferentes marcas, modelos e configurações.",
   },
   {
     pergunta:
-      'Qual é a diferença entre comprar um seminovo comum e um seminovo Pizzattolog?',
+      "Qual é a diferença entre comprar um seminovo comum e um seminovo Pizzattolog?",
     resposta:
-      'O processo Pizzattolog busca oferecer maior transparência sobre procedência, documentação e condições do veículo antes da negociação.',
+      "O processo Pizzattolog busca oferecer maior transparência sobre procedência, documentação e condições do veículo antes da negociação.",
   },
   {
-    pergunta: 'Os veículos estão prontos para rodar imediatamente?',
+    pergunta: "Os veículos estão prontos para rodar imediatamente?",
     resposta:
-      'A condição de cada veículo é informada individualmente. Nossa equipe apresenta a documentação e as informações necessárias antes da entrega.',
+      "A condição de cada veículo é informada individualmente. Nossa equipe apresenta a documentação e as informações necessárias antes da entrega.",
   },
 ];
 
@@ -188,35 +191,35 @@ interface SeminovosSectionProps {
   conteudo?: SiteContent;
 }
 
-export default function SeminovosSection({
-  conteudo,
-}: SeminovosSectionProps) {
-  const beneficiosEditaveis =
-    mergeTextItems(beneficios, conteudo, 'beneficios', [
-      'titulo',
-      'descricao',
-    ]);
-  const introducaoPilaresEditaveis =
-    mergeTextItems(introducaoPilares, conteudo, 'introducaoPilares', [
-      'titulo',
-      'texto',
-    ]);
-  const diferenciaisEditaveis =
-    mergeTextItems(diferenciais, conteudo, 'diferenciais', [
-      'titulo',
-      'descricao',
-    ]);
-  const depoimentosEditaveis =
-    mergeTextItems(depoimentos, conteudo, 'depoimentos', [
-      'nome',
-      'cargo',
-      'texto',
-    ]);
-  const perguntasEditaveis =
-    mergeTextItems(perguntas, conteudo, 'faq', [
-      'pergunta',
-      'resposta',
-    ]);
+export default function SeminovosSection({ conteudo }: SeminovosSectionProps) {
+  const beneficiosEditaveis = mergeTextItems(
+    beneficios,
+    conteudo,
+    "beneficios",
+    ["titulo", "descricao"],
+  );
+  const introducaoPilaresEditaveis = mergeTextItems(
+    introducaoPilares,
+    conteudo,
+    "introducaoPilares",
+    ["titulo", "texto"],
+  );
+  const diferenciaisEditaveis = mergeTextItems(
+    diferenciais,
+    conteudo,
+    "diferenciais",
+    ["titulo", "descricao"],
+  );
+  const depoimentosEditaveis = mergeTextItems(
+    depoimentos,
+    conteudo,
+    "depoimentos",
+    ["nome", "cargo", "texto"],
+  );
+  const perguntasEditaveis = mergeTextItems(perguntas, conteudo, "faq", [
+    "pergunta",
+    "resposta",
+  ]);
   const diferenciaisAnimados = [
     ...diferenciaisEditaveis,
     ...diferenciaisEditaveis,
@@ -236,7 +239,7 @@ export default function SeminovosSection({
         component="section"
         sx={{
           ...bannerCurveSx,
-          position: 'relative',
+          position: "relative",
 
           pt: { xs: 14, md: 16 },
           pb: { xs: 3, md: 4 },
@@ -246,23 +249,22 @@ export default function SeminovosSection({
             md: 620,
           },
 
-          display: 'flex',
+          display: "flex",
 
-          alignItems: 'center',
+          alignItems: "center",
           backgroundImage: `
   url('${getContentString(
-            conteudo,
-            'hero.imagemUrl',
-            '/images/seminovos/caminhao.png'
-          )}')
+    conteudo,
+    "hero.imagemUrl",
+    "/images/seminovos/caminhao.png",
+  )}')
 `,
 
-          backgroundSize: 'cover',
+          backgroundSize: "cover",
 
-          backgroundPosition: 'center',
+          backgroundPosition: "center",
 
-          backgroundRepeat: 'no-repeat',
-
+          backgroundRepeat: "no-repeat",
         }}
       >
         <Container maxWidth="xl">
@@ -271,19 +273,18 @@ export default function SeminovosSection({
             sx={{
               maxWidth: 720,
 
-              position: 'relative',
-
+              position: "relative",
             }}
           >
             <Typography
               component="h1"
               sx={{
-                color: '#fff',
+                color: "#fff",
 
                 fontSize: {
-                  xs: '2.4rem',
-                  sm: '3rem',
-                  md: '4.2rem',
+                  xs: "2.4rem",
+                  sm: "3rem",
+                  md: "4.2rem",
                 },
 
                 lineHeight: 1.08,
@@ -296,11 +297,11 @@ export default function SeminovosSection({
 
             <Typography
               sx={{
-                color: 'rgba(255,255,255,0.88)',
+                color: "rgba(255,255,255,0.88)",
 
                 fontSize: {
-                  xs: '1rem',
-                  md: '1.2rem',
+                  xs: "1rem",
+                  md: "1.2rem",
                 },
 
                 lineHeight: 1.8,
@@ -313,8 +314,8 @@ export default function SeminovosSection({
 
             <Stack
               direction={{
-                xs: 'column',
-                sm: 'row',
+                xs: "column",
+                sm: "row",
               }}
               spacing={2}
             >
@@ -327,8 +328,8 @@ export default function SeminovosSection({
                 size="large"
                 sx={{
                   width: {
-                    xs: '100%',
-                    sm: 'fit-content',
+                    xs: "100%",
+                    sm: "fit-content",
                   },
 
                   px: 4,
@@ -336,23 +337,23 @@ export default function SeminovosSection({
 
                   borderRadius: 3,
 
-                  bgcolor: '#ff5805',
+                  bgcolor: "#ff5805",
 
                   fontWeight: 800,
 
-                  textTransform: 'none',
+                  textTransform: "none",
 
-                  fontSize: '1rem',
+                  fontSize: "1rem",
 
-                  boxShadow: '0 10px 30px rgba(255, 88, 5, 0.28)',
+                  boxShadow: "0 10px 30px rgba(255, 88, 5, 0.28)",
 
-                  '&:hover': {
-                    bgcolor: '#e64e00',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 14px 35px rgba(255, 88, 5, 0.36)',
+                  "&:hover": {
+                    bgcolor: "#e64e00",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 14px 35px rgba(255, 88, 5, 0.36)",
                   },
 
-                  transition: 'all 0.3s ease',
+                  transition: "all 0.3s ease",
                 }}
               >
                 Encontrar meu seminovo
@@ -374,7 +375,7 @@ export default function SeminovosSection({
             md: 12,
           },
 
-          bgcolor: '#fff',
+          bgcolor: "#F4F6F7",
         }}
       >
         <Container maxWidth="xl">
@@ -385,14 +386,14 @@ export default function SeminovosSection({
               md: 8,
             }}
             sx={{
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
             <Grid size={{ xs: 12, md: 7 }}>
               <Stack
                 spacing={2.5}
                 sx={{
-                  width: '100%',
+                  width: "100%",
                   maxWidth: 760,
 
                   pl: {
@@ -410,40 +411,41 @@ export default function SeminovosSection({
                     maxWidth: 740,
 
                     fontSize: {
-                      xs: '2rem',
-                      sm: '2.4rem',
-                      md: '3rem',
-                      lg: '3.2rem',
+                      xs: "2rem",
+                      sm: "2.4rem",
+                      md: "3rem",
+                      lg: "3.2rem",
                     },
 
                     lineHeight: 1.05,
 
                     fontWeight: 800,
 
-                    color: '#172033',
+                    color: "#172033",
 
-                    letterSpacing: '-0.02em',
+                    letterSpacing: "-0.02em",
                   }}
                 >
-                  Seminovo é sinônimo de cuidado, confiança e investimento inteligente.
+                  Seminovo é sinônimo de cuidado, confiança e investimento
+                  inteligente.
                 </Typography>
 
                 <Typography
                   sx={{
                     maxWidth: 700,
 
-                    color: 'text.secondary',
+                    color: "text.secondary",
 
                     fontSize: {
-                      xs: '1rem',
-                      md: '1.1rem',
+                      xs: "1rem",
+                      md: "1.1rem",
                     },
 
                     lineHeight: 1.75,
                   }}
                 >
-                  Cada veículo passa por uma avaliação criteriosa para entregar mais
-                  segurança na compra e mais previsibilidade na operação.
+                  Cada veículo passa por uma avaliação criteriosa para entregar
+                  mais segurança na compra e mais previsibilidade na operação.
                 </Typography>
               </Stack>
             </Grid>
@@ -453,31 +455,31 @@ export default function SeminovosSection({
                 component="img"
                 src={getContentString(
                   conteudo,
-                  'introducao.imagemUrl',
-                  '/images/seminovos/seminovos.png'
+                  "introducao.imagemUrl",
+                  "/images/seminovos/seminovos.png",
                 )}
                 alt="Caminhão seminovo Pizzattolog"
                 sx={{
-                  display: 'block',
+                  display: "block",
 
-                  width: '100%',
+                  width: "100%",
 
                   height: {
                     xs: 280,
                     md: 430,
                   },
 
-                  objectFit: 'cover',
-                  objectPosition: 'right center',
+                  objectFit: "cover",
+                  objectPosition: "right center",
 
-                  borderRadius: '8px 54px 8px 54px',
+                  borderRadius: "8px 54px 8px 54px",
 
-                  boxShadow: '0 24px 52px rgba(19, 39, 57, 0.14)',
+                  boxShadow: "0 24px 52px rgba(19, 39, 57, 0.14)",
 
                   // joga a imagem para o centro da página
                   transform: {
-                    xs: 'none',
-                    md: 'translateX(-45px)',
+                    xs: "none",
+                    md: "translateX(-45px)",
                   },
                 }}
               />
@@ -486,14 +488,14 @@ export default function SeminovosSection({
 
           <Box
             sx={{
-              position: 'relative',
+              position: "relative",
 
               mt: {
                 xs: 6,
                 md: 8,
               },
 
-              mx: 'auto',
+              mx: "auto",
 
               maxWidth: 1040,
 
@@ -504,45 +506,48 @@ export default function SeminovosSection({
 
               borderRadius: 4,
 
-              border: '1px solid rgba(15, 23, 42, 0.08)',
+              border: "1px solid rgba(15, 23, 42, 0.08)",
 
-              bgcolor: '#ffb71b',
+              bgcolor: "#ffb71b",
 
-              boxShadow: '0 18px 44px rgba(15, 23, 42, 0.08)',
+              boxShadow: "0 18px 44px rgba(15, 23, 42, 0.08)",
 
-              overflow: 'hidden',
+              overflow: "hidden",
 
-              '&::before': {
+              "&::before": {
                 content: '""',
 
-                position: 'absolute',
+                position: "absolute",
 
                 top: 0,
 
-                left: '50%',
+                left: "50%",
 
                 width: 120,
 
                 height: 6,
 
-                borderRadius: '0 0 8px 8px',
+                borderRadius: "0 0 8px 8px",
 
-                bgcolor: '#ff5805',
+                bgcolor: "#ff5805",
 
-                transform: 'translateX(-50%)',
+                transform: "translateX(-50%)",
               },
             }}
           >
-            <Stack spacing={3.5} sx={{ alignItems: 'center', textAlign: 'center' }}>
-              <Stack spacing={1.5} sx={{ maxWidth: 760, alignItems: 'center' }}>
+            <Stack
+              spacing={3.5}
+              sx={{ alignItems: "center", textAlign: "center" }}
+            >
+              <Stack spacing={1.5} sx={{ maxWidth: 760, alignItems: "center" }}>
                 <Typography
                   component="h3"
                   sx={{
-                    color: '#010102',
+                    color: "#010102",
 
                     fontSize: {
-                      xs: '1.7rem',
-                      md: '2.35rem',
+                      xs: "1.7rem",
+                      md: "2.35rem",
                     },
 
                     fontWeight: 800,
@@ -555,11 +560,11 @@ export default function SeminovosSection({
 
                 <Typography
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
 
                     fontSize: {
-                      xs: '1rem',
-                      md: '1.08rem',
+                      xs: "1rem",
+                      md: "1.08rem",
                     },
 
                     lineHeight: 1.8,
@@ -572,15 +577,15 @@ export default function SeminovosSection({
                 </Typography>
               </Stack>
 
-              <Grid container spacing={2.5} sx={{ width: '100%' }}>
+              <Grid container spacing={2.5} sx={{ width: "100%" }}>
                 {introducaoPilaresEditaveis.map((pilar) => (
                   <Grid key={pilar.titulo} size={{ xs: 12, md: 4 }}>
                     <Stack
                       spacing={1.4}
                       sx={{
-                        height: '100%',
+                        height: "100%",
 
-                        alignItems: 'center',
+                        alignItems: "center",
 
                         p: {
                           xs: 2.25,
@@ -589,9 +594,9 @@ export default function SeminovosSection({
 
                         borderRadius: 3,
 
-                        bgcolor: '#fff',
+                        bgcolor: "#fff",
 
-                        border: '1px solid rgba(15, 23, 42, 0.06)',
+                        border: "1px solid rgba(15, 23, 42, 0.06)",
                       }}
                     >
                       <Box
@@ -600,17 +605,17 @@ export default function SeminovosSection({
 
                           height: 50,
 
-                          display: 'grid',
+                          display: "grid",
 
-                          placeItems: 'center',
+                          placeItems: "center",
 
                           borderRadius: 2,
 
-                          bgcolor: 'rgba(255, 88, 5, 0.1)',
+                          bgcolor: "rgba(255, 88, 5, 0.1)",
 
-                          color: '#ff5805',
+                          color: "#ff5805",
 
-                          '& svg': {
+                          "& svg": {
                             fontSize: 28,
                           },
                         }}
@@ -620,7 +625,7 @@ export default function SeminovosSection({
 
                       <Typography
                         sx={{
-                          color: '#172033',
+                          color: "#172033",
 
                           fontWeight: 800,
                         }}
@@ -630,11 +635,11 @@ export default function SeminovosSection({
 
                       <Typography
                         sx={{
-                          color: 'text.secondary',
+                          color: "text.secondary",
 
                           lineHeight: 1.6,
 
-                          fontSize: '0.94rem',
+                          fontSize: "0.94rem",
                         }}
                       >
                         {pilar.texto}
@@ -659,7 +664,7 @@ export default function SeminovosSection({
             md: 10,
           },
 
-          bgcolor: '#f8fafc',
+          bgcolor: "#f8fafc",
         }}
       >
         <Container maxWidth="xl">
@@ -676,61 +681,61 @@ export default function SeminovosSection({
                 <Card
                   elevation={0}
                   sx={{
-                    position: 'relative',
+                    position: "relative",
 
-                    height: '100%',
+                    height: "100%",
 
                     borderRadius: 4,
 
-                    overflow: 'hidden',
+                    overflow: "hidden",
 
-                    bgcolor: '#fff',
+                    bgcolor: "#fff",
 
-                    border: '1px solid',
+                    border: "1px solid",
 
-                    borderColor: 'rgba(15, 23, 42, 0.08)',
+                    borderColor: "rgba(15, 23, 42, 0.08)",
 
-                    transition: 'all 0.3s ease',
+                    transition: "all 0.3s ease",
 
-                    '&::before': {
+                    "&::before": {
                       content: '""',
 
-                      position: 'absolute',
+                      position: "absolute",
 
                       top: 0,
 
                       left: 0,
 
-                      width: '100%',
+                      width: "100%",
 
                       height: 4,
 
-                      bgcolor: '#ff5805',
+                      bgcolor: "#ff5805",
 
-                      transform: 'scaleX(0)',
+                      transform: "scaleX(0)",
 
-                      transformOrigin: 'left',
+                      transformOrigin: "left",
 
-                      transition: 'transform 0.3s ease',
+                      transition: "transform 0.3s ease",
                     },
 
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
+                    "&:hover": {
+                      transform: "translateY(-8px)",
 
-                      borderColor: 'rgba(255, 88, 5, 0.30)',
+                      borderColor: "rgba(255, 88, 5, 0.30)",
 
-                      boxShadow: '0 20px 45px rgba(15, 23, 42, 0.10)',
+                      boxShadow: "0 20px 45px rgba(15, 23, 42, 0.10)",
 
-                      '&::before': {
-                        transform: 'scaleX(1)',
+                      "&::before": {
+                        transform: "scaleX(1)",
                       },
 
-                      '& .beneficio-icon': {
-                        bgcolor: '#ff5805',
+                      "& .beneficio-icon": {
+                        bgcolor: "#ff5805",
 
-                        color: '#fff',
+                        color: "#fff",
 
-                        transform: 'scale(1.08)',
+                        transform: "scale(1.08)",
                       },
                     },
                   }}
@@ -742,7 +747,7 @@ export default function SeminovosSection({
                         md: 3.5,
                       },
 
-                      '&:last-child': {
+                      "&:last-child": {
                         pb: {
                           xs: 3,
                           md: 3.5,
@@ -754,9 +759,9 @@ export default function SeminovosSection({
                       <Stack
                         direction="row"
                         sx={{
-                          alignItems: 'center',
+                          alignItems: "center",
 
-                          justifyContent: 'space-between',
+                          justifyContent: "space-between",
                         }}
                       >
                         <Box
@@ -766,21 +771,21 @@ export default function SeminovosSection({
 
                             height: 58,
 
-                            display: 'flex',
+                            display: "flex",
 
-                            alignItems: 'center',
+                            alignItems: "center",
 
-                            justifyContent: 'center',
+                            justifyContent: "center",
 
                             borderRadius: 3,
 
-                            bgcolor: 'rgba(255, 88, 5, 0.10)',
+                            bgcolor: "rgba(255, 88, 5, 0.10)",
 
-                            color: '#ff5805',
+                            color: "#ff5805",
 
-                            transition: 'all 0.3s ease',
+                            transition: "all 0.3s ease",
 
-                            '& svg': {
+                            "& svg": {
                               fontSize: 30,
                             },
                           }}
@@ -790,11 +795,11 @@ export default function SeminovosSection({
 
                         <Typography
                           sx={{
-                            fontSize: '0.78rem',
+                            fontSize: "0.78rem",
 
                             fontWeight: 800,
 
-                            color: 'text.disabled',
+                            color: "text.disabled",
 
                             letterSpacing: 1.2,
                           }}
@@ -807,13 +812,13 @@ export default function SeminovosSection({
                         <Typography
                           component="h3"
                           sx={{
-                            fontSize: '1.2rem',
+                            fontSize: "1.2rem",
 
                             fontWeight: 800,
 
                             mb: 1.3,
 
-                            color: '#172033',
+                            color: "#172033",
                           }}
                         >
                           {item.titulo}
@@ -821,11 +826,11 @@ export default function SeminovosSection({
 
                         <Typography
                           sx={{
-                            color: 'text.secondary',
+                            color: "text.secondary",
 
                             lineHeight: 1.75,
 
-                            fontSize: '0.96rem',
+                            fontSize: "0.96rem",
                           }}
                         >
                           {item.descricao}
@@ -852,9 +857,9 @@ export default function SeminovosSection({
             md: 11,
           },
 
-          bgcolor: '#ff5805',
+          bgcolor: "#ff5805",
 
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         <Container maxWidth="xl">
@@ -864,13 +869,13 @@ export default function SeminovosSection({
               maxWidth: 760,
 
               mx: {
-                xs: 'auto',
+                xs: "auto",
                 md: 0,
               },
 
               textAlign: {
-                xs: 'center',
-                md: 'left',
+                xs: "center",
+                md: "left",
               },
 
               mb: {
@@ -879,7 +884,7 @@ export default function SeminovosSection({
               },
             }}
           >
-            <SectionLabel sx={{ mx: { xs: 'auto', md: 0 }, color: '#fff' }}>
+            <SectionLabel sx={{ mx: { xs: "auto", md: 0 }, color: "#fff" }}>
               Por que escolher a Pizzattolog?
             </SectionLabel>
 
@@ -887,15 +892,15 @@ export default function SeminovosSection({
               component="h2"
               sx={{
                 fontSize: {
-                  xs: '2rem',
-                  md: '3rem',
+                  xs: "2rem",
+                  md: "3rem",
                 },
 
                 lineHeight: 1.15,
 
                 fontWeight: 800,
 
-                color: '#fff',
+                color: "#fff",
               }}
             >
               Diferenciais exclusivos que entregam valor
@@ -903,9 +908,9 @@ export default function SeminovosSection({
 
             <Typography
               sx={{
-                color: 'rgba(255,255,255,0.84)',
+                color: "rgba(255,255,255,0.84)",
 
-                fontSize: '1.08rem',
+                fontSize: "1.08rem",
 
                 lineHeight: 1.8,
               }}
@@ -917,34 +922,34 @@ export default function SeminovosSection({
 
           <Box
             sx={{
-              position: 'relative',
+              position: "relative",
 
-              overflowX: 'auto',
+              overflowX: "auto",
 
-              overflowY: 'hidden',
+              overflowY: "hidden",
 
               pb: 2,
 
-              scrollbarWidth: 'none',
+              scrollbarWidth: "none",
 
-              msOverflowStyle: 'none',
+              msOverflowStyle: "none",
 
-              '&::-webkit-scrollbar': {
-                display: 'none',
+              "&::-webkit-scrollbar": {
+                display: "none",
               },
 
-              '&:hover .seminovos-diferenciais-track': {
-                animationPlayState: 'paused',
+              "&:hover .seminovos-diferenciais-track": {
+                animationPlayState: "paused",
               },
 
-              '@keyframes seminovosDiferenciaisMarquee': {
-                '0%': { transform: 'translateX(0)' },
-                '100%': { transform: 'translateX(-50%)' },
+              "@keyframes seminovosDiferenciaisMarquee": {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
               },
 
-              '@media (prefers-reduced-motion: reduce)': {
-                '.seminovos-diferenciais-track': {
-                  animation: 'none',
+              "@media (prefers-reduced-motion: reduce)": {
+                ".seminovos-diferenciais-track": {
+                  animation: "none",
                 },
               },
             }}
@@ -952,22 +957,24 @@ export default function SeminovosSection({
             <Box
               className="seminovos-diferenciais-track"
               sx={{
-                display: 'flex',
+                display: "flex",
 
                 gap: 3,
 
-                width: 'max-content',
+                width: "max-content",
 
-                animation: 'seminovosDiferenciaisMarquee 34s linear infinite',
+                animation: "seminovosDiferenciaisMarquee 34s linear infinite",
               }}
             >
               {diferenciaisAnimados.map((item, index) => (
                 <Card
                   key={`${item.titulo}-${index}`}
                   elevation={0}
-                  aria-hidden={index >= diferenciaisEditaveis.length ? true : undefined}
+                  aria-hidden={
+                    index >= diferenciaisEditaveis.length ? true : undefined
+                  }
                   sx={{
-                    flex: '0 0 auto',
+                    flex: "0 0 auto",
 
                     width: {
                       xs: 292,
@@ -979,27 +986,27 @@ export default function SeminovosSection({
 
                     borderRadius: 4,
 
-                    border: '1px solid',
+                    border: "1px solid",
 
-                    borderColor: 'rgba(15, 23, 42, 0.08)',
+                    borderColor: "rgba(15, 23, 42, 0.08)",
 
-                    bgcolor: '#fff',
+                    bgcolor: "#fff",
 
-                    transition: 'all 0.3s ease',
+                    transition: "all 0.3s ease",
 
-                    '&:hover': {
-                      transform: 'translateY(-6px)',
+                    "&:hover": {
+                      transform: "translateY(-6px)",
 
-                      borderColor: 'rgba(255, 183, 27, 0.5)',
+                      borderColor: "rgba(255, 183, 27, 0.5)",
 
-                      boxShadow: '0 18px 40px rgba(15, 23, 42, 0.08)',
+                      boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
 
-                      '& .diferencial-icon': {
-                        bgcolor: '#ffb71b',
+                      "& .diferencial-icon": {
+                        bgcolor: "#ffb71b",
 
-                        color: '#172033',
+                        color: "#172033",
 
-                        transform: 'scale(1.08)',
+                        transform: "scale(1.08)",
                       },
                     },
                   }}
@@ -1008,7 +1015,7 @@ export default function SeminovosSection({
                     sx={{
                       p: 3.5,
 
-                      '&:last-child': {
+                      "&:last-child": {
                         pb: 3.5,
                       },
                     }}
@@ -1020,23 +1027,23 @@ export default function SeminovosSection({
 
                         height: 56,
 
-                        display: 'flex',
+                        display: "flex",
 
-                        alignItems: 'center',
+                        alignItems: "center",
 
-                        justifyContent: 'center',
+                        justifyContent: "center",
 
-                        borderRadius: '50%',
+                        borderRadius: "50%",
 
-                        bgcolor: 'rgba(255, 183, 27, 0.14)',
+                        bgcolor: "rgba(255, 183, 27, 0.14)",
 
-                        color: '#d98d00',
+                        color: "#d98d00",
 
                         mb: 2.5,
 
-                        transition: 'all 0.3s ease',
+                        transition: "all 0.3s ease",
 
-                        '& svg': {
+                        "& svg": {
                           fontSize: 28,
                         },
                       }}
@@ -1047,11 +1054,11 @@ export default function SeminovosSection({
                     <Typography
                       component="h3"
                       sx={{
-                        fontSize: '1.1rem',
+                        fontSize: "1.1rem",
 
                         fontWeight: 800,
 
-                        color: '#172033',
+                        color: "#172033",
 
                         mb: 1.2,
                       }}
@@ -1061,11 +1068,11 @@ export default function SeminovosSection({
 
                     <Typography
                       sx={{
-                        color: 'text.secondary',
+                        color: "text.secondary",
 
                         lineHeight: 1.75,
 
-                        fontSize: '0.95rem',
+                        fontSize: "0.95rem",
                       }}
                     >
                       {item.descricao}
@@ -1090,35 +1097,35 @@ export default function SeminovosSection({
             md: 11,
           },
 
-          bgcolor: '#f8fafc',
+          bgcolor: "#f8fafc",
         }}
       >
         <Container maxWidth="xl">
           <Stack
             spacing={2}
             sx={{
-              textAlign: 'center',
+              textAlign: "center",
 
               maxWidth: 760,
 
-              mx: 'auto',
+              mx: "auto",
 
               mb: 6,
             }}
           >
-            <SectionLabel sx={{ mx: 'auto' }}>Depoimentos</SectionLabel>
+            <SectionLabel sx={{ mx: "auto" }}>Depoimentos</SectionLabel>
 
             <Typography
               component="h2"
               sx={{
                 fontSize: {
-                  xs: '2rem',
-                  md: '3rem',
+                  xs: "2rem",
+                  md: "3rem",
                 },
 
                 fontWeight: 800,
 
-                color: '#172033',
+                color: "#172033",
               }}
             >
               Quem já dirige, recomenda
@@ -1126,7 +1133,7 @@ export default function SeminovosSection({
 
             <Typography
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
 
                 lineHeight: 1.8,
               }}
@@ -1138,34 +1145,34 @@ export default function SeminovosSection({
 
           <Box
             sx={{
-              position: 'relative',
+              position: "relative",
 
-              overflowX: 'auto',
+              overflowX: "auto",
 
-              overflowY: 'hidden',
+              overflowY: "hidden",
 
               pb: 2,
 
-              scrollbarWidth: 'none',
+              scrollbarWidth: "none",
 
-              msOverflowStyle: 'none',
+              msOverflowStyle: "none",
 
-              '&::-webkit-scrollbar': {
-                display: 'none',
+              "&::-webkit-scrollbar": {
+                display: "none",
               },
 
-              '&:hover .seminovos-depoimentos-track': {
-                animationPlayState: 'paused',
+              "&:hover .seminovos-depoimentos-track": {
+                animationPlayState: "paused",
               },
 
-              '@keyframes seminovosDepoimentosMarquee': {
-                '0%': { transform: 'translateX(0)' },
-                '100%': { transform: 'translateX(-50%)' },
+              "@keyframes seminovosDepoimentosMarquee": {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
               },
 
-              '@media (prefers-reduced-motion: reduce)': {
-                '.seminovos-depoimentos-track': {
-                  animation: 'none',
+              "@media (prefers-reduced-motion: reduce)": {
+                ".seminovos-depoimentos-track": {
+                  animation: "none",
                 },
               },
             }}
@@ -1173,22 +1180,24 @@ export default function SeminovosSection({
             <Box
               className="seminovos-depoimentos-track"
               sx={{
-                display: 'flex',
+                display: "flex",
 
                 gap: 3,
 
-                width: 'max-content',
+                width: "max-content",
 
-                animation: 'seminovosDepoimentosMarquee 36s linear infinite',
+                animation: "seminovosDepoimentosMarquee 36s linear infinite",
               }}
             >
               {depoimentosAnimados.map((depoimento, index) => (
                 <Card
                   key={`${depoimento.nome}-${index}`}
                   elevation={0}
-                  aria-hidden={index >= depoimentosEditaveis.length ? true : undefined}
+                  aria-hidden={
+                    index >= depoimentosEditaveis.length ? true : undefined
+                  }
                   sx={{
-                    flex: '0 0 auto',
+                    flex: "0 0 auto",
 
                     width: {
                       xs: 320,
@@ -1200,20 +1209,20 @@ export default function SeminovosSection({
 
                     borderRadius: 4,
 
-                    bgcolor: '#fff',
+                    bgcolor: "#fff",
 
-                    border: '1px solid',
+                    border: "1px solid",
 
-                    borderColor: 'rgba(15, 23, 42, 0.08)',
+                    borderColor: "rgba(15, 23, 42, 0.08)",
 
-                    transition: 'all 0.3s ease',
+                    transition: "all 0.3s ease",
 
-                    '&:hover': {
-                      transform: 'translateY(-6px)',
+                    "&:hover": {
+                      transform: "translateY(-6px)",
 
-                      borderColor: 'rgba(255, 183, 27, 0.4)',
+                      borderColor: "rgba(255, 183, 27, 0.4)",
 
-                      boxShadow: '0 18px 40px rgba(15, 23, 42, 0.08)',
+                      boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
                     },
                   }}
                 >
@@ -1221,7 +1230,7 @@ export default function SeminovosSection({
                     sx={{
                       p: 4,
 
-                      '&:last-child': {
+                      "&:last-child": {
                         pb: 4,
                       },
                     }}
@@ -1230,7 +1239,7 @@ export default function SeminovosSection({
                       sx={{
                         fontSize: 44,
 
-                        color: '#ffb71b',
+                        color: "#ffb71b",
 
                         mb: 2,
                       }}
@@ -1238,7 +1247,7 @@ export default function SeminovosSection({
 
                     <Typography
                       sx={{
-                        color: 'text.secondary',
+                        color: "text.secondary",
 
                         lineHeight: 1.8,
 
@@ -1252,16 +1261,16 @@ export default function SeminovosSection({
                       sx={{
                         pt: 2,
 
-                        borderTop: '1px solid',
+                        borderTop: "1px solid",
 
-                        borderColor: 'divider',
+                        borderColor: "divider",
                       }}
                     >
                       <Typography
                         sx={{
                           fontWeight: 800,
 
-                          color: '#172033',
+                          color: "#172033",
                         }}
                       >
                         {depoimento.nome}
@@ -1269,9 +1278,9 @@ export default function SeminovosSection({
 
                       <Typography
                         sx={{
-                          color: 'text.secondary',
+                          color: "text.secondary",
 
-                          fontSize: '0.9rem',
+                          fontSize: "0.9rem",
 
                           mt: 0.5,
                         }}
@@ -1295,37 +1304,35 @@ export default function SeminovosSection({
         component="section"
         sx={{
           ...bannerCurveSx,
-          position: 'relative',
-          overflow: 'hidden',
+          position: "relative",
+          overflow: "hidden",
 
           py: {
             xs: 8,
             md: 12,
           },
 
-          color: '#fff',
-          textAlign: 'center',
+          color: "#fff",
+          textAlign: "center",
 
-          borderTop: '6px solid #ff5805',
+          borderTop: "6px solid #ff5805",
 
           // FOTO DE FUNDO
-          backgroundImage:
-            'url("/images/seminovos/avantte.png")',
+          backgroundImage: 'url("/images/seminovos/avantte.png")',
 
-          backgroundSize: 'cover',
+          backgroundSize: "cover",
 
-          backgroundPosition: 'center',
+          backgroundPosition: "center",
 
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: "no-repeat",
 
           // CAMADA ESCURA SOBRE A FOTO
-          '&::before': {
+          "&::before": {
             content: '""',
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
 
-            background:
-              'rgba(10, 25, 40, 0.72)',
+            background: "rgba(10, 25, 40, 0.72)",
 
             zIndex: 0,
           },
@@ -1335,23 +1342,25 @@ export default function SeminovosSection({
           <Stack
             spacing={3}
             sx={{
-              position: 'relative',
+              position: "relative",
 
               maxWidth: 900,
 
-              mx: 'auto',
+              mx: "auto",
 
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
-            <SectionLabel sx={{ mx: 'auto' }}>Pronto para sua operação</SectionLabel>
+            <SectionLabel sx={{ mx: "auto" }}>
+              Pronto para sua operação
+            </SectionLabel>
 
             <Typography
               component="h2"
               sx={{
                 fontSize: {
-                  xs: '2rem',
-                  md: '3.2rem',
+                  xs: "2rem",
+                  md: "3.2rem",
                 },
 
                 lineHeight: 1.12,
@@ -1364,11 +1373,11 @@ export default function SeminovosSection({
 
             <Typography
               sx={{
-                color: 'rgba(255,255,255,0.76)',
+                color: "rgba(255,255,255,0.76)",
 
                 fontSize: {
-                  xs: '1rem',
-                  md: '1.15rem',
+                  xs: "1rem",
+                  md: "1.15rem",
                 },
 
                 lineHeight: 1.8,
@@ -1387,8 +1396,8 @@ export default function SeminovosSection({
               size="large"
               sx={{
                 width: {
-                  xs: '100%',
-                  sm: 'fit-content',
+                  xs: "100%",
+                  sm: "fit-content",
                 },
 
                 px: 4,
@@ -1397,19 +1406,19 @@ export default function SeminovosSection({
 
                 borderRadius: 3,
 
-                bgcolor: '#ff5805',
+                bgcolor: "#ff5805",
 
                 fontWeight: 800,
 
-                textTransform: 'none',
+                textTransform: "none",
 
-                '&:hover': {
-                  bgcolor: '#e64e00',
+                "&:hover": {
+                  bgcolor: "#e64e00",
 
-                  transform: 'translateY(-2px)',
+                  transform: "translateY(-2px)",
                 },
 
-                transition: 'all 0.3s ease',
+                transition: "all 0.3s ease",
               }}
             >
               Falar com nossa equipe
@@ -1430,31 +1439,31 @@ export default function SeminovosSection({
             md: 11,
           },
 
-          bgcolor: '#f8fafc',
+          bgcolor: "#f8fafc",
         }}
       >
         <Container maxWidth="md">
           <Stack
             spacing={2}
             sx={{
-              textAlign: 'center',
+              textAlign: "center",
 
               mb: 5,
             }}
           >
-            <SectionLabel sx={{ mx: 'auto' }}>FAQ</SectionLabel>
+            <SectionLabel sx={{ mx: "auto" }}>FAQ</SectionLabel>
 
             <Typography
               component="h2"
               sx={{
                 fontSize: {
-                  xs: '2rem',
-                  md: '3rem',
+                  xs: "2rem",
+                  md: "3rem",
                 },
 
                 fontWeight: 800,
 
-                color: '#172033',
+                color: "#172033",
               }}
             >
               Perguntas frequentes
@@ -1462,7 +1471,7 @@ export default function SeminovosSection({
 
             <Typography
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
 
                 lineHeight: 1.8,
               }}
@@ -1478,24 +1487,24 @@ export default function SeminovosSection({
                 disableGutters
                 elevation={0}
                 sx={{
-                  bgcolor: '#fff',
+                  bgcolor: "#fff",
 
-                  border: '1px solid',
+                  border: "1px solid",
 
-                  borderColor: 'rgba(15, 23, 42, 0.08)',
+                  borderColor: "rgba(15, 23, 42, 0.08)",
 
-                  borderRadius: '16px !important',
+                  borderRadius: "16px !important",
 
-                  overflow: 'hidden',
+                  overflow: "hidden",
 
-                  transition: 'all 0.25s ease',
+                  transition: "all 0.25s ease",
 
-                  '&::before': {
-                    display: 'none',
+                  "&::before": {
+                    display: "none",
                   },
 
-                  '&:hover': {
-                    borderColor: 'rgba(255, 88, 5, 0.25)',
+                  "&:hover": {
+                    borderColor: "rgba(255, 88, 5, 0.25)",
                   },
                 }}
               >
@@ -1503,7 +1512,7 @@ export default function SeminovosSection({
                   expandIcon={
                     <KeyboardArrowDownRoundedIcon
                       sx={{
-                        color: '#ff5805',
+                        color: "#ff5805",
                       }}
                     />
                   }
@@ -1517,7 +1526,7 @@ export default function SeminovosSection({
                     sx={{
                       fontWeight: 700,
 
-                      color: '#172033',
+                      color: "#172033",
                     }}
                   >
                     {item.pergunta}
@@ -1533,7 +1542,7 @@ export default function SeminovosSection({
                 >
                   <Typography
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
 
                       lineHeight: 1.8,
                     }}

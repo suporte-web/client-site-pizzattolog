@@ -1,30 +1,18 @@
-import { bannerCurveSx } from '@/components/site/banner-curve';
-import {
-  Box,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { bannerCurveSx } from "@/components/site/banner-curve";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
-import type {
-  Subpagina,
-} from '@/types/site';
+import type { Subpagina } from "@/types/site";
 
-import type {
-  QuemSomosConteudo,
-} from '@/types/site-institucional';
+import type { QuemSomosConteudo } from "@/types/site-institucional";
 
-import {
-  SectionLabel,
-} from '@/components/site/section-label';
+import { SectionLabel } from "@/components/site/section-label";
 
 interface HistoriaSectionProps {
   subpagina?: Subpagina;
 
-  banner?: QuemSomosConteudo['banner'];
+  banner?: QuemSomosConteudo["banner"];
 
-  historia?: QuemSomosConteudo['historia'];
+  historia?: QuemSomosConteudo["historia"];
 }
 
 export function HistoriaSection({
@@ -43,43 +31,29 @@ export function HistoriaSection({
   */
 
   const bannerImagem =
-    banner?.imagemUrl?.trim() ||
-    '/images/quem somos/quem-somos-banner.png';
+    banner?.imagemUrl?.trim() || "/images/quem somos/quem-somos-banner.png";
 
   const historiaImagem =
-    historia?.imagemUrl?.trim() ||
-    '/images/quem somos/historia-equipe.png';
+    historia?.imagemUrl?.trim() || "/images/quem somos/historia-equipe.png";
 
-  const bannerTitulo =
-    banner?.titulo?.trim();
+  const bannerTitulo = banner?.titulo?.trim();
 
-  const bannerSubtitulo =
-    banner?.subtitulo?.trim();
+  const bannerSubtitulo = banner?.subtitulo?.trim();
 
-  const historiaTitulo =
-    historia?.titulo?.trim() ||
-    'Sobre nós';
+  const historiaTitulo = historia?.titulo?.trim() || "Sobre nós";
 
-  const historiaTexto =
-    historia?.texto?.trim();
+  const historiaTexto = historia?.texto?.trim();
 
-  const temTextoBanner =
-    Boolean(
-      bannerTitulo ||
-        bannerSubtitulo,
-    );
+  const temTextoBanner = Boolean(bannerTitulo || bannerSubtitulo);
 
   return (
     <Box
       component="section"
-      id={
-        subpagina?.ancora ??
-        'historia'
-      }
+      id={subpagina?.ancora ?? "historia"}
       sx={{
-        bgcolor: 'white',
+        bgcolor: "#F4F6F7",
 
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       {/*
@@ -91,9 +65,9 @@ export function HistoriaSection({
       <Box
         sx={{
           ...bannerCurveSx,
-          position: 'relative',
+          position: "relative",
 
-          width: '100%',
+          width: "100%",
 
           height: {
             xs: 300,
@@ -102,22 +76,19 @@ export function HistoriaSection({
             lg: 460,
           },
 
-          display: 'flex',
+          display: "flex",
 
-          alignItems: 'flex-end',
+          alignItems: "flex-end",
 
           backgroundImage: `
             url("${bannerImagem}")
           `,
 
-          backgroundSize:
-            'cover',
+          backgroundSize: "cover",
 
-          backgroundPosition:
-            'center',
+          backgroundPosition: "center",
 
-          backgroundRepeat:
-            'no-repeat',
+          backgroundRepeat: "no-repeat",
         }}
       >
         {temTextoBanner ? (
@@ -140,11 +111,11 @@ export function HistoriaSection({
                 <Typography
                   component="h1"
                   sx={{
-                    color: 'white',
+                    color: "white",
 
                     fontSize: {
-                      xs: '2.4rem',
-                      md: '4rem',
+                      xs: "2.4rem",
+                      md: "4rem",
                     },
 
                     fontWeight: 900,
@@ -161,8 +132,7 @@ export function HistoriaSection({
                   sx={{
                     maxWidth: 700,
 
-                    color:
-                      'rgba(255,255,255,0.86)',
+                    color: "rgba(255,255,255,0.86)",
 
                     fontSize: {
                       xs: 16,
@@ -202,7 +172,7 @@ export function HistoriaSection({
             md: 10,
           }}
           sx={{
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           {/*
@@ -219,7 +189,7 @@ export function HistoriaSection({
           >
             <Box
               sx={{
-                position: 'relative',
+                position: "relative",
 
                 ml: {
                   xs: 0,
@@ -230,19 +200,15 @@ export function HistoriaSection({
               <Box
                 component="img"
                 src={historiaImagem}
-                alt={
-                  historiaTitulo
-                }
+                alt={historiaTitulo}
                 sx={{
-                  position:
-                    'relative',
+                  position: "relative",
 
                   zIndex: 1,
 
-                  display:
-                    'block',
+                  display: "block",
 
-                  width: '100%',
+                  width: "100%",
 
                   height: {
                     xs: 380,
@@ -250,20 +216,16 @@ export function HistoriaSection({
                     md: 520,
                   },
 
-                  objectFit:
-                    'cover',
+                  objectFit: "cover",
 
-                  objectPosition:
-                    'center',
+                  objectPosition: "center",
 
-                  borderBottomRightRadius:
-                    {
-                      xs: 35,
-                      md: 55,
-                    },
+                  borderBottomRightRadius: {
+                    xs: 35,
+                    md: 55,
+                  },
 
-                  boxShadow:
-                    '0 24px 70px rgba(23, 69, 107, 0.16)',
+                  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.08)",
                 }}
               />
             </Box>
@@ -288,24 +250,21 @@ export function HistoriaSection({
 
                 mx: {
                   xs: 0,
-                  md: 'auto',
+                  md: "auto",
                 },
               }}
             >
-              <SectionLabel>
-                Quem somos
-              </SectionLabel>
+              <SectionLabel>Quem somos</SectionLabel>
 
               <Typography
                 component="h2"
                 variant="h2"
                 sx={{
-                  color:
-                    'text.primary',
+                  color: "text.primary",
 
                   fontSize: {
-                    xs: '2.1rem',
-                    md: '3rem',
+                    xs: "2.1rem",
+                    md: "3rem",
                   },
                 }}
               >
@@ -316,19 +275,17 @@ export function HistoriaSection({
                 <Typography
                   component="p"
                   sx={{
-                    color:
-                      'text.primary',
+                    color: "text.primary",
 
                     fontSize: {
-                      xs: '1.05rem',
-                      sm: '1.15rem',
-                      md: '1.3rem',
+                      xs: "1.05rem",
+                      sm: "1.15rem",
+                      md: "1.3rem",
                     },
 
                     lineHeight: 1.55,
 
-                    whiteSpace:
-                      'pre-line',
+                    whiteSpace: "pre-line",
                   }}
                 >
                   {historiaTexto}
@@ -338,124 +295,101 @@ export function HistoriaSection({
                   <Typography
                     component="p"
                     sx={{
-                      color:
-                        'text.primary',
+                      color: "text.primary",
 
                       fontSize: {
-                        xs: '1.05rem',
-                        sm: '1.15rem',
-                        md: '1.3rem',
+                        xs: "1.05rem",
+                        sm: "1.15rem",
+                        md: "1.3rem",
                       },
 
                       lineHeight: 1.45,
                     }}
                   >
-                    Na Pizzattolog,
-                    reunimos a solidez de{' '}
+                    Na Pizzattolog, reunimos a solidez de{" "}
                     <Box
                       component="strong"
                       sx={{
                         fontWeight: 700,
                       }}
                     >
-                      mais de 50 anos de
-                      história
-                    </Box>{' '}
-                    com uma visão clara de
-                    futuro. Somos uma
-                    seleção de
-                    profissionais da
-                    logística, movidos
-                    pelo compromisso com
-                    a excelência, pela
-                    responsabilidade em
-                    cada decisão e pela
-                    busca constante por{' '}
+                      mais de 50 anos de história
+                    </Box>{" "}
+                    com uma visão clara de futuro. Somos uma seleção de
+                    profissionais da logística, movidos pelo compromisso com a
+                    excelência, pela responsabilidade em cada decisão e pela
+                    busca constante por{" "}
                     <Box
                       component="strong"
                       sx={{
                         fontWeight: 700,
                       }}
                     >
-                      evoluir pessoas,
-                      processos e
-                      tecnologias.
+                      evoluir pessoas, processos e tecnologias.
                     </Box>
                   </Typography>
 
                   <Typography
                     component="p"
                     sx={{
-                      color:
-                        'text.primary',
+                      color: "text.primary",
 
                       fontSize: {
-                        xs: '1.05rem',
-                        sm: '1.15rem',
-                        md: '1.3rem',
+                        xs: "1.05rem",
+                        sm: "1.15rem",
+                        md: "1.3rem",
                       },
 
                       lineHeight: 1.45,
                     }}
                   >
-                    Entregamos{' '}
+                    Entregamos{" "}
                     <Box
                       component="strong"
                       sx={{
                         fontWeight: 700,
                       }}
                     >
-                      soluções logísticas
-                      completas e
-                      integradas
-                    </Box>{' '}
-                    em todas as etapas da
-                    cadeia de
-                    suprimentos, atuando
-                    de ponta a ponta para{' '}
+                      soluções logísticas completas e integradas
+                    </Box>{" "}
+                    em todas as etapas da cadeia de suprimentos, atuando de
+                    ponta a ponta para{" "}
                     <Box
                       component="strong"
                       sx={{
                         fontWeight: 700,
                       }}
                     >
-                      simplificar
-                      operações complexas
+                      simplificar operações complexas
                     </Box>
-                    , gerar
-                    previsibilidade e
-                    garantir eficiência
-                    operacional real.
+                    , gerar previsibilidade e garantir eficiência operacional
+                    real.
                   </Typography>
 
                   <Typography
                     component="p"
                     sx={{
-                      color:
-                        'text.primary',
+                      color: "text.primary",
 
                       fontSize: {
-                        xs: '1.05rem',
-                        sm: '1.15rem',
-                        md: '1.3rem',
+                        xs: "1.05rem",
+                        sm: "1.15rem",
+                        md: "1.3rem",
                       },
 
                       lineHeight: 1.45,
                     }}
                   >
-                    Com{' '}
+                    Com{" "}
                     <Box
                       component="strong"
                       sx={{
                         fontWeight: 700,
                       }}
                     >
-                      unidades
-                      estrategicamente
-                      localizadas
-                    </Box>{' '}
-                    e ampla atuação,
-                    desenvolvemos{' '}
+                      unidades estrategicamente localizadas
+                    </Box>{" "}
+                    e ampla atuação, desenvolvemos{" "}
                     <Box
                       component="strong"
                       sx={{
@@ -463,10 +397,8 @@ export function HistoriaSection({
                       }}
                     >
                       soluções sob medida
-                    </Box>{' '}
-                    para transportes de
-                    carga e operações
-                    logísticas de alta
+                    </Box>{" "}
+                    para transportes de carga e operações logísticas de alta
                     complexidade.
                   </Typography>
                 </>
