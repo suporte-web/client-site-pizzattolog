@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { ResultadoRastreamento, TipoConsultaRastreamento } from '@/types/rastreamento';
+import type { ResultadoRastreamento, TipoConsultaRastreamento } from '@/types/site/rastreamento';
 
 export const runtime = 'nodejs';
 const tipos: TipoConsultaRastreamento[] = ['nro_nf', 'pedido', 'chave_nfe', 'nro_coleta'];

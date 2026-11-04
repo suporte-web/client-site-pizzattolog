@@ -18,8 +18,8 @@ import {
 } from '@mui/material';
 
 import type { Subpagina } from '@/types/site';
-import type { QuemSomosConteudo } from '@/types/site-institucional';
-import { SectionLabel } from '@/components/site/section-label';
+import type { QuemSomosConteudo } from '@/types/site/institucional';
+import { SectionLabel } from '@/components/site/shared/section-label';
 
 import type { UnidadeMapa } from './MapaUnidades';
 

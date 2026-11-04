@@ -1,13 +1,13 @@
 import { Box } from '@mui/material';
 
-import { Hero } from '@/components/site/hero';
+import { Hero } from '@/components/site/home/hero';
 import { HomeSolucoes } from './HomeSolucoes';
 import { HomeBlogPreview } from './HomeBlogPreview';
 
 import {
   getPaginaPublicadaSite,
   getSiteHomeData,
-} from '@/services/site.service';
+} from '@/services/site/site.service';
 
 import type {
   HeroPaginaInicial,

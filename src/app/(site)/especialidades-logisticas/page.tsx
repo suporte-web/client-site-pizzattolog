@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import EspecialidadesSection from '@/components/site/especialidades/EspecialidadesSection';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export const metadata: Metadata = {
   title: 'Especialidades Logisticas | Pizzattolog',

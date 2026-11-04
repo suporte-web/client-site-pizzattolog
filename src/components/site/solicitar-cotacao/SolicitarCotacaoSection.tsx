@@ -1,14 +1,12 @@
 import {
   Box,
-  Container,
-  Stack,
-  Typography,
+  Container, Typography
 } from '@mui/material';
 
 import {
   getContentString,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 import SolicitarCotacaoForm from './SolicitarCotacaoForm';
 

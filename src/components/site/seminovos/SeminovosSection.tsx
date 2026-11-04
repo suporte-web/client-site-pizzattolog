@@ -1,6 +1,6 @@
 "use client";
 
-import { bannerCurveSx } from "@/components/site/banner-curve";
+import { bannerCurveSx } from "@/components/site/shared/banner-curve";
 
 import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
 import FactCheckRoundedIcon from "@mui/icons-material/FactCheckRounded";
@@ -29,12 +29,12 @@ import {
 } from "@mui/material";
 
 import Link from "next/link";
-import { SectionLabel } from "@/components/site/section-label";
+import { SectionLabel } from "@/components/site/shared/section-label";
 import {
   getContentString,
   mergeTextItems,
   type SiteContent,
-} from "@/utils/site-content";
+} from "@/utils/site/content";
 
 /* =========================================================
    BENEFÍCIOS

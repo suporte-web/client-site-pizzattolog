@@ -8,7 +8,7 @@ import {
 
 import {
   fallbackSiteData,
-} from '@/services/site.service';
+} from '@/services/site/site.service';
 
 /*
 |--------------------------------------------------------------------------

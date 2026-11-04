@@ -6,7 +6,7 @@ import {
 
 import type {
   PaginaPublicadaSite,
-} from '@/types/site-institucional';
+} from '@/types/site/institucional';
 
 const apiBaseUrl =
   process.env.NEXT_PUBLIC_API_URL ??

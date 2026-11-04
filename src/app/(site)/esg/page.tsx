@@ -1,5 +1,5 @@
 import { EsgSections } from '@/components/site/esg';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export default async function EsgPage() {
   const pagina =

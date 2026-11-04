@@ -5,12 +5,12 @@ import {
   Typography,
 } from '@mui/material';
 
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 
 import {
   getContentString,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 interface GovernancaSectionProps {
   conteudo?: SiteContent;

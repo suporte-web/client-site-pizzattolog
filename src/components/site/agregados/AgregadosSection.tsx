@@ -1,29 +1,10 @@
 "use client";
 
-import { bannerCurveSx } from "@/components/site/banner-curve";
+import { bannerCurveSx } from "@/components/site/shared/banner-curve";
 
-import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
-import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
-import CardGiftcardRoundedIcon from "@mui/icons-material/CardGiftcardRounded";
-import CarRepairRoundedIcon from "@mui/icons-material/CarRepairRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
 import FactCheckRoundedIcon from "@mui/icons-material/FactCheckRounded";
-import HandshakeRoundedIcon from "@mui/icons-material/HandshakeRounded";
-import HealthAndSafetyRoundedIcon from "@mui/icons-material/HealthAndSafetyRounded";
 import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
-import LocalGasStationRoundedIcon from "@mui/icons-material/LocalGasStationRounded";
-import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import MedicalServicesRoundedIcon from "@mui/icons-material/MedicalServicesRounded";
-import OilBarrelRoundedIcon from "@mui/icons-material/OilBarrelRounded";
-import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
-import SavedSearchRoundedIcon from "@mui/icons-material/SavedSearchRounded";
-import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
-import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
-import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
-import WorkspacePremiumRoundedIcon from "@mui/icons-material/WorkspacePremiumRounded";
 import {
   Box,
   Button,
@@ -33,36 +14,36 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { SectionLabel } from "@/components/site/section-label";
+import { SectionLabel } from "@/components/site/shared/section-label";
 import { trackWhatsappClicado } from "@/lib/analytics/tracking";
 import {
   getContentString,
   mergeStringItems,
   mergeTextItems,
   type SiteContent,
-} from "@/utils/site-content";
+} from "@/utils/site/content";
 
 // VANTAGENS - AgregadosMenores
-import CartaoAbastecimentoImg from "../../icons/AgregadosMenores/Cartão Abastecimento (1).png";
-import CarretasRevisadasImg from "../../icons/AgregadosMenores/Carretas Revisadas.png";
-import SeguroTerceirosImg from "../../icons/AgregadosMenores/Seguro Contra Terceiros (1).png";
-import TransparenciaNegociacoesImg from "../../icons/AgregadosMenores/Transparência nas negociações (1).png";
-import RastreadorComodatoImg from "../../icons/AgregadosMenores/Rastreador em Comodato (1).png";
-import FluxoCargasImg from "../../icons/AgregadosMenores/Fluxo de Cargas (1).png";
-import ClubeExclusivoImg from "../../icons/AgregadosMenores/Clube exclusivo (1).png";
-import BonificacaoSegurancaImg from "../../icons/AgregadosMenores/Bonificação para segurança (1).png";
+import CartaoAbastecimentoImg from "@/assets/icons/agregados-beneficios/Cartão Abastecimento (1).png";
+import CarretasRevisadasImg from "@/assets/icons/agregados-beneficios/Carretas Revisadas.png";
+import SeguroTerceirosImg from "@/assets/icons/agregados-beneficios/Seguro Contra Terceiros (1).png";
+import TransparenciaNegociacoesImg from "@/assets/icons/agregados-beneficios/Transparência nas negociações (1).png";
+import RastreadorComodatoImg from "@/assets/icons/agregados-beneficios/Rastreador em Comodato (1).png";
+import FluxoCargasImg from "@/assets/icons/agregados-beneficios/Fluxo de Cargas (1).png";
+import ClubeExclusivoImg from "@/assets/icons/agregados-beneficios/Clube exclusivo (1).png";
+import BonificacaoSegurancaImg from "@/assets/icons/agregados-beneficios/Bonificação para segurança (1).png";
 
 // BENEFÍCIOS DO CLUBE - Agregados
-import BonificacaoMotoristasImg from "../../icons/Agregados/Bonificação do motorista.png";
-import BonificacaoTempoImg from "../../icons/Agregados/Bonificação por tempo (1).png";
-import DieselArlaImg from "../../icons/Agregados/Diesel e Arla (1).png";
-import IndicacaoValoresAcessiveisImg from "../../icons/Agregados/Indicação com valores acessíveis (1).png";
-import IndicacaoClinicaImg from "../../icons/Agregados/Indicação de Clinica (1).png";
-import IndicacaoMelhoresLocaisImg from "../../icons/Agregados/Indicação dos melhores locais (1).png";
-import IndiqueGanheImg from "../../icons/Agregados/Indique e ganhe (1).png";
-import MaterialApoioEducacaoFinanceiraImg from "../../icons/Agregados/Material de apoio educação financeira (1).png";
-import MaterialApoioSaudeQualidadeVidaImg from "../../icons/Agregados/Material de apoio saúde e qualidade de vida (1).png";
-import PneusPrecoImg from "../../icons/Agregados/Pneus com preços (1).png";
+import BonificacaoMotoristasImg from "@/assets/icons/agregados/Bonificação do motorista.png";
+import BonificacaoTempoImg from "@/assets/icons/agregados/Bonificação por tempo (1).png";
+import DieselArlaImg from "@/assets/icons/agregados/Diesel e Arla (1).png";
+import IndicacaoValoresAcessiveisImg from "@/assets/icons/agregados/Indicação com valores acessíveis (1).png";
+import IndicacaoClinicaImg from "@/assets/icons/agregados/Indicação de Clinica (1).png";
+import IndicacaoMelhoresLocaisImg from "@/assets/icons/agregados/Indicação dos melhores locais (1).png";
+import IndiqueGanheImg from "@/assets/icons/agregados/Indique e ganhe (1).png";
+import MaterialApoioEducacaoFinanceiraImg from "@/assets/icons/agregados/Material de apoio educação financeira (1).png";
+import MaterialApoioSaudeQualidadeVidaImg from "@/assets/icons/agregados/Material de apoio saúde e qualidade de vida (1).png";
+import PneusPrecoImg from "@/assets/icons/agregados/Pneus com preços (1).png";
 
 const whatsappAgregados =
   "https://api.whatsapp.com/send?phone=554132481042&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20como%20virar%20um%20agregado%20da%20Pizzattolog";
@@ -183,42 +164,6 @@ const requisitosMotorista = [
   "Perfil securitário",
 ];
 
-const unidades = [
-  {
-    nome: "Curitiba - PR (Matriz)",
-    endereco: "Rua Nunes Machado, 68 - 15º andar, Batel, 80250-000.",
-  },
-  {
-    nome: "Filial Curitiba - PR",
-    endereco:
-      "Rua Frei Gaspar da Madre de Deus, 830 - Prédio 26, Portão, 81050-590.",
-  },
-  {
-    nome: "Filial São José dos Pinhais - PR",
-    endereco: "Rua do Colono, 2146 - Costeira, 83075-000.",
-  },
-  {
-    nome: "Filial Rodeio - SC",
-    endereco: "Rua Jose Ostrowski Junior, 623 - Kaspereit, 89136-000.",
-  },
-  {
-    nome: "Filial Guarulhos - SP",
-    endereco: "Estrada Velha, 100 - Cumbica, 07231-010.",
-  },
-  {
-    nome: "Filial Varginha - MG",
-    endereco: "Avenida Princesa do Sul, 950 - Jardim Andere, 37.026-080.",
-  },
-  {
-    nome: "Filial Feira de Santana - BA",
-    endereco: "Avenida Deputado Luís Eduardo Magalhães - Limoeiro, 44.097-324.",
-  },
-  {
-    nome: "Filial Parnamirim - RN",
-    endereco: "Rua Piloto Pereira Tim, 1762 - Monte Claro, 59146-220.",
-  },
-];
-
 function ImagemAgregados({
   src,
   alt,
@@ -303,10 +248,7 @@ export function AgregadosSection({ conteudo }: AgregadosSectionProps) {
     conteudo,
     "requisitos.motorista",
   );
-  const unidadesEditaveis = mergeTextItems(unidades, conteudo, "unidades", [
-    "nome",
-    "endereco",
-  ]);
+
   const beneficiosAnimados = [
     ...beneficiosClubeEditaveis,
     ...beneficiosClubeEditaveis,

@@ -7,7 +7,7 @@ import {
   getBlogPostSlug,
   type BlogPost,
 } from '@/components/site/blog/blog-posts';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 interface BlogPostRouteProps {
   params: Promise<{ slug: string }>;

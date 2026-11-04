@@ -5,7 +5,7 @@ import {
   getBlogPostSlug,
   type BlogPost,
 } from '@/components/site/blog/blog-posts';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export const metadata: Metadata = {
   title: 'Blog | Pizzattolog',

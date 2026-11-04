@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import SolicitarCotacaoSection from '@/components/site/solicitar-cotacao/SolicitarCotacaoSection';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export const metadata: Metadata = {
   title: 'Solicitar Cotação | Pizzattolog',

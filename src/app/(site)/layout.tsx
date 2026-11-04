@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import SitePageLayout from '@/components/site/layout/SitePageLayout';
-import { getSiteHomeData } from '@/services/site.service';
+import { getSiteHomeData } from '@/services/site/site.service';
 
 interface SiteLayoutProps {
   children: ReactNode;

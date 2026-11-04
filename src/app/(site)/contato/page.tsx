@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import ContatosSection from '@/components/site/contatos/ContatosSection';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export const metadata: Metadata = {
   title: 'Contato | Pizzattolog',

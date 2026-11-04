@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import QuemSomosSection from '@/components/site/quem-somos/QuemSomosSection';
+import { InstitutionalPageSection } from '@/components/site/institucional';
 
 export const metadata: Metadata = {
   title: 'Quem Somos | Pizzattolog',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function QuemSomosPage() {
-  return <QuemSomosSection />;
+  return <InstitutionalPageSection slug="quem-somos" />;
 }

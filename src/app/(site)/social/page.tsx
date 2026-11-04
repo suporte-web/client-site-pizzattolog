@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import SocialSection from '@/components/site/social/SocialSection';
-import { getPaginaPublicadaSite } from '@/services/site.service';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
 
 export const metadata: Metadata = {
   title: 'Social | Pizzattolog',

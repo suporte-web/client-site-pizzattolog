@@ -1,16 +1,16 @@
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 import Diversity3RoundedIcon from '@mui/icons-material/Diversity3Rounded';
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
 import { Box, Container, Grid, Paper, Stack, Typography } from '@mui/material';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 import {
   getContentString,
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 const iniciativas = [
   {

@@ -21,7 +21,6 @@ import {
 } from '@/services/site/entrada-site.service';
 import { trackSolicitarCotacaoEnviado } from '@/lib/analytics/tracking';
 
-
 import type {
   CotacaoFormErrors,
   CotacaoSubmitStatus,
@@ -75,24 +74,6 @@ function validateForm(formulario: FormularioCotacao) {
   }
 
   return errors;
-}
-
-function buildMensagem(formulario: FormularioCotacao) {
-  const detalhes = [
-    `Empresa: ${formulario.empresa.trim()}`,
-    formulario.cnpj.trim()
-      ? `CNPJ: ${onlyDigits(formulario.cnpj)}`
-      : null,
-    `Tipo de serviço: ${getServicoLabel(formulario.tipoServico)}`,
-  ];
-
-  if (formulario.observacoes.trim()) {
-    detalhes.push(
-      `Observações: ${formulario.observacoes.trim()}`,
-    );
-  }
-
-  return detalhes.filter(Boolean).join('\n');
 }
 
 function buildPayload(

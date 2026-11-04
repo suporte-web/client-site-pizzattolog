@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 
 export function RelatorioSection() {
   return (

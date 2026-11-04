@@ -1,8 +1,8 @@
 "use client";
 
-import { bannerCurveSx } from "@/components/site/banner-curve";
+import { bannerCurveSx } from "@/components/site/shared/banner-curve";
 
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 
 import Link from "next/link";
 

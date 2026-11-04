@@ -5,7 +5,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { Box, Button, Chip, CircularProgress, Container, Grid, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material';
 import { avisarRegistro } from '@/utils/site/avisos';
-import type { ResultadoRastreamento, TipoConsultaRastreamento } from '@/types/rastreamento';
+import type { ResultadoRastreamento, TipoConsultaRastreamento } from '@/types/site/rastreamento';
 
 const tipos: Array<{ valor: TipoConsultaRastreamento; titulo: string }> = [
   { valor: 'nro_nf', titulo: 'Número da nota fiscal' },

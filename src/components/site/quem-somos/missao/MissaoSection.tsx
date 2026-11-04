@@ -17,11 +17,11 @@ import type {
 
 import type {
   QuemSomosConteudo,
-} from '@/types/site-institucional';
+} from '@/types/site/institucional';
 
 import {
   SectionLabel,
-} from '@/components/site/section-label';
+} from '@/components/site/shared/section-label';
 
 interface MissaoSectionProps {
   missao?: Subpagina;

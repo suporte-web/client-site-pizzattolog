@@ -1,22 +1,18 @@
 'use client';
 
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 
 import CoffeeRoundedIcon from '@mui/icons-material/CoffeeRounded';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
-import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
-import HandshakeRoundedIcon from '@mui/icons-material/HandshakeRounded';
 import RouteRoundedIcon from '@mui/icons-material/RouteRounded';
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
-import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
-import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
 import { Box, Button, Container, Grid, Paper, Stack, Typography } from '@mui/material';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 import {
   getContentString,
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 const historias = [
   {

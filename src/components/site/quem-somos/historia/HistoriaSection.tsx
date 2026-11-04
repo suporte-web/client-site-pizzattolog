@@ -1,11 +1,11 @@
-import { bannerCurveSx } from "@/components/site/banner-curve";
+import { bannerCurveSx } from "@/components/site/shared/banner-curve";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
 import type { Subpagina } from "@/types/site";
 
-import type { QuemSomosConteudo } from "@/types/site-institucional";
+import type { QuemSomosConteudo } from "@/types/site/institucional";
 
-import { SectionLabel } from "@/components/site/section-label";
+import { SectionLabel } from "@/components/site/shared/section-label";
 
 interface HistoriaSectionProps {
   subpagina?: Subpagina;

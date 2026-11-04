@@ -1,8 +1,8 @@
 'use client';
 
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 
-import { NumbersBackground } from '@/components/site/numeros/NumbersBackground';
+import { NumbersBackground } from '@/components/site/shared/numeros/NumbersBackground';
 import AutoGraphRoundedIcon from '@mui/icons-material/AutoGraphRounded';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
@@ -30,13 +30,13 @@ import {
   Typography,
 } from '@mui/material';
 import type { Solucao } from '@/types/site';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 import {
   getContentString,
   getContentValue,
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 const icones = {
   local_shipping: <LocalShippingRoundedIcon fontSize="large" />,

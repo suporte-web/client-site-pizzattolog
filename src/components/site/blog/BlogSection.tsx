@@ -22,7 +22,7 @@ import { blogCategories, blogPosts, getBlogPostPath, type BlogPost } from './blo
 import {
   getContentString,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 const allCategoriesLabel = 'Todos';
 const postsPerPage = 9;

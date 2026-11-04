@@ -1,6 +1,6 @@
 "use client";
-import { bannerCurveSx } from "@/components/site/banner-curve";
-import { NumbersBackground } from "@/components/site/numeros/NumbersBackground";
+import { bannerCurveSx } from "@/components/site/shared/banner-curve";
+import { NumbersBackground } from "@/components/site/shared/numeros/NumbersBackground";
 import AutoGraphRoundedIcon from "@mui/icons-material/AutoGraphRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
@@ -26,12 +26,12 @@ import {
   IconButton,
   useMediaQuery,
 } from "@mui/material";
-import { SectionLabel } from "@/components/site/section-label";
+import { SectionLabel } from "@/components/site/shared/section-label";
 import { trackWhatsappClicado } from "@/lib/analytics/tracking";
 import type { Solucao } from "@/types/site";
-import CosmeticosImg from "../../icons/Home/Cosméticos (1).png";
-import ProdutosQuimicosImg from "../../icons/Home/Produtos Químicos.png";
-import PetsImg from "../../icons/Home/PET (1).png";
+import CosmeticosImg from "@/assets/icons/home/Cosméticos (1).png";
+import ProdutosQuimicosImg from "@/assets/icons/home/Produtos Químicos.png";
+import PetsImg from "@/assets/icons/home/PET (1).png";
 
 /* =========================================================
    TIPOS
@@ -44,11 +44,6 @@ type SolucaoComImagem = Solucao & {
 interface HomeSolucoesProps {
   solucoes: SolucaoComImagem[];
 }
-
-// Agregados imagens
-
-const imagemAgregados =
-  "https://pizzattolog.com.br/wp-content/uploads/2026/03/bannerrrrr-AGREGADOS-e1776274417156.png";
 
 /* =========================================================
  BOTÕES DAS SOLUÇÕES
@@ -1501,7 +1496,6 @@ export function HomeSolucoes({ solucoes = [] }: HomeSolucoesProps) {
           alignItems: "center",
 
           color: "#ffffff",
-
 
           backgroundImage: 'url("/images/agregados/banneragregados.jpg")',
 

@@ -1,17 +1,17 @@
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 import BiotechRoundedIcon from '@mui/icons-material/BiotechRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import { Box, Container, Grid, Paper, Stack, Typography } from '@mui/material';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 import {
   getContentString,
   mergeStringItems,
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 const especialidades = [
   {

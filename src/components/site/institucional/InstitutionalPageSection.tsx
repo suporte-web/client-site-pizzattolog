@@ -1,4 +1,4 @@
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 import {
   Box,
   Button,
@@ -13,25 +13,23 @@ import {
 
 import { notFound } from 'next/navigation';
 
-import {
-  AgregadosSection,
-  CarreirasSection,
-  ConteudoPagina,
-  QuemSomosSections,
-  Solucoes,
-} from '@/components/site';
+import { AgregadosSection } from '@/components/site/agregados';
+import { CarreirasSection } from '@/components/site/carreiras';
+import { ConteudoPagina } from '@/components/site/conteudo-pagina';
+import { QuemSomosSections } from '@/components/site/quem-somos';
+import { Solucoes } from '@/components/site/solucoes';
 
 import {
   getPaginaBySlug,
   getPaginaPublicadaSite,
   getSiteHomeData,
   getSubpaginasByPagina,
-} from '@/services/site.service';
+} from '@/services/site/site.service';
 
-import { normalizeSitePath } from '@/utils/routes';
+import { normalizeSitePath } from '@/utils/site/routes';
 import {
   getContentString,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 interface InstitutionalPageSectionProps {
   slug: string;

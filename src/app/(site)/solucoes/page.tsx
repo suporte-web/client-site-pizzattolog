@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import SolucoesSection from '@/components/site/solucoes/SolucoesSection';
+import { InstitutionalPageSection } from '@/components/site/institucional';
 
 export const metadata: Metadata = {
   title: 'Solucoes | Pizzattolog',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function SolucoesPage() {
-  return <SolucoesSection />;
+  return <InstitutionalPageSection slug="solucoes" />;
 }

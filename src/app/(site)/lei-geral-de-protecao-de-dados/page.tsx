@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { LegalPage } from '@/components/site/legal';
-import { getPaginaPublicadaSite } from '@/services/site.service';
-import { getContentString } from '@/utils/site-content';
+import { getPaginaPublicadaSite } from '@/services/site/site.service';
+import { getContentString } from '@/utils/site/content';
 
 export const metadata: Metadata = {
   title: 'Lei Geral de Proteção de Dados | Pizzattolog',

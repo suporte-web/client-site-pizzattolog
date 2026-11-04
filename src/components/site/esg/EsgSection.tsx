@@ -1,46 +1,30 @@
-import { bannerCurveSx } from '@/components/site/banner-curve';
+import { bannerCurveSx } from '@/components/site/shared/banner-curve';
 import {
-  AutoStoriesRounded,
-  Diversity3Rounded,
-  ElectricCarRounded,
-  EmojiEventsRounded,
-  ForestRounded,
-  GavelRounded,
-  GroupsRounded,
-  PublicRounded,
-  ShieldRounded,
-  WorkspacePremiumRounded,
+  PublicRounded
 } from '@mui/icons-material';
 
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Container,
-  Divider,
-  Grid,
+  Button, Container, Grid,
   Link,
   Paper,
   Stack,
-  Typography,
+  Typography
 } from '@mui/material';
 
 import { ProgramasSection } from './programas';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 
 import type { Subpagina } from '@/types/site';
 import {
   getContentString,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 
 import { AmbientalSection } from './ambiental';
 import { GovernancaSection } from './governancia';
 import { SocialSection } from './social';
 import { RelatorioSection } from './relatorio';
-
 
 interface EsgSectionsProps {
   conteudo?: SiteContent;
@@ -68,38 +52,10 @@ export function EsgSections({
   );
 }
 
-
 interface NossoCompromissoEsgSectionProps {
   subpagina?: Subpagina;
   conteudo?: SiteContent;
 }
-
-const programas = [
-  {
-    titulo: 'Rota Verde',
-    descricao:
-      'O Rota Verde é nossa operação de carga fracionada conduzida exclusivamente por mulheres ao volante de veículos 100% elétricos em Curitiba e região. Unimos a meta de zero emissões ao protagonismo feminino, transformando a logística urbana em um modelo de impacto positivo.',
-    icon: <ElectricCarRounded />,
-  },
-  {
-    titulo: 'Rota do Saber',
-    descricao:
-      'O Rota do Saber promove a capacitação contínua de nossas equipes, unindo o desenvolvimento pessoal e profissional a uma cultura de segurança viária. Assim, garantimos que nossos profissionais estejam sempre preparados para os desafios e as transformações da logística moderna.',
-    icon: <AutoStoriesRounded />,
-  },
-  {
-    titulo: 'Rota de Oportunidade',
-    descricao:
-      'O Rota de Oportunidade é o nosso canal direto com você: através de QR Codes adesivados em nossos caminhões, abrimos espaço para feedbacks sobre nossa frota e atuação nas estradas. Esse reconhecimento é a base de premiações trimestrais e do nosso grande destaque anual, onde os motoristas com melhor desempenho e avaliação são premiados pela integridade e qualidade mantidas em cada viagem.',
-    icon: <EmojiEventsRounded />,
-  },
-  {
-    titulo: 'Diversidade e Inclusão',
-    descricao:
-      'Valorizar e integrar as diferenças é o que fortalece a nossa equipe. No programa Diversidade e Inclusão, garantimos um ambiente seguro onde diferentes vivências e habilidades são reconhecidas. Nosso compromisso é construir uma operação onde o respeito e a multiplicidade de talentos caminhem juntos para resolver desafios com excelência.',
-    icon: <Diversity3Rounded />,
-  },
-];
 
 export function NossoCompromissoEsgSection({
   subpagina,

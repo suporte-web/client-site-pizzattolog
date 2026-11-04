@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@mui/material';
 import Link from 'next/link';
-import { SectionLabel } from '@/components/site/section-label';
+import { SectionLabel } from '@/components/site/shared/section-label';
 
 
 const programas = [

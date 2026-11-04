@@ -6,7 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, Container, Divider, Grid, IconButton, Stack, SvgIcon, Typography } from '@mui/material';
 import type { Rodape } from '@/types/site';
-import { normalizeSitePath } from '@/utils/routes';
+import { normalizeSitePath } from '@/utils/site/routes';
 import { CanalDoCliente } from './CanalDoCliente';
 
 interface SiteFooterProps {
@@ -73,7 +73,7 @@ const linksLegais = [
   },
 ];
 
-const logoUrl = 'https://pizzattolog.com.br/wp-content/uploads/2025/06/logo-pizzattolog.png';
+
 const blogFooterLink = { id: 'blog', titulo: 'Blog', url: '/blog/', ordem: 999, ativo: true };
 
 function isExternalUrl(url: string) {

@@ -27,7 +27,7 @@ import type {
 
 import type {
   QuemSomosConteudo,
-} from '@/types/site-institucional';
+} from '@/types/site/institucional';
 
 interface ValoresSectionProps {
   subpagina?: Subpagina;

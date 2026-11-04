@@ -46,7 +46,7 @@ import { avisarRegistro } from '@/utils/site/avisos';
 import {
   mergeTextItems,
   type SiteContent,
-} from '@/utils/site-content';
+} from '@/utils/site/content';
 import {
   buildAgregadoSitePayload,
   buildContatoSitePayload,
