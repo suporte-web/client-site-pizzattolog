@@ -97,7 +97,7 @@ function BlogPreviewCard({
 
 export function HomeBlogPreview() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 10 }, bgcolor: 'white' }}>
+    <Box component="section" sx={{ py: { xs: 8, md: 10 }, bgcolor: '#F4F6F7' }}>
       <Container maxWidth="xl">
         <Stack spacing={5} sx={{ alignItems: 'center' }}>
           <Stack spacing={1.5} sx={{ textAlign: 'center', maxWidth: 920 }}>
