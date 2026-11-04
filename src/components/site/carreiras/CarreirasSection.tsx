@@ -81,11 +81,7 @@ const programas = [
   },
 ];
 
-const destaquesCarreira = [
-  { texto: 'Respeito mútuo', icone: <HandshakeRoundedIcon />, cor: '#ffb71b' },
-  { texto: 'Crescimento real', icone: <TrendingUpRoundedIcon />, cor: '#ff5805' },
-  { texto: 'Time colaborativo', icone: <GroupsRoundedIcon />, cor: '#f23f35' },
-];
+
 
 interface CarreirasSectionProps {
   conteudo?: SiteContent;
@@ -130,10 +126,8 @@ export function CarreirasSection({
     'Confira nossas vagas',
   );
 
-  const destaquesEditaveis =
-    mergeTextItems(destaquesCarreira, conteudo, 'destaques', [
-      'texto',
-    ]);
+  
+
   const historiasEditaveis =
     mergeTextItems(historias, conteudo, 'historias', [
       'nome',
@@ -224,40 +218,6 @@ export function CarreirasSection({
                     pt: 0.5,
                   }}
                 >
-                  {destaquesEditaveis.map((destaque) => (
-                    <Box
-                      key={destaque.texto}
-                      sx={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 0.75,
-
-                        px: 1.4,
-                        py: 0.8,
-
-                        borderRadius: 999,
-
-                        bgcolor: 'white',
-
-                        border:
-                          '1px solid rgba(15, 23, 42, 0.06)',
-
-                        boxShadow:
-                          '0 8px 20px rgba(19, 39, 57, 0.05)',
-
-                        fontSize: 14,
-                        fontWeight: 850,
-
-                        '& svg': {
-                          color: destaque.cor,
-                          fontSize: 18,
-                        },
-                      }}
-                    >
-                      {destaque.icone}
-                      {destaque.texto}
-                    </Box>
-                  ))}
                 </Stack>
               </Stack>
             </Grid>
@@ -317,7 +277,7 @@ export function CarreirasSection({
                =============================================== */}
                   <Box
                     sx={{
-                      bgcolor: 'primary.dark',
+                      bgcolor: '#ffb71b',
 
                       color: 'white',
 
