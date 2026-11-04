@@ -1,6 +1,7 @@
 "use client";
 
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import {
   AppBar,
@@ -211,6 +212,7 @@ function renderMobileItems(
     if (filhos.length) {
       return [
         <Fragment key={item.id}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
           <ListItemButton
             component={Link}
             href={getHref(item.url, item.slug)}
@@ -231,15 +233,16 @@ function renderMobileItems(
               }
             />
           </ListItemButton>
-          <Button
+          <IconButton
             onClick={() => alternarItem(item.id)}
             aria-expanded={aberto}
-            aria-label={`Exibir subcategorias de ${item.titulo}`}
+            aria-label={`${aberto ? "Ocultar" : "Exibir"} subcategorias de ${item.titulo}`}
             size="small"
-            sx={{ ml: 2 + nivel * 2.5 }}
+            sx={{ flexShrink: 0 }}
           >
-            {aberto ? "Ocultar subcategorias" : "Exibir subcategorias"}
-          </Button>
+            <ExpandMoreRoundedIcon sx={{ transform: aberto ? "rotate(180deg)" : "none" }} />
+          </IconButton>
+          </Box>
           <Collapse in={aberto} timeout="auto" unmountOnExit>
             {renderMobileItems(
               filhos,
@@ -379,27 +382,22 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
       <AppBar
         position="fixed"
         color="inherit"
-        elevation={7}
+        elevation={0}
         sx={{
           borderBottom: "1px solid",
           borderColor: "divider",
-          backgroundColor: "rgba(255,255,255,0.7)",
-          backdropFilter: "blur(20px)",
+          backgroundColor: "#fff",
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth={false}>
           <Toolbar
             disableGutters
             sx={{
               minHeight: 90,
               gap: 2,
-              pt: 1.5,
-              pb: 1,
-              display: { xs: "flex", lg: "grid" },
-              gridTemplateColumns: { lg: "1fr auto 1fr" },
-              gridTemplateRows: { lg: "auto" },
-              alignContent: "center",
-              alignItems: { xs: "center", lg: "end" },
+              py: 1,
+              display: "flex",
+              alignItems: "center",
               justifyContent: "space-between",
               position: "relative",
             }}
@@ -414,7 +412,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
                 flexShrink: 0,
                 mr: 0,
                 zIndex: 2,
-                justifySelf: "start",
+                transform: "translateY(-4px)",
               }}
             >
               <Box
@@ -438,7 +436,9 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
               sx={{
                 display: { xs: "none", lg: "flex" },
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "flex-end",
+                ml: "auto",
+                "& .MuiButton-root": { px: 1.5 },
                 position: "relative",
                 whiteSpace: "nowrap",
                 zIndex: 1,
@@ -522,7 +522,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
               href="/solicitar-cotacao"
               sx={{
                 display: { xs: "none", sm: "inline-flex" },
-                justifySelf: "end",
+                flexShrink: 0,
               }}
             >
               Solicitar cotação
@@ -621,6 +621,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
             {menusSemEsg.map((menu) => (
               <Fragment key={menu.id}>
                 <Box sx={{ mb: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
                   <ListItemButton
                     component={Link}
                     href={getHref(menu.url, menu.slug).split("#")[0]}
@@ -631,7 +632,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
                         getHref(menu.url, menu.slug),
                       );
                     }}
-                    sx={{ py: 1, width: "100%" }}
+                    sx={{ py: 1, flex: 1, minWidth: 0 }}
                   >
                     <ListItemText
                       primary={
@@ -649,17 +650,17 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
                   </ListItemButton>
 
                   {menu.itens.length > 0 && (
-                    <Button
+                    <IconButton
                       onClick={() => alternarItemMobile(menu.id)}
                       aria-expanded={itensMobileExpandidos.has(menu.id)}
-                      aria-label={`Exibir subcategorias de ${menu.titulo}`}
+                      aria-label={`${itensMobileExpandidos.has(menu.id) ? "Ocultar" : "Exibir"} subcategorias de ${menu.titulo}`}
                       size="small"
+                      sx={{ flexShrink: 0 }}
                     >
-                      {itensMobileExpandidos.has(menu.id)
-                        ? "Ocultar subcategorias"
-                        : "Exibir subcategorias"}
-                    </Button>
+                      <ExpandMoreRoundedIcon sx={{ transform: itensMobileExpandidos.has(menu.id) ? "rotate(180deg)" : "none" }} />
+                    </IconButton>
                   )}
+                  </Box>
                   <Collapse
                     in={itensMobileExpandidos.has(menu.id)}
                     timeout="auto"
@@ -681,6 +682,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
                     <Box sx={{ mb: 1 }}>
                       <ListItemButton
                         onClick={() => alternarItemMobile("menu-esg-mobile")}
+                        aria-expanded={itensMobileExpandidos.has("menu-esg-mobile")}
                         sx={{ py: 1, width: "100%" }}
                       >
                         <ListItemText
@@ -695,6 +697,7 @@ export function SiteHeader({ menus, nomeEmpresa }: SiteHeaderProps) {
                             </Typography>
                           }
                         />
+                        <ExpandMoreRoundedIcon sx={{ transform: itensMobileExpandidos.has("menu-esg-mobile") ? "rotate(180deg)" : "none" }} />
                       </ListItemButton>
 
                       <Collapse
