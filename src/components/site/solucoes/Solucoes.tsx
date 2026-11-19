@@ -228,7 +228,7 @@ const numeros = [
     cor: '#ffb71b',
   },
   {
-    valor: '+740',
+    valor: '+720',
     rotulo: 'ativos',
     icone: <LocalShippingRoundedIcon />,
     cor: '#ff5805',

@@ -262,7 +262,7 @@ const numeros = [
     icone: <FavoriteBorderRoundedIcon />,
   },
   {
-    valor: "+740",
+    valor: "+720",
     rotulo: "ativos",
     icone: <LocalShippingRoundedIcon />,
   },
